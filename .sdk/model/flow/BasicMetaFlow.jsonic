@@ -1,0 +1,28 @@
+# BasicMetaFlow
+
+main: kit: flow: BasicMetaFlow:
+{
+  entity: "meta",
+  kind: "basic",
+  name: "BasicMetaFlow",
+  step: [
+    {
+      input: {
+        ref: "meta_ref01",
+        srcdatavar: "meta_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-meta_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicMetaFlow"
+}

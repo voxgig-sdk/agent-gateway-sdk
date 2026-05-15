@@ -1,0 +1,105 @@
+# Entity: payment
+
+main: kit: entity: payment: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "address"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "api_key"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "chain"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "credits_added"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "ok"
+      req: false
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "rate"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "token"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "total_credit"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "tx_hash"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "usdc"
+      req: false
+      type: "`$NUMBER`"
+    }
+  ]
+
+  name: "payment"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/credits/topup"
+          parts: [
+            "api"
+            "credits"
+            "topup"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/payments/info"
+          parts: [
+            "api"
+            "payments"
+            "info"
+          ]
+          select: {
+            "$action": "info"
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

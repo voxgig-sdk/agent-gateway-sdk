@@ -1,0 +1,44 @@
+# Entity: balance
+
+main: kit: entity: balance: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "created_at"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "credit"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "balance"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/api/keys/balance"
+          parts: [
+            "api"
+            "keys"
+            "balance"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

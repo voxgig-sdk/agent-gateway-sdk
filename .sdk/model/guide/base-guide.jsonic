@@ -1,0 +1,55 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 6
+  metrics: count: path: 9
+  metrics: count: method: 9
+
+  entity: analytics: {
+    path: "/api/stats": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: api_key: {
+    path: "/api/keys/create": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: balance: {
+    path: "/api/keys/balance": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: meta: {
+    path: "/health": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: payment: {
+    path: "/api/credits/topup": {
+      op: create: method: *POST
+    }
+    path: "/api/payments/info": {
+      action: "info": {}
+      op: load: method: *GET
+    }
+  }
+
+  entity: service: {
+    path: "/api/services": {
+      op: list: method: *GET
+    }
+    path: "/api/services/health": {
+      action: "health": {}
+      op: list: method: *GET
+    }
+    path: "/api/services/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+}

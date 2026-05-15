@@ -1,0 +1,53 @@
+{
+  "existing": {
+    "service": {
+      "SERVICE00": {
+        "api_url": "s5a",
+        "category": "s5b",
+        "description": "s5c",
+        "endpoint": [],
+        "icon": "s5e",
+        "id": "SERVICE00",
+        "latency": 96,
+        "name": "s61",
+        "status": "s62"
+      },
+      "SERVICE01": {
+        "api_url": "sb4",
+        "category": "sb5",
+        "description": "sb6",
+        "endpoint": [],
+        "icon": "sb8",
+        "id": "SERVICE01",
+        "latency": 186,
+        "name": "sbb",
+        "status": "sbc"
+      },
+      "SERVICE02": {
+        "api_url": "s10e",
+        "category": "s10f",
+        "description": "s110",
+        "endpoint": [],
+        "icon": "s112",
+        "id": "SERVICE02",
+        "latency": 276,
+        "name": "s115",
+        "status": "s116"
+      }
+    }
+  },
+  "new": {
+    "service": {
+      "service_ref01": {
+        "api_url": "s168",
+        "category": "s169",
+        "description": "s16a",
+        "endpoint": [],
+        "icon": "s16c",
+        "latency": 366,
+        "name": "s16f",
+        "status": "s170"
+      }
+    }
+  }
+}

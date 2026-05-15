@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "api_key": {
+      "API_KEY00": {
+        "credit": "s14",
+        "key": "s15"
+      },
+      "API_KEY01": {
+        "credit": "s28",
+        "key": "s29"
+      },
+      "API_KEY02": {
+        "credit": "s3c",
+        "key": "s3d"
+      }
+    }
+  },
+  "new": {
+    "api_key": {
+      "api_key_ref01": {
+        "credit": "s50",
+        "key": "s51"
+      }
+    }
+  }
+}

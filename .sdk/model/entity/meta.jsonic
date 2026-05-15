@@ -1,0 +1,37 @@
+# Entity: meta
+
+main: kit: entity: meta: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "status"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "meta"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          method: "GET"
+          orig: "/health"
+          parts: [
+            "health"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

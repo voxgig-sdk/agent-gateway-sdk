@@ -1,0 +1,36 @@
+# BasicPaymentFlow
+
+main: kit: flow: BasicPaymentFlow:
+{
+  entity: "payment",
+  kind: "basic",
+  name: "BasicPaymentFlow",
+  step: [
+    {
+      input: {
+        ref: "payment_ref01"
+      }
+
+      op: "create"
+    }
+
+    {
+      input: {
+        ref: "payment_ref01",
+        srcdatavar: "payment_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-payment_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicPaymentFlow"
+}

@@ -1,0 +1,290 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Agent Gateway",
+    "version": "1.0.0",
+    "description": "34 production-ready API services for AI agents. Wallets, trading, storage, scheduling, scraping, logging, and more — all in one gateway. Pay-as-you-go with USDC on Base.",
+    "contact": {
+      "name": "Agent Gateway",
+      "url": "https://agent-gateway-kappa.vercel.app"
+    },
+    "license": {
+      "name": "Proprietary"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://agent-gateway-kappa.vercel.app",
+      "description": "Production API"
+    }
+  ],
+  "security": [
+    { "bearerAuth": [] }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access."
+      }
+    },
+    "schemas": {
+      "ApiKey": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "string", "example": "gw_abc123..." },
+          "credits": { "type": "integer", "example": 200 }
+        }
+      },
+      "Balance": {
+        "type": "object",
+        "properties": {
+          "credits": { "type": "integer", "example": 150 },
+          "createdAt": { "type": "integer", "example": 1709000000000, "description": "Unix timestamp ms" }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "category": { "type": "string", "enum": ["infrastructure","defi","blockchain","data","security","gaming"] },
+          "icon": { "type": "string" },
+          "apiUrl": { "type": "string" },
+          "endpoints": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/keys/create": {
+      "post": {
+        "summary": "Create a free API key",
+        "description": "Creates a new API key with 50 free requests/day. No payment required. Buy credits for more.",
+        "operationId": "createApiKey",
+        "security": [],
+        "tags": ["Auth"],
+        "responses": {
+          "200": {
+            "description": "API key created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ApiKey" },
+                "example": { "key": "gw_abc123...", "credits": 200 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/keys/balance": {
+      "get": {
+        "summary": "Check API key balance",
+        "description": "Returns remaining credits and creation date for your API key.",
+        "operationId": "getBalance",
+        "tags": ["Auth"],
+        "responses": {
+          "200": {
+            "description": "Balance info",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Balance" }
+              }
+            }
+          },
+          "401": { "description": "Invalid key", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } } }
+        }
+      }
+    },
+    "/api/credits/topup": {
+      "post": {
+        "summary": "Top up credits via USDC",
+        "description": "Verify a USDC transfer on Base and add credits (500 credits per 1 USDC).",
+        "operationId": "topupCredits",
+        "security": [],
+        "tags": ["Payments"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["api_key", "tx_hash"],
+                "properties": {
+                  "api_key": { "type": "string" },
+                  "tx_hash": { "type": "string", "description": "Transaction hash of USDC transfer on Base" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credits added",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "usdc": { "type": "number" },
+                    "credits_added": { "type": "integer" },
+                    "total_credits": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/payments/info": {
+      "get": {
+        "summary": "Get payment information",
+        "description": "Returns USDC wallet address and credit rate for top-ups.",
+        "operationId": "getPaymentInfo",
+        "security": [],
+        "tags": ["Payments"],
+        "responses": {
+          "200": {
+            "description": "Payment details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "chain": { "type": "string", "example": "Base (L2)" },
+                    "token": { "type": "string", "example": "USDC" },
+                    "address": { "type": "string" },
+                    "rate": { "type": "string", "example": "500 credits per 1 USDC" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/services": {
+      "get": {
+        "summary": "List all services",
+        "description": "Returns all 34 available agent services with descriptions, categories, and API URLs.",
+        "operationId": "listServices",
+        "security": [],
+        "tags": ["Services"],
+        "parameters": [
+          { "name": "category", "in": "query", "schema": { "type": "string" }, "description": "Filter by category" },
+          { "name": "search", "in": "query", "schema": { "type": "string" }, "description": "Search by name or description" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "services": { "type": "array", "items": { "$ref": "#/components/schemas/Service" } },
+                    "count": { "type": "integer" },
+                    "total": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/services/{id}": {
+      "get": {
+        "summary": "Get service detail",
+        "description": "Returns detailed information for a single service including all endpoints.",
+        "operationId": "getService",
+        "security": [],
+        "tags": ["Services"],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" }, "example": "crypto-feeds" }
+        ],
+        "responses": {
+          "200": { "description": "Service detail", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Service" } } } },
+          "404": { "description": "Service not found" }
+        }
+      }
+    },
+    "/api/services/health": {
+      "get": {
+        "summary": "Live health status of all services",
+        "description": "Returns real-time health status for all 34 services.",
+        "operationId": "getHealth",
+        "security": [],
+        "tags": ["Services"],
+        "responses": {
+          "200": {
+            "description": "Health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "services": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "name": { "type": "string" },
+                          "status": { "type": "string", "enum": ["online", "offline"] },
+                          "latency": { "type": "number" }
+                        }
+                      }
+                    },
+                    "online": { "type": "integer" },
+                    "offline": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/stats": {
+      "get": {
+        "summary": "Gateway usage statistics",
+        "description": "Returns aggregate statistics: total keys, credits, revenue.",
+        "operationId": "getStats",
+        "security": [],
+        "tags": ["Analytics"],
+        "responses": {
+          "200": { "description": "Usage stats" }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Gateway health check",
+        "operationId": "healthCheck",
+        "security": [],
+        "tags": ["Meta"],
+        "responses": {
+          "200": { "description": "OK", "content": { "application/json": { "schema": { "type": "object", "properties": { "status": { "type": "string", "example": "ok" } } } } } }
+        }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Auth", "description": "API key management" },
+    { "name": "Payments", "description": "USDC credit top-up" },
+    { "name": "Services", "description": "Browse and discover agent services" },
+    { "name": "Analytics", "description": "Usage statistics" },
+    { "name": "Meta", "description": "Health and discovery" }
+  ]
+}

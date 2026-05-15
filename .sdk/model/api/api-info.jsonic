@@ -1,0 +1,27 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "Agent Gateway"
+        url: "https://agent-gateway-kappa.vercel.app"
+      }
+      description: "34 production-ready API services for AI agents. Wallets, trading, storage, scheduling, scraping, logging, and more — all in one gateway. Pay-as-you-go with USDC on Base."
+      license: {
+        name: "Proprietary"
+      }
+      servers: [
+        {
+          description: "Production API"
+          url: "https://agent-gateway-kappa.vercel.app"
+        }
+      ]
+      title: "Agent Gateway"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

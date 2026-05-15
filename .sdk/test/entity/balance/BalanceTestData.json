@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "balance": {
+      "BALANCE00": {
+        "created_at": "s14",
+        "credit": "s15"
+      },
+      "BALANCE01": {
+        "created_at": "s28",
+        "credit": "s29"
+      },
+      "BALANCE02": {
+        "created_at": "s3c",
+        "credit": "s3d"
+      }
+    }
+  },
+  "new": {
+    "balance": {
+      "balance_ref01": {
+        "created_at": "s50",
+        "credit": "s51"
+      }
+    }
+  }
+}

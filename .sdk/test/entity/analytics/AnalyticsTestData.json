@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "analytics": {
+      "ANALYTICS00": {},
+      "ANALYTICS01": {},
+      "ANALYTICS02": {}
+    }
+  },
+  "new": {
+    "analytics": {
+      "analytics_ref01": {}
+    }
+  }
+}

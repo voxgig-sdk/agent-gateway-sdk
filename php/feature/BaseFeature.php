@@ -1,0 +1,37 @@
+<?php
+declare(strict_types=1);
+
+// AgentGateway SDK base feature
+
+class AgentGatewayBaseFeature
+{
+    public string $version;
+    public string $name;
+    public bool $active;
+
+    public function __construct()
+    {
+        $this->version = '0.0.1';
+        $this->name = 'base';
+        $this->active = true;
+    }
+
+    public function get_version(): string { return $this->version; }
+    public function get_name(): string { return $this->name; }
+    public function get_active(): bool { return $this->active; }
+
+    public function init(AgentGatewayContext $ctx, array $options): void {}
+    public function PostConstruct(AgentGatewayContext $ctx): void {}
+    public function PostConstructEntity(AgentGatewayContext $ctx): void {}
+    public function SetData(AgentGatewayContext $ctx): void {}
+    public function GetData(AgentGatewayContext $ctx): void {}
+    public function GetMatch(AgentGatewayContext $ctx): void {}
+    public function SetMatch(AgentGatewayContext $ctx): void {}
+    public function PrePoint(AgentGatewayContext $ctx): void {}
+    public function PreSpec(AgentGatewayContext $ctx): void {}
+    public function PreRequest(AgentGatewayContext $ctx): void {}
+    public function PreResponse(AgentGatewayContext $ctx): void {}
+    public function PreResult(AgentGatewayContext $ctx): void {}
+    public function PreDone(AgentGatewayContext $ctx): void {}
+    public function PreUnexpected(AgentGatewayContext $ctx): void {}
+}

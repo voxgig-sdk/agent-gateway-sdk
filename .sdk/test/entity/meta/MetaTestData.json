@@ -1,0 +1,22 @@
+{
+  "existing": {
+    "meta": {
+      "META00": {
+        "status": "sa"
+      },
+      "META01": {
+        "status": "s14"
+      },
+      "META02": {
+        "status": "s1e"
+      }
+    }
+  },
+  "new": {
+    "meta": {
+      "meta_ref01": {
+        "status": "s28"
+      }
+    }
+  }
+}

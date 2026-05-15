@@ -1,0 +1,44 @@
+# Entity: api_key
+
+main: kit: entity: api_key: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "credit"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "key"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "api_key"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/api/keys/create"
+          parts: [
+            "api"
+            "keys"
+            "create"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
