@@ -1,9 +1,15 @@
 {
   "existing": {
     "analytics": {
-      "ANALYTICS00": {},
-      "ANALYTICS01": {},
-      "ANALYTICS02": {}
+      "ANALYTICS00": {
+        "id": "ANALYTICS00"
+      },
+      "ANALYTICS01": {
+        "id": "ANALYTICS01"
+      },
+      "ANALYTICS02": {
+        "id": "ANALYTICS02"
+      }
     }
   },
   "new": {

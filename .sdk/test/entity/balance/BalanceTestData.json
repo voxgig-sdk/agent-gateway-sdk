@@ -3,15 +3,18 @@
     "balance": {
       "BALANCE00": {
         "created_at": "s14",
-        "credit": "s15"
+        "credit": "s15",
+        "id": "BALANCE00"
       },
       "BALANCE01": {
         "created_at": "s28",
-        "credit": "s29"
+        "credit": "s29",
+        "id": "BALANCE01"
       },
       "BALANCE02": {
         "created_at": "s3c",
-        "credit": "s3d"
+        "credit": "s3d",
+        "id": "BALANCE02"
       }
     }
   },

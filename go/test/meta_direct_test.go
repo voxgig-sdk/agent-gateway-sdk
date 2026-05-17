@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/agent-gateway-sdk"
-	"github.com/voxgig-sdk/agent-gateway-sdk/core"
+	sdk "github.com/voxgig-sdk/agent-gateway-sdk/go"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/core"
 )
 
 func TestMetaDirect(t *testing.T) {

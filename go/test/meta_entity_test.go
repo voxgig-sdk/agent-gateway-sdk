@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/agent-gateway-sdk"
-	"github.com/voxgig-sdk/agent-gateway-sdk/core"
+	sdk "github.com/voxgig-sdk/agent-gateway-sdk/go"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/agent-gateway-sdk/go/utility/struct"
 )
 
 func TestMetaEntity(t *testing.T) {

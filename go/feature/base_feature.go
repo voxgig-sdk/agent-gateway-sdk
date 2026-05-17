@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/agent-gateway-sdk/core"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/core"
 )
 
 type BaseFeature struct {

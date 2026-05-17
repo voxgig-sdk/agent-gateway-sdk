@@ -1,10 +1,10 @@
 package voxgigagentgatewaysdk
 
 import (
-	"github.com/voxgig-sdk/agent-gateway-sdk/core"
-	"github.com/voxgig-sdk/agent-gateway-sdk/entity"
-	"github.com/voxgig-sdk/agent-gateway-sdk/feature"
-	_ "github.com/voxgig-sdk/agent-gateway-sdk/utility"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/core"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/entity"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/feature"
+	_ "github.com/voxgig-sdk/agent-gateway-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

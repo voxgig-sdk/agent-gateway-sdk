@@ -1,9 +1,9 @@
 package utility
 
 import (
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/agent-gateway-sdk/go/utility/struct"
 
-	"github.com/voxgig-sdk/agent-gateway-sdk/core"
+	"github.com/voxgig-sdk/agent-gateway-sdk/go/core"
 )
 
 func prepareHeadersUtil(ctx *core.Context) map[string]any {

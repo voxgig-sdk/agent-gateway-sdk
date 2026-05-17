@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/agent-gateway-sdk/core"
+import "github.com/voxgig-sdk/agent-gateway-sdk/go/core"
 
 func cleanUtil(ctx *core.Context, val any) any {
 	return val

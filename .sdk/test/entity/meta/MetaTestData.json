@@ -2,13 +2,16 @@
   "existing": {
     "meta": {
       "META00": {
-        "status": "sa"
+        "status": "sa",
+        "id": "META00"
       },
       "META01": {
-        "status": "s14"
+        "status": "s14",
+        "id": "META01"
       },
       "META02": {
-        "status": "s1e"
+        "status": "s1e",
+        "id": "META02"
       }
     }
   },
