@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'agentgateway_sdk.php';
 
-$client = new AgentGatewaySDK([
-    "apikey" => getenv("AGENT-GATEWAY_APIKEY"),
-]);
+$client = new AgentGatewaySDK([]);
 ```
 
 ### 3. Load a analytics
@@ -113,7 +111,6 @@ Create a `.env.local` file at the project root:
 
 ```
 AGENT-GATEWAY_TEST_LIVE=TRUE
-AGENT-GATEWAY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -136,7 +133,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

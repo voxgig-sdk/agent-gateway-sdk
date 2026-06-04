@@ -175,14 +175,12 @@ func serviceDirectSetup(mockres any) *serviceDirectSetupResult {
 	env := envOverride(map[string]any{
 		"AGENTGATEWAY_TEST_SERVICE_ENTID": map[string]any{},
 		"AGENTGATEWAY_TEST_LIVE":    "FALSE",
-		"AGENTGATEWAY_APIKEY":       "NONE",
 	})
 
 	live := env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["AGENTGATEWAY_APIKEY"],
 		}
 		client := sdk.NewAgentGatewaySDK(mergedOpts)
 

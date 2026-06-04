@@ -82,7 +82,6 @@ def meta_basic_setup(extra)
     "AGENTGATEWAY_TEST_META_ENTID" => idmap,
     "AGENTGATEWAY_TEST_LIVE" => "FALSE",
     "AGENTGATEWAY_TEST_EXPLAIN" => "FALSE",
-    "AGENTGATEWAY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +93,6 @@ def meta_basic_setup(extra)
   if env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["AGENTGATEWAY_APIKEY"],
       },
       extra || {},
     ])

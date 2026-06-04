@@ -113,7 +113,6 @@ function basicSetup(extra?: any) {
     'AGENT_GATEWAY_TEST_META_ENTID': idmap,
     'AGENT_GATEWAY_TEST_LIVE': 'FALSE',
     'AGENT_GATEWAY_TEST_EXPLAIN': 'FALSE',
-    'AGENT_GATEWAY_APIKEY': 'NONE',
   })
 
   idmap = env['AGENT_GATEWAY_TEST_META_ENTID']
@@ -123,7 +122,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new AgentGatewaySDK(merge([
       {
-        apikey: env.AGENT_GATEWAY_APIKEY,
       },
       extra
     ]))
