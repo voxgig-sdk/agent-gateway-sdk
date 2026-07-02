@@ -59,12 +59,14 @@ def _payment_direct_setup(mockres):
     env = runner.env_override({
         "AGENTGATEWAY_TEST_PAYMENT_ENTID": {},
         "AGENTGATEWAY_TEST_LIVE": "FALSE",
+        "AGENTGATEWAY_APIKEY": "NONE",
     })
 
     live = env.get("AGENTGATEWAY_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("AGENTGATEWAY_APIKEY"),
         }
         client = AgentGatewaySDK(merged_opts)
         return {

@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -114,7 +114,7 @@ local analytics = client:Analytics(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Analytics(nil):load({ id = "analytics_id" }, nil)
+local result, err = client:Analytics():load({ id = "analytics_id" })
 ```
 
 ### Common Methods
@@ -167,8 +167,8 @@ local api_key = client:ApiKey(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:ApiKey(nil):create({
-}, nil)
+local result, err = client:ApiKey():create({
+})
 ```
 
 ### Common Methods
@@ -221,7 +221,7 @@ local balance = client:Balance(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Balance(nil):load({ id = "balance_id" }, nil)
+local result, err = client:Balance():load({ id = "balance_id" })
 ```
 
 ### Common Methods
@@ -273,7 +273,7 @@ local meta = client:Meta(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Meta(nil):load({ id = "meta_id" }, nil)
+local result, err = client:Meta():load({ id = "meta_id" })
 ```
 
 ### Common Methods
@@ -334,10 +334,10 @@ local payment = client:Payment(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Payment(nil):create({
+local result, err = client:Payment():create({
   api_key = --[[ `$STRING` ]],
   tx_hash = --[[ `$STRING` ]],
-}, nil)
+})
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -345,7 +345,7 @@ local result, err = client:Payment(nil):create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Payment(nil):load({ id = "payment_id" }, nil)
+local result, err = client:Payment():load({ id = "payment_id" })
 ```
 
 ### Common Methods
@@ -405,7 +405,7 @@ local service = client:Service(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Service(nil):list(nil, nil)
+local results, err = client:Service():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -413,7 +413,7 @@ local results, err = client:Service(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Service(nil):load({ id = "service_id" }, nil)
+local result, err = client:Service():load({ id = "service_id" })
 ```
 
 ### Common Methods

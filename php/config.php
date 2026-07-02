@@ -20,6 +20,9 @@ class AgentGatewayConfig
             ],
             "options" => [
                 "base" => "https://agent-gateway-kappa.vercel.app",
+                "auth" => [
+                    "prefix" => "Bearer",
+                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -38,26 +41,26 @@ class AgentGatewayConfig
           'name' => 'analytics',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/api/stats',
                   'parts' => [
                     'api',
                     'stats',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -68,26 +71,29 @@ class AgentGatewayConfig
         'api_key' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'credit',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'key',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
           ],
           'name' => 'api_key',
           'op' => [
             'create' => [
+              'input' => 'data',
               'name' => 'create',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'POST',
                   'orig' => '/api/keys/create',
                   'parts' => [
@@ -95,17 +101,14 @@ class AgentGatewayConfig
                     'keys',
                     'create',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'create',
             ],
           ],
@@ -116,26 +119,29 @@ class AgentGatewayConfig
         'balance' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'created_at',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'credit',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 1,
             ],
           ],
           'name' => 'balance',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/api/keys/balance',
                   'parts' => [
@@ -143,17 +149,14 @@ class AgentGatewayConfig
                     'keys',
                     'balance',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -164,35 +167,35 @@ class AgentGatewayConfig
         'meta' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'status',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
           ],
           'name' => 'meta',
           'op' => [
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/health',
                   'parts' => [
                     'health',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -203,82 +206,85 @@ class AgentGatewayConfig
         'payment' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'address',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'api_key',
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'chain',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'credits_added',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'ok',
               'req' => false,
               'type' => '`$BOOLEAN`',
-              'active' => true,
               'index$' => 4,
             ],
             [
+              'active' => true,
               'name' => 'rate',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 5,
             ],
             [
+              'active' => true,
               'name' => 'token',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 6,
             ],
             [
+              'active' => true,
               'name' => 'total_credit',
               'req' => false,
               'type' => '`$INTEGER`',
-              'active' => true,
               'index$' => 7,
             ],
             [
+              'active' => true,
               'name' => 'tx_hash',
               'req' => true,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 8,
             ],
             [
+              'active' => true,
               'name' => 'usdc',
               'req' => false,
               'type' => '`$NUMBER`',
-              'active' => true,
               'index$' => 9,
             ],
           ],
           'name' => 'payment',
           'op' => [
             'create' => [
+              'input' => 'data',
               'name' => 'create',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'POST',
                   'orig' => '/api/credits/topup',
                   'parts' => [
@@ -286,23 +292,23 @@ class AgentGatewayConfig
                     'credits',
                     'topup',
                   ],
+                  'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
-                  'select' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'create',
             ],
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/api/payments/info',
                   'parts' => [
@@ -317,12 +323,9 @@ class AgentGatewayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],
@@ -333,92 +336,94 @@ class AgentGatewayConfig
         'service' => [
           'fields' => [
             [
+              'active' => true,
               'name' => 'api_url',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 0,
             ],
             [
+              'active' => true,
               'name' => 'category',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 1,
             ],
             [
+              'active' => true,
               'name' => 'description',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 2,
             ],
             [
+              'active' => true,
               'name' => 'endpoint',
               'req' => false,
               'type' => '`$ARRAY`',
-              'active' => true,
               'index$' => 3,
             ],
             [
+              'active' => true,
               'name' => 'icon',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 4,
             ],
             [
+              'active' => true,
               'name' => 'id',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 5,
             ],
             [
+              'active' => true,
               'name' => 'latency',
               'req' => false,
               'type' => '`$NUMBER`',
-              'active' => true,
               'index$' => 6,
             ],
             [
+              'active' => true,
               'name' => 'name',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 7,
             ],
             [
+              'active' => true,
               'name' => 'status',
               'req' => false,
               'type' => '`$STRING`',
-              'active' => true,
               'index$' => 8,
             ],
           ],
           'name' => 'service',
           'op' => [
             'list' => [
+              'input' => 'data',
               'name' => 'list',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'query' => [
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'category',
                         'orig' => 'category',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                       [
+                        'active' => true,
                         'kind' => 'query',
                         'name' => 'search',
                         'orig' => 'search',
                         'reqd' => false,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -438,10 +443,11 @@ class AgentGatewayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
                 [
+                  'active' => true,
+                  'args' => [],
                   'method' => 'GET',
                   'orig' => '/api/services/health',
                   'parts' => [
@@ -456,28 +462,27 @@ class AgentGatewayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
-                  'args' => [],
                   'index$' => 1,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'list',
             ],
             'load' => [
+              'input' => 'data',
               'name' => 'load',
               'points' => [
                 [
+                  'active' => true,
                   'args' => [
                     'params' => [
                       [
+                        'active' => true,
                         'example' => 'crypto-feeds',
                         'kind' => 'param',
                         'name' => 'id',
                         'orig' => 'id',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'active' => true,
                       ],
                     ],
                   ],
@@ -497,11 +502,9 @@ class AgentGatewayConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'active' => true,
                   'index$' => 0,
                 ],
               ],
-              'input' => 'data',
               'key$' => 'load',
             ],
           ],

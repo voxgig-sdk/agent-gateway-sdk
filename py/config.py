@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://agent-gateway-kappa.vercel.app",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -33,26 +36,26 @@ def make_config():
         "name": "analytics",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/api/stats",
                 "parts": [
                   "api",
                   "stats",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -63,26 +66,29 @@ def make_config():
       "api_key": {
         "fields": [
           {
+            "active": True,
             "name": "credit",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "key",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
         ],
         "name": "api_key",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/api/keys/create",
                 "parts": [
@@ -90,17 +96,14 @@ def make_config():
                   "keys",
                   "create",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
         },
@@ -111,26 +114,29 @@ def make_config():
       "balance": {
         "fields": [
           {
+            "active": True,
             "name": "created_at",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "credit",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 1,
           },
         ],
         "name": "balance",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/api/keys/balance",
                 "parts": [
@@ -138,17 +144,14 @@ def make_config():
                   "keys",
                   "balance",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -159,35 +162,35 @@ def make_config():
       "meta": {
         "fields": [
           {
+            "active": True,
             "name": "status",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
         ],
         "name": "meta",
         "op": {
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/health",
                 "parts": [
                   "health",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -198,82 +201,85 @@ def make_config():
       "payment": {
         "fields": [
           {
+            "active": True,
             "name": "address",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "api_key",
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "chain",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "credits_added",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "ok",
             "req": False,
             "type": "`$BOOLEAN`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "rate",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "token",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "total_credit",
             "req": False,
             "type": "`$INTEGER`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "tx_hash",
             "req": True,
             "type": "`$STRING`",
-            "active": True,
             "index$": 8,
           },
           {
+            "active": True,
             "name": "usdc",
             "req": False,
             "type": "`$NUMBER`",
-            "active": True,
             "index$": 9,
           },
         ],
         "name": "payment",
         "op": {
           "create": {
+            "input": "data",
             "name": "create",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "POST",
                 "orig": "/api/credits/topup",
                 "parts": [
@@ -281,23 +287,23 @@ def make_config():
                   "credits",
                   "topup",
                 ],
+                "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
-                "select": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "create",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/api/payments/info",
                 "parts": [
@@ -312,12 +318,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },
@@ -328,92 +331,94 @@ def make_config():
       "service": {
         "fields": [
           {
+            "active": True,
             "name": "api_url",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "category",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "description",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 2,
           },
           {
+            "active": True,
             "name": "endpoint",
             "req": False,
             "type": "`$ARRAY`",
-            "active": True,
             "index$": 3,
           },
           {
+            "active": True,
             "name": "icon",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 4,
           },
           {
+            "active": True,
             "name": "id",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 5,
           },
           {
+            "active": True,
             "name": "latency",
             "req": False,
             "type": "`$NUMBER`",
-            "active": True,
             "index$": 6,
           },
           {
+            "active": True,
             "name": "name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 7,
           },
           {
+            "active": True,
             "name": "status",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 8,
           },
         ],
         "name": "service",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "query": [
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "category",
                       "orig": "category",
                       "reqd": False,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "kind": "query",
                       "name": "search",
                       "orig": "search",
                       "reqd": False,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -433,10 +438,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
               {
+                "active": True,
+                "args": {},
                 "method": "GET",
                 "orig": "/api/services/health",
                 "parts": [
@@ -451,28 +457,27 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
-                "args": {},
                 "index$": 1,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
           "load": {
+            "input": "data",
             "name": "load",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "crypto-feeds",
                       "kind": "param",
                       "name": "id",
                       "orig": "id",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -492,11 +497,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "load",
           },
         },

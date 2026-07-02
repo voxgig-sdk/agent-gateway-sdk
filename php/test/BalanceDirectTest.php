@@ -67,12 +67,14 @@ function balance_direct_setup($mockres)
     $env = Runner::env_override([
         "AGENTGATEWAY_TEST_BALANCE_ENTID" => [],
         "AGENTGATEWAY_TEST_LIVE" => "FALSE",
+        "AGENTGATEWAY_APIKEY" => "NONE",
     ]);
 
     $live = $env["AGENTGATEWAY_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["AGENTGATEWAY_APIKEY"],
         ];
         $client = new AgentGatewaySDK($merged_opts);
         return [

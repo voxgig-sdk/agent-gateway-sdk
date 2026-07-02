@@ -20,33 +20,7 @@ main: {
       ]
       title: "Agent Gateway"
       version: "1.0.0"
-      tagline: "Call 40+ services — DNS, screenshots, crypto prices, scraping, code execution, geo, PDF — behind one API key"
-      homepage: "https://agent-gateway-kappa.vercel.app"
-      docs_url: "https://agent-gateway-kappa.vercel.app"
-      license_short: "Proprietary, hosted commercial gateway with a free tier and pay-as-you-go USDC credits."
-      license_md: `- Proprietary service operated as a hosted gateway; no open-source licence is published.
-- Free tier of 50 requests per day with no credit card required.
-- Paid usage is pay-as-you-go: 1 USDC = 500 credits, credits do not expire.
-- Payments settle in USDC on the Base network, including per-request HTTP 402 Payment Required flows for AI agents.`
-      about_md: `[Agent Gateway](https://agent-gateway-kappa.vercel.app) is a hosted API gateway that fronts 40+ production services behind a single API key, aimed at AI agents and automation workloads. Categories include infrastructure, DeFi, blockchain data, security, and gaming.
-
-What you get from the API:
-
-- A catalogue endpoint listing every available service (e.g. \`GET /api/services\`) and a health endpoint reporting real-time status (\`GET /api/services/health\`).
-- Concrete service endpoints such as live cryptocurrency price feeds at \`GET /api/price/{SYMBOL}\`, plus DNS lookups, screenshots, web scraping, sandboxed code execution, geolocation, and PDF processing.
-- API key management — generate a key instantly with \`POST /api/keys/create\` and check remaining credits with \`GET /api/keys/balance\`.
-- A payment flow built on HTTP 402: requests without sufficient credit return \`402 Payment Required\` with payment details, and agents retry the request with a USDC-on-Base transaction hash.
-
-Operational notes: authentication is by Bearer token in the \`Authorization\` header, keys are issued without signup, and the free tier is rate-limited to 50 requests per day. Pricing is metered in credits (1 USDC = 500 credits) that never expire.`
-      entity_desc: {
-        analytics: "Usage and health analytics for the gateway and its underlying services, surfaced via endpoints like `GET /api/services/health`."
-        api_key: "API key lifecycle — instantly issued bearer tokens created via `POST /api/keys/create` and used in the `Authorization` header."
-        balance: "Credit balance for an API key, queried via `GET /api/keys/balance`; credits are denominated against the 1 USDC = 500 credits rate."
-        meta: "Gateway-level metadata such as the service catalogue and overall status."
-        payment: "USDC-on-Base payment records and the HTTP 402 Payment Required flow that lets agents pay per request and resume with a transaction hash."
-        service: "An individual upstream service exposed through the gateway (DNS, screenshots, crypto prices, scraping, code execution, geo, PDF, etc.), listed at `GET /api/services`."
-      }
-      auth: false
     }
   }
 }
+

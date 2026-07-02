@@ -99,12 +99,14 @@ func analyticsDirectSetup(mockres any) *analyticsDirectSetupResult {
 	env := envOverride(map[string]any{
 		"AGENTGATEWAY_TEST_ANALYTICS_ENTID": map[string]any{},
 		"AGENTGATEWAY_TEST_LIVE":    "FALSE",
+		"AGENTGATEWAY_APIKEY":       "NONE",
 	})
 
 	live := env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["AGENTGATEWAY_APIKEY"],
 		}
 		client := sdk.NewAgentGatewaySDK(mergedOpts)
 

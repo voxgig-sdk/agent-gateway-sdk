@@ -117,6 +117,7 @@ func balanceBasicSetup(extra map[string]any) *entityTestSetup {
 		"AGENTGATEWAY_TEST_BALANCE_ENTID": idmap,
 		"AGENTGATEWAY_TEST_LIVE":      "FALSE",
 		"AGENTGATEWAY_TEST_EXPLAIN":   "FALSE",
+		"AGENTGATEWAY_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["AGENTGATEWAY_TEST_BALANCE_ENTID"])
@@ -127,6 +128,7 @@ func balanceBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["AGENTGATEWAY_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["AGENTGATEWAY_APIKEY"],
 			},
 			extra,
 		})

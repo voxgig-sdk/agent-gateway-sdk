@@ -92,6 +92,7 @@ function payment_basic_setup(extra)
     ["AGENTGATEWAY_TEST_PAYMENT_ENTID"] = idmap,
     ["AGENTGATEWAY_TEST_LIVE"] = "FALSE",
     ["AGENTGATEWAY_TEST_EXPLAIN"] = "FALSE",
+    ["AGENTGATEWAY_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,6 +104,7 @@ function payment_basic_setup(extra)
   if env["AGENTGATEWAY_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["AGENTGATEWAY_APIKEY"],
       },
       extra or {},
     })

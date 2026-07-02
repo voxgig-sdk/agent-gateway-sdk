@@ -117,12 +117,14 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'AGENTGATEWAY_TEST_SERVICE_ENTID': {},
     'AGENTGATEWAY_TEST_LIVE': 'FALSE',
+    'AGENTGATEWAY_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.AGENTGATEWAY_TEST_LIVE
 
   if (live) {
     const client = new AgentGatewaySDK({
+      apikey: env.AGENTGATEWAY_APIKEY,
     })
 
     let idmap: any = env['AGENTGATEWAY_TEST_SERVICE_ENTID']

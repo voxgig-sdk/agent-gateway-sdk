@@ -1,21 +1,8 @@
 # AgentGateway SDK
 
-Call 40+ services — DNS, screenshots, crypto prices, scraping, code execution, geo, PDF — behind one API key
+Agent Gateway client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Agent Gateway
-
-[Agent Gateway](https://agent-gateway-kappa.vercel.app) is a hosted API gateway that fronts 40+ production services behind a single API key, aimed at AI agents and automation workloads. Categories include infrastructure, DeFi, blockchain data, security, and gaming.
-
-What you get from the API:
-
-- A catalogue endpoint listing every available service (e.g. `GET /api/services`) and a health endpoint reporting real-time status (`GET /api/services/health`).
-- Concrete service endpoints such as live cryptocurrency price feeds at `GET /api/price/{SYMBOL}`, plus DNS lookups, screenshots, web scraping, sandboxed code execution, geolocation, and PDF processing.
-- API key management — generate a key instantly with `POST /api/keys/create` and check remaining credits with `GET /api/keys/balance`.
-- A payment flow built on HTTP 402: requests without sufficient credit return `402 Payment Required` with payment details, and agents retry the request with a USDC-on-Base transaction hash.
-
-Operational notes: authentication is by Bearer token in the `Authorization` header, keys are issued without signup, and the free tier is rate-limited to 50 requests per day. Pricing is metered in credits (1 USDC = 500 credits) that never expire.
 
 ## Try it
 
@@ -49,27 +36,31 @@ gem install agent-gateway-sdk
 luarocks install agent-gateway-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { AgentGatewaySDK } from 'agent-gateway'
 
-const client = new AgentGatewaySDK({})
+const client = new AgentGatewaySDK({
+  apikey: process.env.AGENT-GATEWAY_APIKEY,
+})
 
+// Load analytics data
+const analytics = await client.Analytics().load({})
+console.log(analytics.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,12 +90,12 @@ The API exposes 6 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Analytics** | Usage and health analytics for the gateway and its underlying services, surfaced via endpoints like `GET /api/services/health`. | `/api/stats` |
-| **ApiKey** | API key lifecycle — instantly issued bearer tokens created via `POST /api/keys/create` and used in the `Authorization` header. | `/api/keys/create` |
-| **Balance** | Credit balance for an API key, queried via `GET /api/keys/balance`; credits are denominated against the 1 USDC = 500 credits rate. | `/api/keys/balance` |
-| **Meta** | Gateway-level metadata such as the service catalogue and overall status. | `/health` |
-| **Payment** | USDC-on-Base payment records and the HTTP 402 Payment Required flow that lets agents pay per request and resume with a transaction hash. | `/api/credits/topup` |
-| **Service** | An individual upstream service exposed through the gateway (DNS, screenshots, crypto prices, scraping, code execution, geo, PDF, etc.), listed at `GET /api/services`. | `/api/services` |
+| **Analytics** |  | `/api/stats` |
+| **ApiKey** |  | `/api/keys/create` |
+| **Balance** |  | `/api/keys/balance` |
+| **Meta** |  | `/health` |
+| **Payment** |  | `/api/credits/topup` |
+| **Service** |  | `/api/services` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -114,15 +105,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from agentgateway_sdk import AgentGatewaySDK
 
-client = AgentGatewaySDK({})
+client = AgentGatewaySDK({
+    "apikey": os.environ.get("AGENT-GATEWAY_APIKEY"),
+})
 
 
 # Load a specific analytics
-analytics, err = client.Analytics(None).load(
-    {"id": "example_id"}, None
-)
+analytics, err = client.Analytics().load({"id": "example_id"})
+print(analytics)
 ```
 
 ### PHP
@@ -131,13 +124,14 @@ analytics, err = client.Analytics(None).load(
 <?php
 require_once 'agentgateway_sdk.php';
 
-$client = new AgentGatewaySDK([]);
+$client = new AgentGatewaySDK([
+    "apikey" => getenv("AGENT-GATEWAY_APIKEY"),
+]);
 
 
 // Load a specific analytics
-[$analytics, $err] = $client->Analytics(null)->load(
-    ["id" => "example_id"], null
-);
+[$analytics, $err] = $client->Analytics()->load(["id" => "example_id"]);
+print_r($analytics);
 ```
 
 ### Golang
@@ -145,8 +139,13 @@ $client = new AgentGatewaySDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/agent-gateway-sdk/go"
 
-client := sdk.NewAgentGatewaySDK(map[string]any{})
+client := sdk.NewAgentGatewaySDK(map[string]any{
+    "apikey": os.Getenv("AGENT-GATEWAY_APIKEY"),
+})
 
+// Load analytics data
+analytics, err := client.Analytics(nil).Load(map[string]any{}, nil)
+fmt.Println(analytics)
 ```
 
 ### Ruby
@@ -154,13 +153,14 @@ client := sdk.NewAgentGatewaySDK(map[string]any{})
 ```ruby
 require_relative "AgentGateway_sdk"
 
-client = AgentGatewaySDK.new({})
+client = AgentGatewaySDK.new({
+  "apikey" => ENV["AGENT-GATEWAY_APIKEY"],
+})
 
 
 # Load a specific analytics
-analytics, err = client.Analytics(nil).load(
-  { "id" => "example_id" }, nil
-)
+analytics, err = client.Analytics().load({ "id" => "example_id" })
+puts analytics
 ```
 
 ### Lua
@@ -168,13 +168,14 @@ analytics, err = client.Analytics(nil).load(
 ```lua
 local sdk = require("agent-gateway_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("AGENT-GATEWAY_APIKEY"),
+})
 
 
 -- Load a specific analytics
-local analytics, err = client:Analytics(nil):load(
-  { id = "example_id" }, nil
-)
+local analytics, err = client:Analytics():load({ id = "example_id" })
+print(analytics)
 ```
 
 ## Unit testing in offline mode
@@ -193,25 +194,21 @@ const result = await client.Analytics().load({ id: 'test01' })
 ### Python
 
 ```python
-client = AgentGatewaySDK.test(None, None)
-result, err = client.Analytics(None).load(
-    {"id": "test01"}, None
-)
+client = AgentGatewaySDK.test()
+result, err = client.Analytics().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = AgentGatewaySDK::test(null, null);
-[$result, $err] = $client->Analytics(null)->load(
-    ["id" => "test01"], null
-);
+$client = AgentGatewaySDK::test();
+[$result, $err] = $client->Analytics()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Analytics(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -220,19 +217,15 @@ result, err := client.Analytics(nil).Load(
 ### Ruby
 
 ```ruby
-client = AgentGatewaySDK.test(nil, nil)
-result, err = client.Analytics(nil).load(
-  { "id" => "test01" }, nil
-)
+client = AgentGatewaySDK.test
+result, err = client.Analytics().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Analytics(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Analytics():load({ id = "test01" })
 ```
 
 ## How it works
@@ -336,15 +329,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Agent Gateway
-
-- Upstream: [https://agent-gateway-kappa.vercel.app](https://agent-gateway-kappa.vercel.app)
-
-- Proprietary service operated as a hosted gateway; no open-source licence is published.
-- Free tier of 50 requests per day with no credit card required.
-- Paid usage is pay-as-you-go: 1 USDC = 500 credits, credits do not expire.
-- Payments settle in USDC on the Base network, including per-request HTTP 402 Payment Required flows for AI agents.
 
 ---
 
