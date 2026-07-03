@@ -10,7 +10,7 @@ The Python SDK for the AgentGateway API — an entity-oriented client following 
 
 ## Install
 ```bash
-pip install agent-gateway-sdk
+pip install voxgig-sdk-agent-gateway
 ```
 
 Or install from source:

@@ -10,7 +10,7 @@ The PHP SDK for the AgentGateway API — an entity-oriented client using PHP con
 
 ## Install
 ```bash
-composer require voxgig/agent-gateway-sdk
+composer require voxgig-sdk/agent-gateway
 ```
 
 

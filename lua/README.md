@@ -10,7 +10,7 @@ The Lua SDK for the AgentGateway API — an entity-oriented client using Lua con
 
 ## Install
 ```bash
-luarocks install agent-gateway-sdk
+luarocks install voxgig-sdk-agent-gateway
 ```
 
 If the module is not yet published, add the source directory to

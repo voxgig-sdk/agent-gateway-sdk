@@ -10,7 +10,7 @@ The TypeScript SDK for the AgentGateway API — a type-safe, entity-oriented cli
 
 ## Install
 ```bash
-npm install agent-gateway
+npm install @voxgig-sdk/agent-gateway
 ```
 ## Tutorial: your first API call
 

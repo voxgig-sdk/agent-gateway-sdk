@@ -10,13 +10,13 @@ The Ruby SDK for the AgentGateway API — an entity-oriented client using idioma
 
 ## Install
 ```bash
-gem install agent-gateway-sdk
+gem install voxgig-sdk-agent-gateway
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "agent-gateway-sdk"
+gem "voxgig-sdk-agent-gateway"
 ```
 
 Then run:
