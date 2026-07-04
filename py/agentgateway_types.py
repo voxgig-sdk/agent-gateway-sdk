@@ -4,126 +4,119 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Analytics:
+class Analytics(TypedDict):
     pass
 
 
-@dataclass
-class AnalyticsLoadMatch:
+class AnalyticsLoadMatch(TypedDict):
     pass
 
 
-@dataclass
-class ApiKey:
-    credit: Optional[int] = None
-    key: Optional[str] = None
+class ApiKey(TypedDict, total=False):
+    credit: int
+    key: str
 
 
-@dataclass
-class ApiKeyCreateData:
-    credit: Optional[int] = None
-    key: Optional[str] = None
+class ApiKeyCreateData(TypedDict, total=False):
+    credit: int
+    key: str
 
 
-@dataclass
-class Balance:
-    created_at: Optional[int] = None
-    credit: Optional[int] = None
+class Balance(TypedDict, total=False):
+    created_at: int
+    credit: int
 
 
-@dataclass
-class BalanceLoadMatch:
-    created_at: Optional[int] = None
-    credit: Optional[int] = None
+class BalanceLoadMatch(TypedDict, total=False):
+    created_at: int
+    credit: int
 
 
-@dataclass
-class Meta:
-    status: Optional[str] = None
+class Meta(TypedDict, total=False):
+    status: str
 
 
-@dataclass
-class MetaLoadMatch:
-    status: Optional[str] = None
+class MetaLoadMatch(TypedDict, total=False):
+    status: str
 
 
-@dataclass
-class Payment:
+class PaymentRequired(TypedDict):
     api_key: str
     tx_hash: str
-    address: Optional[str] = None
-    chain: Optional[str] = None
-    credits_added: Optional[int] = None
-    ok: Optional[bool] = None
-    rate: Optional[str] = None
-    token: Optional[str] = None
-    total_credit: Optional[int] = None
-    usdc: Optional[float] = None
 
 
-@dataclass
-class PaymentLoadMatch:
-    address: Optional[str] = None
-    api_key: Optional[str] = None
-    chain: Optional[str] = None
-    credits_added: Optional[int] = None
-    ok: Optional[bool] = None
-    rate: Optional[str] = None
-    token: Optional[str] = None
-    total_credit: Optional[int] = None
-    tx_hash: Optional[str] = None
-    usdc: Optional[float] = None
+class Payment(PaymentRequired, total=False):
+    address: str
+    chain: str
+    credits_added: int
+    ok: bool
+    rate: str
+    token: str
+    total_credit: int
+    usdc: float
 
 
-@dataclass
-class PaymentCreateData:
-    address: Optional[str] = None
-    api_key: Optional[str] = None
-    chain: Optional[str] = None
-    credits_added: Optional[int] = None
-    ok: Optional[bool] = None
-    rate: Optional[str] = None
-    token: Optional[str] = None
-    total_credit: Optional[int] = None
-    tx_hash: Optional[str] = None
-    usdc: Optional[float] = None
+class PaymentLoadMatch(TypedDict, total=False):
+    address: str
+    api_key: str
+    chain: str
+    credits_added: int
+    ok: bool
+    rate: str
+    token: str
+    total_credit: int
+    tx_hash: str
+    usdc: float
 
 
-@dataclass
-class Service:
-    api_url: Optional[str] = None
-    category: Optional[str] = None
-    description: Optional[str] = None
-    endpoint: Optional[list] = None
-    icon: Optional[str] = None
-    id: Optional[str] = None
-    latency: Optional[float] = None
-    name: Optional[str] = None
-    status: Optional[str] = None
+class PaymentCreateData(TypedDict, total=False):
+    address: str
+    api_key: str
+    chain: str
+    credits_added: int
+    ok: bool
+    rate: str
+    token: str
+    total_credit: int
+    tx_hash: str
+    usdc: float
 
 
-@dataclass
-class ServiceLoadMatch:
+class Service(TypedDict, total=False):
+    api_url: str
+    category: str
+    description: str
+    endpoint: list
+    icon: str
+    id: str
+    latency: float
+    name: str
+    status: str
+
+
+class ServiceLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class ServiceListMatch:
-    api_url: Optional[str] = None
-    category: Optional[str] = None
-    description: Optional[str] = None
-    endpoint: Optional[list] = None
-    icon: Optional[str] = None
-    id: Optional[str] = None
-    latency: Optional[float] = None
-    name: Optional[str] = None
-    status: Optional[str] = None
-
+class ServiceListMatch(TypedDict, total=False):
+    api_url: str
+    category: str
+    description: str
+    endpoint: list
+    icon: str
+    id: str
+    latency: float
+    name: str
+    status: str

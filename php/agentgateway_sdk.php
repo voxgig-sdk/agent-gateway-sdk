@@ -233,10 +233,10 @@ class AgentGatewaySDK
 
     private $_analytics = null;
 
-    // Idiomatic facade: $client->analytics()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Analytics() (PHP method
-    // names are case-insensitive).
-    public function analytics($data = null)
+    // Canonical facade: $client->Analytics()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->analytics()
+    // resolves here too.
+    public function Analytics($data = null)
     {
         require_once __DIR__ . '/entity/analytics_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class AgentGatewaySDK
 
     private $_api_key = null;
 
-    // Idiomatic facade: $client->api_key()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias ApiKey() (PHP method
-    // names are case-insensitive).
-    public function api_key($data = null)
+    // Canonical facade: $client->ApiKey()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->api_key()
+    // resolves here too.
+    public function ApiKey($data = null)
     {
         require_once __DIR__ . '/entity/api_key_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class AgentGatewaySDK
 
     private $_balance = null;
 
-    // Idiomatic facade: $client->balance()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Balance() (PHP method
-    // names are case-insensitive).
-    public function balance($data = null)
+    // Canonical facade: $client->Balance()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->balance()
+    // resolves here too.
+    public function Balance($data = null)
     {
         require_once __DIR__ . '/entity/balance_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class AgentGatewaySDK
 
     private $_meta = null;
 
-    // Idiomatic facade: $client->meta()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Meta() (PHP method
-    // names are case-insensitive).
-    public function meta($data = null)
+    // Canonical facade: $client->Meta()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->meta()
+    // resolves here too.
+    public function Meta($data = null)
     {
         require_once __DIR__ . '/entity/meta_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class AgentGatewaySDK
 
     private $_payment = null;
 
-    // Idiomatic facade: $client->payment()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Payment() (PHP method
-    // names are case-insensitive).
-    public function payment($data = null)
+    // Canonical facade: $client->Payment()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->payment()
+    // resolves here too.
+    public function Payment($data = null)
     {
         require_once __DIR__ . '/entity/payment_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class AgentGatewaySDK
 
     private $_service = null;
 
-    // Idiomatic facade: $client->service()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Service() (PHP method
-    // names are case-insensitive).
-    public function service($data = null)
+    // Canonical facade: $client->Service()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->service()
+    // resolves here too.
+    public function Service($data = null)
     {
         require_once __DIR__ . '/entity/service_entity.php';
         if ($data === null) {

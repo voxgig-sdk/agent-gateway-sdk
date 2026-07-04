@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:analytics():list() / client:analytics():load({ id = ... })
-function AgentGatewaySDK:analytics(data)
+-- Idiomatic facade: client:Analytics():list() / client:Analytics():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AgentGatewaySDK:Analytics(data)
   local EntityMod = require("entity.analytics_entity")
   if data == nil then
     if self._analytics == nil then
@@ -256,15 +257,10 @@ function AgentGatewaySDK:analytics(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:analytics() instead.
-function AgentGatewaySDK:Analytics(data)
-  local EntityMod = require("entity.analytics_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:api_key():list() / client:api_key():load({ id = ... })
-function AgentGatewaySDK:api_key(data)
+-- Idiomatic facade: client:ApiKey():list() / client:ApiKey():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AgentGatewaySDK:ApiKey(data)
   local EntityMod = require("entity.api_key_entity")
   if data == nil then
     if self._api_key == nil then
@@ -275,15 +271,10 @@ function AgentGatewaySDK:api_key(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:api_key() instead.
-function AgentGatewaySDK:ApiKey(data)
-  local EntityMod = require("entity.api_key_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:balance():list() / client:balance():load({ id = ... })
-function AgentGatewaySDK:balance(data)
+-- Idiomatic facade: client:Balance():list() / client:Balance():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AgentGatewaySDK:Balance(data)
   local EntityMod = require("entity.balance_entity")
   if data == nil then
     if self._balance == nil then
@@ -294,15 +285,10 @@ function AgentGatewaySDK:balance(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:balance() instead.
-function AgentGatewaySDK:Balance(data)
-  local EntityMod = require("entity.balance_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:meta():list() / client:meta():load({ id = ... })
-function AgentGatewaySDK:meta(data)
+-- Idiomatic facade: client:Meta():list() / client:Meta():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AgentGatewaySDK:Meta(data)
   local EntityMod = require("entity.meta_entity")
   if data == nil then
     if self._meta == nil then
@@ -313,15 +299,10 @@ function AgentGatewaySDK:meta(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:meta() instead.
-function AgentGatewaySDK:Meta(data)
-  local EntityMod = require("entity.meta_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:payment():list() / client:payment():load({ id = ... })
-function AgentGatewaySDK:payment(data)
+-- Idiomatic facade: client:Payment():list() / client:Payment():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AgentGatewaySDK:Payment(data)
   local EntityMod = require("entity.payment_entity")
   if data == nil then
     if self._payment == nil then
@@ -332,15 +313,10 @@ function AgentGatewaySDK:payment(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:payment() instead.
-function AgentGatewaySDK:Payment(data)
-  local EntityMod = require("entity.payment_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:service():list() / client:service():load({ id = ... })
-function AgentGatewaySDK:service(data)
+-- Idiomatic facade: client:Service():list() / client:Service():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function AgentGatewaySDK:Service(data)
   local EntityMod = require("entity.service_entity")
   if data == nil then
     if self._service == nil then
@@ -348,12 +324,6 @@ function AgentGatewaySDK:service(data)
     end
     return self._service
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:service() instead.
-function AgentGatewaySDK:Service(data)
-  local EntityMod = require("entity.service_entity")
   return EntityMod.new(self, data)
 end
 

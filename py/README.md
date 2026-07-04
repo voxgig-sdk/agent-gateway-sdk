@@ -36,10 +36,12 @@ client = AgentGatewaySDK({
 
 ### 3. Load an analytics
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.analytics.load({"id": "example_id"})
-    print(result)
+    analytics = client.Analytics().load({"id": "example_id"})
+    print(analytics)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -87,8 +89,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AgentGatewaySDK.test()
 
-result = client.analytics.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+analytics = client.Analytics().load({"id": "test01"})
+# analytics contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -166,8 +169,8 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Analytics` | `(data) -> AnalyticsEntity` | Create a Analytics entity instance. |
-| `ApiKey` | `(data) -> ApiKeyEntity` | Create a ApiKey entity instance. |
+| `Analytics` | `(data) -> AnalyticsEntity` | Create an Analytics entity instance. |
+| `ApiKey` | `(data) -> ApiKeyEntity` | Create an ApiKey entity instance. |
 | `Balance` | `(data) -> BalanceEntity` | Create a Balance entity instance. |
 | `Meta` | `(data) -> MetaEntity` | Create a Meta entity instance. |
 | `Payment` | `(data) -> PaymentEntity` | Create a Payment entity instance. |
@@ -296,7 +299,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.analytics`
+Create an instance: `analytics = client.Analytics()`
 
 #### Operations
 
@@ -306,14 +309,14 @@ Create an instance: `const analytics = client.analytics`
 
 #### Example: Load
 
-```ts
-const analytics = await client.analytics.load({ id: 'analytics_id' })
+```python
+analytics = client.Analytics().load({"id": "analytics_id"})
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.api_key`
+Create an instance: `api_key = client.ApiKey()`
 
 #### Operations
 
@@ -330,15 +333,15 @@ Create an instance: `const api_key = client.api_key`
 
 #### Example: Create
 
-```ts
-const api_key = await client.api_key.create({
+```python
+api_key = client.ApiKey().create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.balance`
+Create an instance: `balance = client.Balance()`
 
 #### Operations
 
@@ -355,14 +358,14 @@ Create an instance: `const balance = client.balance`
 
 #### Example: Load
 
-```ts
-const balance = await client.balance.load({ id: 'balance_id' })
+```python
+balance = client.Balance().load({"id": "balance_id"})
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.meta`
+Create an instance: `meta = client.Meta()`
 
 #### Operations
 
@@ -378,14 +381,14 @@ Create an instance: `const meta = client.meta`
 
 #### Example: Load
 
-```ts
-const meta = await client.meta.load({ id: 'meta_id' })
+```python
+meta = client.Meta().load({"id": "meta_id"})
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.payment`
+Create an instance: `payment = client.Payment()`
 
 #### Operations
 
@@ -411,23 +414,23 @@ Create an instance: `const payment = client.payment`
 
 #### Example: Load
 
-```ts
-const payment = await client.payment.load({ id: 'payment_id' })
+```python
+payment = client.Payment().load({"id": "payment_id"})
 ```
 
 #### Example: Create
 
-```ts
-const payment = await client.payment.create({
-  api_key: /* `$STRING` */,
-  tx_hash: /* `$STRING` */,
+```python
+payment = client.Payment().create({
+    "api_key": ...,  # `$STRING`
+    "tx_hash": ...,  # `$STRING`
 })
 ```
 
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `service = client.Service()`
 
 #### Operations
 
@@ -452,14 +455,14 @@ Create an instance: `const service = client.service`
 
 #### Example: Load
 
-```ts
-const service = await client.service.load({ id: 'service_id' })
+```python
+service = client.Service().load({"id": "service_id"})
 ```
 
 #### Example: List
 
-```ts
-const services = await client.service.list()
+```python
+services = client.Service().list({})
 ```
 
 
@@ -533,7 +536,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-analytics = client.analytics
+analytics = client.Analytics()
 analytics.load({"id": "example_id"})
 
 # analytics.data_get() now returns the loaded analytics data

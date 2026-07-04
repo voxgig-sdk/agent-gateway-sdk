@@ -220,105 +220,45 @@ class AgentGatewaySDK:
         }
 
 
-    @property
-    def analytics(self):
-        """Idiomatic facade: client.analytics.list() / client.analytics.load({"id": ...})."""
-        from entity.analytics_entity import AnalyticsEntity
-        cached = getattr(self, "_analytics", None)
-        if cached is None:
-            cached = AnalyticsEntity(self, None)
-            self._analytics = cached
-        return cached
-
-    def Analytics(self, data=None):
-        # Deprecated: use client.analytics instead.
+    def Analytics(self, data=None) -> "AnalyticsEntity":
+        """Entity factory: client.Analytics().list({}) / client.Analytics().load({"id": ...})."""
         from entity.analytics_entity import AnalyticsEntity
         return AnalyticsEntity(self, data)
 
 
-    @property
-    def api_key(self):
-        """Idiomatic facade: client.api_key.list() / client.api_key.load({"id": ...})."""
-        from entity.api_key_entity import ApiKeyEntity
-        cached = getattr(self, "_api_key", None)
-        if cached is None:
-            cached = ApiKeyEntity(self, None)
-            self._api_key = cached
-        return cached
-
-    def ApiKey(self, data=None):
-        # Deprecated: use client.api_key instead.
+    def ApiKey(self, data=None) -> "ApiKeyEntity":
+        """Entity factory: client.ApiKey().list({}) / client.ApiKey().load({"id": ...})."""
         from entity.api_key_entity import ApiKeyEntity
         return ApiKeyEntity(self, data)
 
 
-    @property
-    def balance(self):
-        """Idiomatic facade: client.balance.list() / client.balance.load({"id": ...})."""
-        from entity.balance_entity import BalanceEntity
-        cached = getattr(self, "_balance", None)
-        if cached is None:
-            cached = BalanceEntity(self, None)
-            self._balance = cached
-        return cached
-
-    def Balance(self, data=None):
-        # Deprecated: use client.balance instead.
+    def Balance(self, data=None) -> "BalanceEntity":
+        """Entity factory: client.Balance().list({}) / client.Balance().load({"id": ...})."""
         from entity.balance_entity import BalanceEntity
         return BalanceEntity(self, data)
 
 
-    @property
-    def meta(self):
-        """Idiomatic facade: client.meta.list() / client.meta.load({"id": ...})."""
-        from entity.meta_entity import MetaEntity
-        cached = getattr(self, "_meta", None)
-        if cached is None:
-            cached = MetaEntity(self, None)
-            self._meta = cached
-        return cached
-
-    def Meta(self, data=None):
-        # Deprecated: use client.meta instead.
+    def Meta(self, data=None) -> "MetaEntity":
+        """Entity factory: client.Meta().list({}) / client.Meta().load({"id": ...})."""
         from entity.meta_entity import MetaEntity
         return MetaEntity(self, data)
 
 
-    @property
-    def payment(self):
-        """Idiomatic facade: client.payment.list() / client.payment.load({"id": ...})."""
-        from entity.payment_entity import PaymentEntity
-        cached = getattr(self, "_payment", None)
-        if cached is None:
-            cached = PaymentEntity(self, None)
-            self._payment = cached
-        return cached
-
-    def Payment(self, data=None):
-        # Deprecated: use client.payment instead.
+    def Payment(self, data=None) -> "PaymentEntity":
+        """Entity factory: client.Payment().list({}) / client.Payment().load({"id": ...})."""
         from entity.payment_entity import PaymentEntity
         return PaymentEntity(self, data)
 
 
-    @property
-    def service(self):
-        """Idiomatic facade: client.service.list() / client.service.load({"id": ...})."""
-        from entity.service_entity import ServiceEntity
-        cached = getattr(self, "_service", None)
-        if cached is None:
-            cached = ServiceEntity(self, None)
-            self._service = cached
-        return cached
-
-    def Service(self, data=None):
-        # Deprecated: use client.service instead.
+    def Service(self, data=None) -> "ServiceEntity":
+        """Entity factory: client.Service().list({}) / client.Service().load({"id": ...})."""
         from entity.service_entity import ServiceEntity
         return ServiceEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "AgentGatewaySDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -338,3 +278,14 @@ class AgentGatewaySDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.analytics_entity import AnalyticsEntity
+    from entity.api_key_entity import ApiKeyEntity
+    from entity.balance_entity import BalanceEntity
+    from entity.meta_entity import MetaEntity
+    from entity.payment_entity import PaymentEntity
+    from entity.service_entity import ServiceEntity

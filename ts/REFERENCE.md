@@ -170,7 +170,7 @@ Alias for `AgentGatewaySDK.test()`.
 ## AnalyticsEntity
 
 ```ts
-const analytics = client.analytics
+const analytics = client.Analytics()
 ```
 
 ### Operations
@@ -180,7 +180,7 @@ const analytics = client.analytics
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.analytics.load({ id: 'analytics_id' })
+const result = await client.Analytics().load({ id: 'analytics_id' })
 ```
 
 ### Common Methods
@@ -214,7 +214,7 @@ Return a copy of the entity options.
 ## ApiKeyEntity
 
 ```ts
-const api_key = client.api_key
+const api_key = client.ApiKey()
 ```
 
 ### Fields
@@ -231,7 +231,7 @@ const api_key = client.api_key
 Create a new entity with the given data.
 
 ```ts
-const result = await client.api_key.create({
+const result = await client.ApiKey().create({
 })
 ```
 
@@ -266,7 +266,7 @@ Return a copy of the entity options.
 ## BalanceEntity
 
 ```ts
-const balance = client.balance
+const balance = client.Balance()
 ```
 
 ### Fields
@@ -283,7 +283,7 @@ const balance = client.balance
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.balance.load({ id: 'balance_id' })
+const result = await client.Balance().load({ id: 'balance_id' })
 ```
 
 ### Common Methods
@@ -317,7 +317,7 @@ Return a copy of the entity options.
 ## MetaEntity
 
 ```ts
-const meta = client.meta
+const meta = client.Meta()
 ```
 
 ### Fields
@@ -333,7 +333,7 @@ const meta = client.meta
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.meta.load({ id: 'meta_id' })
+const result = await client.Meta().load({ id: 'meta_id' })
 ```
 
 ### Common Methods
@@ -367,7 +367,7 @@ Return a copy of the entity options.
 ## PaymentEntity
 
 ```ts
-const payment = client.payment
+const payment = client.Payment()
 ```
 
 ### Fields
@@ -392,7 +392,7 @@ const payment = client.payment
 Create a new entity with the given data.
 
 ```ts
-const result = await client.payment.create({
+const result = await client.Payment().create({
   api_key: /* `$STRING` */,
   tx_hash: /* `$STRING` */,
 })
@@ -403,7 +403,7 @@ const result = await client.payment.create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.payment.load({ id: 'payment_id' })
+const result = await client.Payment().load({ id: 'payment_id' })
 ```
 
 ### Common Methods
@@ -437,7 +437,7 @@ Return a copy of the entity options.
 ## ServiceEntity
 
 ```ts
-const service = client.service
+const service = client.Service()
 ```
 
 ### Fields
@@ -461,7 +461,7 @@ const service = client.service
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.service.list()
+const results = await client.Service().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -469,7 +469,7 @@ const results = await client.service.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.service.load({ id: 'service_id' })
+const result = await client.Service().load({ id: 'service_id' })
 ```
 
 ### Common Methods

@@ -106,7 +106,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## AnalyticsEntity
 
 ```php
-$analytics = $client->analytics();
+$analytics = $client->Analytics();
 ```
 
 ### Operations
@@ -116,7 +116,7 @@ $analytics = $client->analytics();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->analytics()->load(["id" => "analytics_id"]);
+$result = $client->Analytics()->load(["id" => "analytics_id"]);
 ```
 
 ### Common Methods
@@ -152,7 +152,7 @@ Return the entity name.
 ## ApiKeyEntity
 
 ```php
-$api_key = $client->api_key();
+$api_key = $client->ApiKey();
 ```
 
 ### Fields
@@ -169,7 +169,7 @@ $api_key = $client->api_key();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->api_key()->create([
+$result = $client->ApiKey()->create([
 ]);
 ```
 
@@ -206,7 +206,7 @@ Return the entity name.
 ## BalanceEntity
 
 ```php
-$balance = $client->balance();
+$balance = $client->Balance();
 ```
 
 ### Fields
@@ -223,7 +223,7 @@ $balance = $client->balance();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->balance()->load(["id" => "balance_id"]);
+$result = $client->Balance()->load(["id" => "balance_id"]);
 ```
 
 ### Common Methods
@@ -259,7 +259,7 @@ Return the entity name.
 ## MetaEntity
 
 ```php
-$meta = $client->meta();
+$meta = $client->Meta();
 ```
 
 ### Fields
@@ -275,7 +275,7 @@ $meta = $client->meta();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->meta()->load(["id" => "meta_id"]);
+$result = $client->Meta()->load(["id" => "meta_id"]);
 ```
 
 ### Common Methods
@@ -311,7 +311,7 @@ Return the entity name.
 ## PaymentEntity
 
 ```php
-$payment = $client->payment();
+$payment = $client->Payment();
 ```
 
 ### Fields
@@ -336,7 +336,7 @@ $payment = $client->payment();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->payment()->create([
+$result = $client->Payment()->create([
   "api_key" => /* `$STRING` */,
   "tx_hash" => /* `$STRING` */,
 ]);
@@ -347,7 +347,7 @@ $result = $client->payment()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->payment()->load(["id" => "payment_id"]);
+$result = $client->Payment()->load(["id" => "payment_id"]);
 ```
 
 ### Common Methods
@@ -383,7 +383,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```php
-$service = $client->service();
+$service = $client->Service();
 ```
 
 ### Fields
@@ -407,7 +407,7 @@ $service = $client->service();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->service()->list([]);
+$results = $client->Service()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -415,7 +415,7 @@ $results = $client->service()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->service()->load(["id" => "service_id"]);
+$result = $client->Service()->load(["id" => "service_id"]);
 ```
 
 ### Common Methods

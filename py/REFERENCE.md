@@ -101,7 +101,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## AnalyticsEntity
 
 ```python
-analytics = client.analytics
+analytics = client.Analytics()
 ```
 
 ### Operations
@@ -111,7 +111,7 @@ analytics = client.analytics
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.analytics.load({"id": "analytics_id"})
+result = client.Analytics().load({"id": "analytics_id"})
 ```
 
 ### Common Methods
@@ -146,7 +146,7 @@ Return the entity name.
 ## ApiKeyEntity
 
 ```python
-api_key = client.api_key
+api_key = client.ApiKey()
 ```
 
 ### Fields
@@ -163,7 +163,7 @@ api_key = client.api_key
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.api_key.create({
+result = client.ApiKey().create({
 })
 ```
 
@@ -199,7 +199,7 @@ Return the entity name.
 ## BalanceEntity
 
 ```python
-balance = client.balance
+balance = client.Balance()
 ```
 
 ### Fields
@@ -216,7 +216,7 @@ balance = client.balance
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.balance.load({"id": "balance_id"})
+result = client.Balance().load({"id": "balance_id"})
 ```
 
 ### Common Methods
@@ -251,7 +251,7 @@ Return the entity name.
 ## MetaEntity
 
 ```python
-meta = client.meta
+meta = client.Meta()
 ```
 
 ### Fields
@@ -267,7 +267,7 @@ meta = client.meta
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.meta.load({"id": "meta_id"})
+result = client.Meta().load({"id": "meta_id"})
 ```
 
 ### Common Methods
@@ -302,7 +302,7 @@ Return the entity name.
 ## PaymentEntity
 
 ```python
-payment = client.payment
+payment = client.Payment()
 ```
 
 ### Fields
@@ -327,9 +327,9 @@ payment = client.payment
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.payment.create({
-    "api_key": # `$STRING`,
-    "tx_hash": # `$STRING`,
+result = client.Payment().create({
+    "api_key": ...,  # `$STRING`
+    "tx_hash": ...,  # `$STRING`
 })
 ```
 
@@ -338,7 +338,7 @@ result = client.payment.create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.payment.load({"id": "payment_id"})
+result = client.Payment().load({"id": "payment_id"})
 ```
 
 ### Common Methods
@@ -373,7 +373,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```python
-service = client.service
+service = client.Service()
 ```
 
 ### Fields
@@ -397,7 +397,9 @@ service = client.service
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.service.list({})
+results = client.Service().list({})
+for service in results:
+    print(service)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -405,7 +407,7 @@ results = client.service.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.service.load({"id": "service_id"})
+result = client.Service().load({"id": "service_id"})
 ```
 
 ### Common Methods

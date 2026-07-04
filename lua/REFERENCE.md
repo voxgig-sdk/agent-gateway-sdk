@@ -104,7 +104,7 @@ same parameters as `direct()`.
 ## AnalyticsEntity
 
 ```lua
-local analytics = client:analytics(nil)
+local analytics = client:Analytics(nil)
 ```
 
 ### Operations
@@ -114,7 +114,7 @@ local analytics = client:analytics(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:analytics():load({ id = "analytics_id" })
+local result, err = client:Analytics():load({ id = "analytics_id" })
 ```
 
 ### Common Methods
@@ -150,7 +150,7 @@ Return the entity name.
 ## ApiKeyEntity
 
 ```lua
-local api_key = client:api_key(nil)
+local api_key = client:ApiKey(nil)
 ```
 
 ### Fields
@@ -167,7 +167,7 @@ local api_key = client:api_key(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:api_key():create({
+local result, err = client:ApiKey():create({
 })
 ```
 
@@ -204,7 +204,7 @@ Return the entity name.
 ## BalanceEntity
 
 ```lua
-local balance = client:balance(nil)
+local balance = client:Balance(nil)
 ```
 
 ### Fields
@@ -221,7 +221,7 @@ local balance = client:balance(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:balance():load({ id = "balance_id" })
+local result, err = client:Balance():load({ id = "balance_id" })
 ```
 
 ### Common Methods
@@ -257,7 +257,7 @@ Return the entity name.
 ## MetaEntity
 
 ```lua
-local meta = client:meta(nil)
+local meta = client:Meta(nil)
 ```
 
 ### Fields
@@ -273,7 +273,7 @@ local meta = client:meta(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:meta():load({ id = "meta_id" })
+local result, err = client:Meta():load({ id = "meta_id" })
 ```
 
 ### Common Methods
@@ -309,7 +309,7 @@ Return the entity name.
 ## PaymentEntity
 
 ```lua
-local payment = client:payment(nil)
+local payment = client:Payment(nil)
 ```
 
 ### Fields
@@ -334,7 +334,7 @@ local payment = client:payment(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:payment():create({
+local result, err = client:Payment():create({
   api_key = --[[ `$STRING` ]],
   tx_hash = --[[ `$STRING` ]],
 })
@@ -345,7 +345,7 @@ local result, err = client:payment():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:payment():load({ id = "payment_id" })
+local result, err = client:Payment():load({ id = "payment_id" })
 ```
 
 ### Common Methods
@@ -381,7 +381,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```lua
-local service = client:service(nil)
+local service = client:Service(nil)
 ```
 
 ### Fields
@@ -405,7 +405,7 @@ local service = client:service(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:service():list()
+local results, err = client:Service():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -413,7 +413,7 @@ local results, err = client:service():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:service():load({ id = "service_id" })
+local result, err = client:Service():load({ id = "service_id" })
 ```
 
 ### Common Methods

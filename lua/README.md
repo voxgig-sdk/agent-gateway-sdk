@@ -36,9 +36,9 @@ local client = sdk.new({
 ### 3. Load an analytics
 
 ```lua
-local result, err = client:analytics():load({ id = "example_id" })
+local analytics, err = client:Analytics():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(analytics)
 ```
 
 
@@ -84,8 +84,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:analytics():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Analytics():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -165,8 +165,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Analytics` | `(data) -> AnalyticsEntity` | Create a Analytics entity instance. |
-| `ApiKey` | `(data) -> ApiKeyEntity` | Create a ApiKey entity instance. |
+| `Analytics` | `(data) -> AnalyticsEntity` | Create an Analytics entity instance. |
+| `ApiKey` | `(data) -> ApiKeyEntity` | Create an ApiKey entity instance. |
 | `Balance` | `(data) -> BalanceEntity` | Create a Balance entity instance. |
 | `Meta` | `(data) -> MetaEntity` | Create a Meta entity instance. |
 | `Payment` | `(data) -> PaymentEntity` | Create a Payment entity instance. |
@@ -192,17 +192,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local analytics, err = client:Analytics():load({ id = "example_id" })
+    if err then error(err) end
+    -- analytics is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -291,7 +296,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.analytics`
+Create an instance: `local analytics = client:Analytics(nil)`
 
 #### Operations
 
@@ -301,14 +306,14 @@ Create an instance: `const analytics = client.analytics`
 
 #### Example: Load
 
-```ts
-const analytics = await client.analytics.load({ id: 'analytics_id' })
+```lua
+local analytics, err = client:Analytics():load({ id = "analytics_id" })
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.api_key`
+Create an instance: `local api_key = client:ApiKey(nil)`
 
 #### Operations
 
@@ -325,15 +330,15 @@ Create an instance: `const api_key = client.api_key`
 
 #### Example: Create
 
-```ts
-const api_key = await client.api_key.create({
+```lua
+local api_key, err = client:ApiKey():create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.balance`
+Create an instance: `local balance = client:Balance(nil)`
 
 #### Operations
 
@@ -350,14 +355,14 @@ Create an instance: `const balance = client.balance`
 
 #### Example: Load
 
-```ts
-const balance = await client.balance.load({ id: 'balance_id' })
+```lua
+local balance, err = client:Balance():load({ id = "balance_id" })
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.meta`
+Create an instance: `local meta = client:Meta(nil)`
 
 #### Operations
 
@@ -373,14 +378,14 @@ Create an instance: `const meta = client.meta`
 
 #### Example: Load
 
-```ts
-const meta = await client.meta.load({ id: 'meta_id' })
+```lua
+local meta, err = client:Meta():load({ id = "meta_id" })
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.payment`
+Create an instance: `local payment = client:Payment(nil)`
 
 #### Operations
 
@@ -406,23 +411,23 @@ Create an instance: `const payment = client.payment`
 
 #### Example: Load
 
-```ts
-const payment = await client.payment.load({ id: 'payment_id' })
+```lua
+local payment, err = client:Payment():load({ id = "payment_id" })
 ```
 
 #### Example: Create
 
-```ts
-const payment = await client.payment.create({
-  api_key: /* `$STRING` */,
-  tx_hash: /* `$STRING` */,
+```lua
+local payment, err = client:Payment():create({
+  api_key = nil, -- `$STRING`
+  tx_hash = nil, -- `$STRING`
 })
 ```
 
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `local service = client:Service(nil)`
 
 #### Operations
 
@@ -447,14 +452,14 @@ Create an instance: `const service = client.service`
 
 #### Example: Load
 
-```ts
-const service = await client.service.load({ id: 'service_id' })
+```lua
+local service, err = client:Service():load({ id = "service_id" })
 ```
 
 #### Example: List
 
-```ts
-const services = await client.service.list()
+```lua
+local services, err = client:Service():list()
 ```
 
 
@@ -529,7 +534,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local analytics = client:analytics()
+local analytics = client:Analytics()
 analytics:load({ id = "example_id" })
 
 -- analytics:data_get() now returns the loaded analytics data

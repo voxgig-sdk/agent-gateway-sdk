@@ -34,8 +34,9 @@ client = AgentGatewaySDK.new({
 
 ```ruby
 begin
-  result = client.analytics.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Analytics record (raises on error).
+  analytics = client.Analytics.load({ "id" => "example_id" })
+  puts analytics
 rescue => err
   warn "load failed: #{err}"
 end
@@ -82,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = AgentGatewaySDK.test
+client = AgentGatewaySDK.test({
+  "entity" => { "analytics" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.analytics.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+analytics = client.Analytics.load({ "id" => "test01" })
+puts analytics
 ```
 
 ### Use a custom fetch function
@@ -166,8 +171,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Analytics` | `(data) -> AnalyticsEntity` | Create a Analytics entity instance. |
-| `ApiKey` | `(data) -> ApiKeyEntity` | Create a ApiKey entity instance. |
+| `Analytics` | `(data) -> AnalyticsEntity` | Create an Analytics entity instance. |
+| `ApiKey` | `(data) -> ApiKeyEntity` | Create an ApiKey entity instance. |
 | `Balance` | `(data) -> BalanceEntity` | Create a Balance entity instance. |
 | `Meta` | `(data) -> MetaEntity` | Create a Meta entity instance. |
 | `Payment` | `(data) -> PaymentEntity` | Create a Payment entity instance. |
@@ -295,7 +300,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.analytics`
+Create an instance: `analytics = client.Analytics`
 
 #### Operations
 
@@ -305,14 +310,15 @@ Create an instance: `const analytics = client.analytics`
 
 #### Example: Load
 
-```ts
-const analytics = await client.analytics.load({ id: 'analytics_id' })
+```ruby
+# load returns the bare Analytics record (raises on error).
+analytics = client.Analytics.load({ "id" => "analytics_id" })
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.api_key`
+Create an instance: `api_key = client.ApiKey`
 
 #### Operations
 
@@ -329,15 +335,15 @@ Create an instance: `const api_key = client.api_key`
 
 #### Example: Create
 
-```ts
-const api_key = await client.api_key.create({
+```ruby
+api_key = client.ApiKey.create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.balance`
+Create an instance: `balance = client.Balance`
 
 #### Operations
 
@@ -354,14 +360,15 @@ Create an instance: `const balance = client.balance`
 
 #### Example: Load
 
-```ts
-const balance = await client.balance.load({ id: 'balance_id' })
+```ruby
+# load returns the bare Balance record (raises on error).
+balance = client.Balance.load({ "id" => "balance_id" })
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.meta`
+Create an instance: `meta = client.Meta`
 
 #### Operations
 
@@ -377,14 +384,15 @@ Create an instance: `const meta = client.meta`
 
 #### Example: Load
 
-```ts
-const meta = await client.meta.load({ id: 'meta_id' })
+```ruby
+# load returns the bare Meta record (raises on error).
+meta = client.Meta.load({ "id" => "meta_id" })
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.payment`
+Create an instance: `payment = client.Payment`
 
 #### Operations
 
@@ -410,23 +418,24 @@ Create an instance: `const payment = client.payment`
 
 #### Example: Load
 
-```ts
-const payment = await client.payment.load({ id: 'payment_id' })
+```ruby
+# load returns the bare Payment record (raises on error).
+payment = client.Payment.load({ "id" => "payment_id" })
 ```
 
 #### Example: Create
 
-```ts
-const payment = await client.payment.create({
-  api_key: /* `$STRING` */,
-  tx_hash: /* `$STRING` */,
+```ruby
+payment = client.Payment.create({
+  "api_key" => nil, # `$STRING`
+  "tx_hash" => nil, # `$STRING`
 })
 ```
 
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `service = client.Service`
 
 #### Operations
 
@@ -451,14 +460,16 @@ Create an instance: `const service = client.service`
 
 #### Example: Load
 
-```ts
-const service = await client.service.load({ id: 'service_id' })
+```ruby
+# load returns the bare Service record (raises on error).
+service = client.Service.load({ "id" => "service_id" })
 ```
 
 #### Example: List
 
-```ts
-const services = await client.service.list()
+```ruby
+# list returns an Array of Service records (raises on error).
+services = client.Service.list
 ```
 
 
@@ -533,7 +544,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-analytics = client.analytics
+analytics = client.Analytics
 analytics.load({ "id" => "example_id" })
 
 # analytics.data_get now returns the loaded analytics data

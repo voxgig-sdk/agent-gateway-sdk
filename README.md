@@ -28,9 +28,9 @@ const client = new AgentGatewaySDK({
   apikey: process.env.AGENT_GATEWAY_APIKEY,
 })
 
-// Load analytics data
-const analytics = await client.analytics.load({})
-console.log(analytics.data)
+// Load analytics data (returns a Analytics)
+const analytics = await client.Analytics().load()
+console.log(analytics)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -94,8 +94,8 @@ client = AgentGatewaySDK({
 })
 
 
-# Load a specific analytics
-analytics = client.analytics.load({"id": "example_id"})
+# Load a specific analytics (returns the record, raises on error)
+analytics = client.Analytics().load({"id": "example_id"})
 print(analytics)
 ```
 
@@ -110,8 +110,8 @@ $client = new AgentGatewaySDK([
 ]);
 
 
-// Load a specific analytics
-$analytics = $client->analytics()->load(["id" => "example_id"]);
+// Load a specific analytics (returns the bare record; throws on error)
+$analytics = $client->Analytics()->load(["id" => "example_id"]);
 print_r($analytics);
 ```
 
@@ -139,8 +139,8 @@ client = AgentGatewaySDK.new({
 })
 
 
-# Load a specific analytics
-analytics = client.analytics.load({ "id" => "example_id" })
+# Load a specific analytics (returns the bare record; raises on error)
+analytics = client.Analytics.load({ "id" => "example_id" })
 puts analytics
 ```
 
@@ -155,7 +155,7 @@ local client = sdk.new({
 
 
 -- Load a specific analytics
-local analytics, err = client:analytics():load({ id = "example_id" })
+local analytics, err = client:Analytics():load({ id = "example_id" })
 print(analytics)
 ```
 
@@ -168,22 +168,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = AgentGatewaySDK.test()
-const result = await client.analytics.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const analytics = await client.Analytics().load({ id: 'test01' })
+// analytics is a bare Analytics populated with mock data
+console.log(analytics)
 ```
 
 ### Python
 
 ```python
 client = AgentGatewaySDK.test()
-result = client.analytics.load({"id": "test01"})
+analytics = client.Analytics().load({"id": "test01"})
+print(analytics)
 ```
 
 ### PHP
 
 ```php
-$client = AgentGatewaySDK::test();
-$result = $client->analytics()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = AgentGatewaySDK::test([
+    "entity" => ["analytics" => ["test01" => ["id" => "test01"]]],
+]);
+$analytics = $client->Analytics()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -198,15 +203,18 @@ result, err := client.Analytics(nil).Load(
 ### Ruby
 
 ```ruby
-client = AgentGatewaySDK.test
-result = client.analytics.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = AgentGatewaySDK.test({
+  "entity" => { "analytics" => { "test01" => { "id" => "test01" } } },
+})
+analytics = client.Analytics.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:analytics():load({ id = "test01" })
+local result, err = client:Analytics():load({ id = "test01" })
 ```
 
 ## How it works
@@ -254,6 +262,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

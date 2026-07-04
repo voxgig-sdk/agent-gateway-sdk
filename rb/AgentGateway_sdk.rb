@@ -208,78 +208,42 @@ class AgentGatewaySDK
   end
 
 
-  # Idiomatic facade: client.analytics.list / client.analytics.load({ "id" => ... })
-  def analytics
-    require_relative 'entity/analytics_entity'
-    @analytics ||= AnalyticsEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.analytics instead.
+  # Canonical facade: client.Analytics.list / client.Analytics.load({ "id" => ... })
   def Analytics(data = nil)
     require_relative 'entity/analytics_entity'
     AnalyticsEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.api_key.list / client.api_key.load({ "id" => ... })
-  def api_key
-    require_relative 'entity/api_key_entity'
-    @api_key ||= ApiKeyEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.api_key instead.
+  # Canonical facade: client.ApiKey.list / client.ApiKey.load({ "id" => ... })
   def ApiKey(data = nil)
     require_relative 'entity/api_key_entity'
     ApiKeyEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.balance.list / client.balance.load({ "id" => ... })
-  def balance
-    require_relative 'entity/balance_entity'
-    @balance ||= BalanceEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.balance instead.
+  # Canonical facade: client.Balance.list / client.Balance.load({ "id" => ... })
   def Balance(data = nil)
     require_relative 'entity/balance_entity'
     BalanceEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.meta.list / client.meta.load({ "id" => ... })
-  def meta
-    require_relative 'entity/meta_entity'
-    @meta ||= MetaEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.meta instead.
+  # Canonical facade: client.Meta.list / client.Meta.load({ "id" => ... })
   def Meta(data = nil)
     require_relative 'entity/meta_entity'
     MetaEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.payment.list / client.payment.load({ "id" => ... })
-  def payment
-    require_relative 'entity/payment_entity'
-    @payment ||= PaymentEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.payment instead.
+  # Canonical facade: client.Payment.list / client.Payment.load({ "id" => ... })
   def Payment(data = nil)
     require_relative 'entity/payment_entity'
     PaymentEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.service.list / client.service.load({ "id" => ... })
-  def service
-    require_relative 'entity/service_entity'
-    @service ||= ServiceEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.service instead.
+  # Canonical facade: client.Service.list / client.Service.load({ "id" => ... })
   def Service(data = nil)
     require_relative 'entity/service_entity'
     ServiceEntity.new(self, data)

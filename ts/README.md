@@ -32,11 +32,14 @@ const client = new AgentGatewaySDK({
 
 ### 3. Load an analytics
 
-```ts
-const result = await client.analytics.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const analytics = await client.Analytics().load({ id: 'example_id' })
+  console.log(analytics)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -54,6 +57,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -82,9 +88,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AgentGatewaySDK.test()
 
-const result = await client.analytics.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const analytics = await client.Analytics().load({ id: 'test01' })
+// analytics is a bare entity populated with mock response data
+console.log(analytics)
 ```
 
 You can also use the instance method:
@@ -99,7 +105,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.analytics
+const entity = client.Analytics()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -181,8 +187,8 @@ new AgentGatewaySDK(options?: {
 | `utility()` | `Utility` | Deep copy of the SDK utility object. |
 | `prepare(fetchargs?)` | `Promise<FetchDef>` | Build an HTTP request definition without sending it. |
 | `direct(fetchargs?)` | `Promise<DirectResult>` | Build and send an HTTP request. |
-| `Analytics(data?)` | `AnalyticsEntity` | Create a Analytics entity instance. |
-| `ApiKey(data?)` | `ApiKeyEntity` | Create a ApiKey entity instance. |
+| `Analytics(data?)` | `AnalyticsEntity` | Create an Analytics entity instance. |
+| `ApiKey(data?)` | `ApiKeyEntity` | Create an ApiKey entity instance. |
 | `Balance(data?)` | `BalanceEntity` | Create a Balance entity instance. |
 | `Meta(data?)` | `MetaEntity` | Create a Meta entity instance. |
 | `Payment(data?)` | `PaymentEntity` | Create a Payment entity instance. |
@@ -203,29 +209,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): AgentGatewaySDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -342,7 +349,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.analytics`
+Create an instance: `const analytics = client.Analytics()`
 
 #### Operations
 
@@ -353,13 +360,13 @@ Create an instance: `const analytics = client.analytics`
 #### Example: Load
 
 ```ts
-const analytics = await client.analytics.load({ id: 'analytics_id' })
+const analytics = await client.Analytics().load({ id: 'analytics_id' })
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.api_key`
+Create an instance: `const api_key = client.ApiKey()`
 
 #### Operations
 
@@ -377,14 +384,14 @@ Create an instance: `const api_key = client.api_key`
 #### Example: Create
 
 ```ts
-const api_key = await client.api_key.create({
+const api_key = await client.ApiKey().create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.balance`
+Create an instance: `const balance = client.Balance()`
 
 #### Operations
 
@@ -402,13 +409,13 @@ Create an instance: `const balance = client.balance`
 #### Example: Load
 
 ```ts
-const balance = await client.balance.load({ id: 'balance_id' })
+const balance = await client.Balance().load({ id: 'balance_id' })
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.meta`
+Create an instance: `const meta = client.Meta()`
 
 #### Operations
 
@@ -425,13 +432,13 @@ Create an instance: `const meta = client.meta`
 #### Example: Load
 
 ```ts
-const meta = await client.meta.load({ id: 'meta_id' })
+const meta = await client.Meta().load({ id: 'meta_id' })
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.payment`
+Create an instance: `const payment = client.Payment()`
 
 #### Operations
 
@@ -458,13 +465,13 @@ Create an instance: `const payment = client.payment`
 #### Example: Load
 
 ```ts
-const payment = await client.payment.load({ id: 'payment_id' })
+const payment = await client.Payment().load({ id: 'payment_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const payment = await client.payment.create({
+const payment = await client.Payment().create({
   api_key: /* `$STRING` */,
   tx_hash: /* `$STRING` */,
 })
@@ -473,7 +480,7 @@ const payment = await client.payment.create({
 
 ### Service
 
-Create an instance: `const service = client.service`
+Create an instance: `const service = client.Service()`
 
 #### Operations
 
@@ -499,13 +506,13 @@ Create an instance: `const service = client.service`
 #### Example: Load
 
 ```ts
-const service = await client.service.load({ id: 'service_id' })
+const service = await client.Service().load({ id: 'service_id' })
 ```
 
 #### Example: List
 
 ```ts
-const services = await client.service.list()
+const services = await client.Service().list()
 ```
 
 
@@ -576,7 +583,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const analytics = client.analytics
+const analytics = client.Analytics()
 await analytics.load({ id: "example_id" })
 
 // analytics.data() now returns the loaded analytics data
