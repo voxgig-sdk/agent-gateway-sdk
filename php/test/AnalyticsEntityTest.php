@@ -49,8 +49,7 @@ class AnalyticsEntityTest extends TestCase
         // LOAD
         $analytics_ref01_ent = $client->Analytics(null);
         $analytics_ref01_match_dt0 = [];
-        [$analytics_ref01_data_dt0_loaded, $err] = $analytics_ref01_ent->load($analytics_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $analytics_ref01_data_dt0_loaded = $analytics_ref01_ent->load($analytics_ref01_match_dt0, null);
         $this->assertNotNull($analytics_ref01_data_dt0_loaded);
 
     }

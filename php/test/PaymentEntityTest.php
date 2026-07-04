@@ -43,15 +43,13 @@ class PaymentEntityTest extends TestCase
         $payment_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.payment"), "payment_ref01"));
 
-        [$payment_ref01_data_result, $err] = $payment_ref01_ent->create($payment_ref01_data, null);
-        $this->assertNull($err);
+        $payment_ref01_data_result = $payment_ref01_ent->create($payment_ref01_data, null);
         $payment_ref01_data = Helpers::to_map($payment_ref01_data_result);
         $this->assertNotNull($payment_ref01_data);
 
         // LOAD
         $payment_ref01_match_dt0 = [];
-        [$payment_ref01_data_dt0_loaded, $err] = $payment_ref01_ent->load($payment_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $payment_ref01_data_dt0_loaded = $payment_ref01_ent->load($payment_ref01_match_dt0, null);
         $this->assertNotNull($payment_ref01_data_dt0_loaded);
 
     }

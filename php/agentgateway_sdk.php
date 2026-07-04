@@ -103,7 +103,7 @@ class AgentGatewaySDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class AgentGatewaySDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class AgentGatewaySDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,59 +216,125 @@ class AgentGatewaySDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Analytics($data = null)
+    private $_analytics = null;
+
+    // Idiomatic facade: $client->analytics()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Analytics() (PHP method
+    // names are case-insensitive).
+    public function analytics($data = null)
     {
         require_once __DIR__ . '/entity/analytics_entity.php';
+        if ($data === null) {
+            if ($this->_analytics === null) {
+                $this->_analytics = new AnalyticsEntity($this, null);
+            }
+            return $this->_analytics;
+        }
         return new AnalyticsEntity($this, $data);
     }
 
 
-    public function ApiKey($data = null)
+    private $_api_key = null;
+
+    // Idiomatic facade: $client->api_key()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias ApiKey() (PHP method
+    // names are case-insensitive).
+    public function api_key($data = null)
     {
         require_once __DIR__ . '/entity/api_key_entity.php';
+        if ($data === null) {
+            if ($this->_api_key === null) {
+                $this->_api_key = new ApiKeyEntity($this, null);
+            }
+            return $this->_api_key;
+        }
         return new ApiKeyEntity($this, $data);
     }
 
 
-    public function Balance($data = null)
+    private $_balance = null;
+
+    // Idiomatic facade: $client->balance()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Balance() (PHP method
+    // names are case-insensitive).
+    public function balance($data = null)
     {
         require_once __DIR__ . '/entity/balance_entity.php';
+        if ($data === null) {
+            if ($this->_balance === null) {
+                $this->_balance = new BalanceEntity($this, null);
+            }
+            return $this->_balance;
+        }
         return new BalanceEntity($this, $data);
     }
 
 
-    public function Meta($data = null)
+    private $_meta = null;
+
+    // Idiomatic facade: $client->meta()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Meta() (PHP method
+    // names are case-insensitive).
+    public function meta($data = null)
     {
         require_once __DIR__ . '/entity/meta_entity.php';
+        if ($data === null) {
+            if ($this->_meta === null) {
+                $this->_meta = new MetaEntity($this, null);
+            }
+            return $this->_meta;
+        }
         return new MetaEntity($this, $data);
     }
 
 
-    public function Payment($data = null)
+    private $_payment = null;
+
+    // Idiomatic facade: $client->payment()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Payment() (PHP method
+    // names are case-insensitive).
+    public function payment($data = null)
     {
         require_once __DIR__ . '/entity/payment_entity.php';
+        if ($data === null) {
+            if ($this->_payment === null) {
+                $this->_payment = new PaymentEntity($this, null);
+            }
+            return $this->_payment;
+        }
         return new PaymentEntity($this, $data);
     }
 
 
-    public function Service($data = null)
+    private $_service = null;
+
+    // Idiomatic facade: $client->service()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Service() (PHP method
+    // names are case-insensitive).
+    public function service($data = null)
     {
         require_once __DIR__ . '/entity/service_entity.php';
+        if ($data === null) {
+            if ($this->_service === null) {
+                $this->_service = new ServiceEntity($this, null);
+            }
+            return $this->_service;
+        }
         return new ServiceEntity($this, $data);
     }
 

@@ -55,6 +55,9 @@ class PaymentEntity
         return new PaymentEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Payment|array $args Payment data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class PaymentEntity
         }
     }
 
+    /**
+     * @return Payment|array The current Payment data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Payment fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class PaymentEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Payment fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class PaymentEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Payment.
+     *
+     * @param PaymentLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed PaymentLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Payment|array The loaded Payment as an assoc-array at the
+     *   SDK boundary; throws AgentGatewayError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -112,7 +133,16 @@ class PaymentEntity
     
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Payment.
+     *
+     * @param PaymentCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed PaymentCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Payment|array The created Payment as an assoc-array at the
+     *   SDK boundary; throws AgentGatewayError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -138,7 +168,7 @@ class PaymentEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

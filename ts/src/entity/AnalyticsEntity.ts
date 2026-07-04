@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Analytics,
+  AnalyticsLoadMatch,
+} from '../AgentGatewayTypes'
 
 // TODO: needs Entity superclass
-class AnalyticsEntity extends AgentGatewayEntityBase {
+class AnalyticsEntity extends AgentGatewayEntityBase<Analytics> {
 
   constructor(client: AgentGatewaySDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class AnalyticsEntity extends AgentGatewayEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: AnalyticsLoadMatch, ctrl?: Control): Promise<Analytics> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class AnalyticsEntity extends AgentGatewayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Analytics> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

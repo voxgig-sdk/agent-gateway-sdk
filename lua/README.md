@@ -9,12 +9,9 @@ The Lua SDK for the AgentGateway API — an entity-oriented client using Lua con
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-agent-gateway
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/agent-gateway-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -32,14 +29,14 @@ loading a specific record.
 local sdk = require("agent-gateway_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("AGENT-GATEWAY_APIKEY"),
+  apikey = os.getenv("AGENT_GATEWAY_APIKEY"),
 })
 ```
 
-### 3. Load a analytics
+### 3. Load an analytics
 
 ```lua
-local result, err = client:Analytics():load({ id = "example_id" })
+local result, err = client:analytics():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +84,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:AgentGateway():load({ id = "test01" })
+local result, err = client:analytics():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -120,8 +117,8 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-AGENT-GATEWAY_TEST_LIVE=TRUE
-AGENT-GATEWAY_APIKEY=<your-key>
+AGENT_GATEWAY_TEST_LIVE=TRUE
+AGENT_GATEWAY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -294,7 +291,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.Analytics()`
+Create an instance: `const analytics = client.analytics`
 
 #### Operations
 
@@ -305,13 +302,13 @@ Create an instance: `const analytics = client.Analytics()`
 #### Example: Load
 
 ```ts
-const analytics = await client.Analytics().load({ id: 'analytics_id' })
+const analytics = await client.analytics.load({ id: 'analytics_id' })
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.ApiKey()`
+Create an instance: `const api_key = client.api_key`
 
 #### Operations
 
@@ -329,14 +326,14 @@ Create an instance: `const api_key = client.ApiKey()`
 #### Example: Create
 
 ```ts
-const api_key = await client.ApiKey().create({
+const api_key = await client.api_key.create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.Balance()`
+Create an instance: `const balance = client.balance`
 
 #### Operations
 
@@ -354,13 +351,13 @@ Create an instance: `const balance = client.Balance()`
 #### Example: Load
 
 ```ts
-const balance = await client.Balance().load({ id: 'balance_id' })
+const balance = await client.balance.load({ id: 'balance_id' })
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.Meta()`
+Create an instance: `const meta = client.meta`
 
 #### Operations
 
@@ -377,13 +374,13 @@ Create an instance: `const meta = client.Meta()`
 #### Example: Load
 
 ```ts
-const meta = await client.Meta().load({ id: 'meta_id' })
+const meta = await client.meta.load({ id: 'meta_id' })
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.Payment()`
+Create an instance: `const payment = client.payment`
 
 #### Operations
 
@@ -410,13 +407,13 @@ Create an instance: `const payment = client.Payment()`
 #### Example: Load
 
 ```ts
-const payment = await client.Payment().load({ id: 'payment_id' })
+const payment = await client.payment.load({ id: 'payment_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const payment = await client.Payment().create({
+const payment = await client.payment.create({
   api_key: /* `$STRING` */,
   tx_hash: /* `$STRING` */,
 })
@@ -425,7 +422,7 @@ const payment = await client.Payment().create({
 
 ### Service
 
-Create an instance: `const service = client.Service()`
+Create an instance: `const service = client.service`
 
 #### Operations
 
@@ -451,13 +448,13 @@ Create an instance: `const service = client.Service()`
 #### Example: Load
 
 ```ts
-const service = await client.Service().load({ id: 'service_id' })
+const service = await client.service.load({ id: 'service_id' })
 ```
 
 #### Example: List
 
 ```ts
-const services = await client.Service().list()
+const services = await client.service.list()
 ```
 
 
@@ -532,11 +529,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local analytics = client:analytics()
+analytics:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- analytics:data_get() now returns the loaded analytics data
+-- analytics:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

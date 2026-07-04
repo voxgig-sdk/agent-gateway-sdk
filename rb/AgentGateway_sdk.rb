@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'AgentGateway_types'
+
 
 class AgentGatewaySDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class AgentGatewaySDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class AgentGatewaySDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue AgentGatewayError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = AgentGatewayHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class AgentGatewaySDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,46 +198,88 @@ class AgentGatewaySDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.analytics.list / client.analytics.load({ "id" => ... })
+  def analytics
+    require_relative 'entity/analytics_entity'
+    @analytics ||= AnalyticsEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.analytics instead.
   def Analytics(data = nil)
     require_relative 'entity/analytics_entity'
     AnalyticsEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.api_key.list / client.api_key.load({ "id" => ... })
+  def api_key
+    require_relative 'entity/api_key_entity'
+    @api_key ||= ApiKeyEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.api_key instead.
   def ApiKey(data = nil)
     require_relative 'entity/api_key_entity'
     ApiKeyEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.balance.list / client.balance.load({ "id" => ... })
+  def balance
+    require_relative 'entity/balance_entity'
+    @balance ||= BalanceEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.balance instead.
   def Balance(data = nil)
     require_relative 'entity/balance_entity'
     BalanceEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.meta.list / client.meta.load({ "id" => ... })
+  def meta
+    require_relative 'entity/meta_entity'
+    @meta ||= MetaEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.meta instead.
   def Meta(data = nil)
     require_relative 'entity/meta_entity'
     MetaEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.payment.list / client.payment.load({ "id" => ... })
+  def payment
+    require_relative 'entity/payment_entity'
+    @payment ||= PaymentEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.payment instead.
   def Payment(data = nil)
     require_relative 'entity/payment_entity'
     PaymentEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.service.list / client.service.load({ "id" => ... })
+  def service
+    require_relative 'entity/service_entity'
+    @service ||= ServiceEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.service instead.
   def Service(data = nil)
     require_relative 'entity/service_entity'
     ServiceEntity.new(self, data)

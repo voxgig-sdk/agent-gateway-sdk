@@ -42,8 +42,7 @@ class BalanceEntityTest < Minitest::Test
     # LOAD
     balance_ref01_ent = client.Balance(nil)
     balance_ref01_match_dt0 = {}
-    balance_ref01_data_dt0_loaded, err = balance_ref01_ent.load(balance_ref01_match_dt0, nil)
-    assert_nil err
+    balance_ref01_data_dt0_loaded = balance_ref01_ent.load(balance_ref01_match_dt0, nil)
     assert !balance_ref01_data_dt0_loaded.nil?
 
   end

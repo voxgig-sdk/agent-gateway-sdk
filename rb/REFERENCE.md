@@ -74,9 +74,11 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs = {}) -> Hash, err`
+#### `direct(fetchargs = {}) -> Hash`
 
-Make a direct HTTP request to any API endpoint.
+Make a direct HTTP request to any API endpoint. Returns a result hash
+(`{ "ok" => ..., "status" => ..., "data" => ..., "err" => ... }`); it
+does not raise — inspect `result["ok"]`.
 
 **Parameters:**
 
@@ -90,14 +92,14 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs["body"]` | `any` | Request body (hashes are JSON-serialized). |
 | `fetchargs["ctrl"]` | `Hash` | Control options (e.g. `{ "explain" => true }`). |
 
-**Returns:** `Hash, err`
+**Returns:** `Hash`
 
-#### `prepare(fetchargs = {}) -> Hash, err`
+#### `prepare(fetchargs = {}) -> Hash`
 
 Prepare a fetch definition without sending the request. Accepts the
-same parameters as `direct()`.
+same parameters as `direct()`. Raises on error.
 
-**Returns:** `Hash, err`
+**Returns:** `Hash` (the fetch definition; raises on error)
 
 
 ---
@@ -105,17 +107,17 @@ same parameters as `direct()`.
 ## AnalyticsEntity
 
 ```ruby
-analytics = client.Analytics
+analytics = client.analytics
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Analytics.load({ "id" => "analytics_id" })
+result = client.analytics.load({ "id" => "analytics_id" })
 ```
 
 ### Common Methods
@@ -151,7 +153,7 @@ Return the entity name.
 ## ApiKeyEntity
 
 ```ruby
-api_key = client.ApiKey
+api_key = client.api_key
 ```
 
 ### Fields
@@ -163,12 +165,12 @@ api_key = client.ApiKey
 
 ### Operations
 
-#### `create(reqdata, ctrl = nil) -> result, err`
+#### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Raises on error.
 
 ```ruby
-result, err = client.ApiKey.create({
+result = client.api_key.create({
 })
 ```
 
@@ -205,7 +207,7 @@ Return the entity name.
 ## BalanceEntity
 
 ```ruby
-balance = client.Balance
+balance = client.balance
 ```
 
 ### Fields
@@ -217,12 +219,12 @@ balance = client.Balance
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Balance.load({ "id" => "balance_id" })
+result = client.balance.load({ "id" => "balance_id" })
 ```
 
 ### Common Methods
@@ -258,7 +260,7 @@ Return the entity name.
 ## MetaEntity
 
 ```ruby
-meta = client.Meta
+meta = client.meta
 ```
 
 ### Fields
@@ -269,12 +271,12 @@ meta = client.Meta
 
 ### Operations
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Meta.load({ "id" => "meta_id" })
+result = client.meta.load({ "id" => "meta_id" })
 ```
 
 ### Common Methods
@@ -310,7 +312,7 @@ Return the entity name.
 ## PaymentEntity
 
 ```ruby
-payment = client.Payment
+payment = client.payment
 ```
 
 ### Fields
@@ -330,23 +332,23 @@ payment = client.Payment
 
 ### Operations
 
-#### `create(reqdata, ctrl = nil) -> result, err`
+#### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Raises on error.
 
 ```ruby
-result, err = client.Payment.create({
+result = client.payment.create({
   "api_key" => # `$STRING`,
   "tx_hash" => # `$STRING`,
 })
 ```
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Payment.load({ "id" => "payment_id" })
+result = client.payment.load({ "id" => "payment_id" })
 ```
 
 ### Common Methods
@@ -382,7 +384,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```ruby
-service = client.Service
+service = client.service
 ```
 
 ### Fields
@@ -401,20 +403,20 @@ service = client.Service
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> result, err`
+#### `list(reqmatch, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results, err = client.Service.list(nil)
+results = client.service.list(nil)
 ```
 
-#### `load(reqmatch, ctrl = nil) -> result, err`
+#### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result, err = client.Service.load({ "id" => "service_id" })
+result = client.service.load({ "id" => "service_id" })
 ```
 
 ### Common Methods

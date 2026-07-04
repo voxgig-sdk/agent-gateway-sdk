@@ -36,15 +36,13 @@ class PaymentEntityTest < Minitest::Test
     payment_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.payment"), "payment_ref01"))
 
-    payment_ref01_data_result, err = payment_ref01_ent.create(payment_ref01_data, nil)
-    assert_nil err
+    payment_ref01_data_result = payment_ref01_ent.create(payment_ref01_data, nil)
     payment_ref01_data = Helpers.to_map(payment_ref01_data_result)
     assert !payment_ref01_data.nil?
 
     # LOAD
     payment_ref01_match_dt0 = {}
-    payment_ref01_data_dt0_loaded, err = payment_ref01_ent.load(payment_ref01_match_dt0, nil)
-    assert_nil err
+    payment_ref01_data_dt0_loaded = payment_ref01_ent.load(payment_ref01_match_dt0, nil)
     assert !payment_ref01_data_dt0_loaded.nil?
 
   end

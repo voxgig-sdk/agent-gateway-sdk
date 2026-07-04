@@ -245,31 +245,49 @@ func (sdk *AgentGatewaySDK) Direct(fetchargs map[string]any) (map[string]any, er
 }
 
 
+// Analytics returns a Analytics entity bound to this client.
+// Idiomatic usage: client.Analytics(nil).List(nil, nil) or
+// client.Analytics(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AgentGatewaySDK) Analytics(data map[string]any) AgentGatewayEntity {
 	return NewAnalyticsEntityFunc(sdk, data)
 }
 
 
+// ApiKey returns a ApiKey entity bound to this client.
+// Idiomatic usage: client.ApiKey(nil).List(nil, nil) or
+// client.ApiKey(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AgentGatewaySDK) ApiKey(data map[string]any) AgentGatewayEntity {
 	return NewApiKeyEntityFunc(sdk, data)
 }
 
 
+// Balance returns a Balance entity bound to this client.
+// Idiomatic usage: client.Balance(nil).List(nil, nil) or
+// client.Balance(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AgentGatewaySDK) Balance(data map[string]any) AgentGatewayEntity {
 	return NewBalanceEntityFunc(sdk, data)
 }
 
 
+// Meta returns a Meta entity bound to this client.
+// Idiomatic usage: client.Meta(nil).List(nil, nil) or
+// client.Meta(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AgentGatewaySDK) Meta(data map[string]any) AgentGatewayEntity {
 	return NewMetaEntityFunc(sdk, data)
 }
 
 
+// Payment returns a Payment entity bound to this client.
+// Idiomatic usage: client.Payment(nil).List(nil, nil) or
+// client.Payment(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AgentGatewaySDK) Payment(data map[string]any) AgentGatewayEntity {
 	return NewPaymentEntityFunc(sdk, data)
 }
 
 
+// Service returns a Service entity bound to this client.
+// Idiomatic usage: client.Service(nil).List(nil, nil) or
+// client.Service(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *AgentGatewaySDK) Service(data map[string]any) AgentGatewayEntity {
 	return NewServiceEntityFunc(sdk, data)
 }

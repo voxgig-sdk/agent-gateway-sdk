@@ -74,9 +74,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -89,11 +89,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -101,17 +101,17 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## AnalyticsEntity
 
 ```python
-analytics = client.Analytics()
+analytics = client.analytics
 ```
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Analytics().load({"id": "analytics_id"})
+result = client.analytics.load({"id": "analytics_id"})
 ```
 
 ### Common Methods
@@ -146,7 +146,7 @@ Return the entity name.
 ## ApiKeyEntity
 
 ```python
-api_key = client.ApiKey()
+api_key = client.api_key
 ```
 
 ### Fields
@@ -158,12 +158,12 @@ api_key = client.ApiKey()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.ApiKey().create({
+result = client.api_key.create({
 })
 ```
 
@@ -199,7 +199,7 @@ Return the entity name.
 ## BalanceEntity
 
 ```python
-balance = client.Balance()
+balance = client.balance
 ```
 
 ### Fields
@@ -211,12 +211,12 @@ balance = client.Balance()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Balance().load({"id": "balance_id"})
+result = client.balance.load({"id": "balance_id"})
 ```
 
 ### Common Methods
@@ -251,7 +251,7 @@ Return the entity name.
 ## MetaEntity
 
 ```python
-meta = client.Meta()
+meta = client.meta
 ```
 
 ### Fields
@@ -262,12 +262,12 @@ meta = client.Meta()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Meta().load({"id": "meta_id"})
+result = client.meta.load({"id": "meta_id"})
 ```
 
 ### Common Methods
@@ -302,7 +302,7 @@ Return the entity name.
 ## PaymentEntity
 
 ```python
-payment = client.Payment()
+payment = client.payment
 ```
 
 ### Fields
@@ -322,23 +322,23 @@ payment = client.Payment()
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Payment().create({
+result = client.payment.create({
     "api_key": # `$STRING`,
     "tx_hash": # `$STRING`,
 })
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Payment().load({"id": "payment_id"})
+result = client.payment.load({"id": "payment_id"})
 ```
 
 ### Common Methods
@@ -373,7 +373,7 @@ Return the entity name.
 ## ServiceEntity
 
 ```python
-service = client.Service()
+service = client.service
 ```
 
 ### Fields
@@ -392,20 +392,20 @@ service = client.Service()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Service().list({})
+results = client.service.list({})
 ```
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Service().load({"id": "service_id"})
+result = client.service.load({"id": "service_id"})
 ```
 
 ### Common Methods

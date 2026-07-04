@@ -44,15 +44,12 @@ class TestPaymentEntity:
         payment_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.payment"), "payment_ref01"))
 
-        payment_ref01_data_result, err = payment_ref01_ent.create(payment_ref01_data, None)
-        assert err is None
-        payment_ref01_data = helpers.to_map(payment_ref01_data_result)
+        payment_ref01_data = helpers.to_map(payment_ref01_ent.create(payment_ref01_data, None))
         assert payment_ref01_data is not None
 
         # LOAD
         payment_ref01_match_dt0 = {}
-        payment_ref01_data_dt0_loaded, err = payment_ref01_ent.load(payment_ref01_match_dt0, None)
-        assert err is None
+        payment_ref01_data_dt0_loaded = payment_ref01_ent.load(payment_ref01_match_dt0, None)
         assert payment_ref01_data_dt0_loaded is not None
 
 

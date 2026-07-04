@@ -49,8 +49,7 @@ class BalanceEntityTest extends TestCase
         // LOAD
         $balance_ref01_ent = $client->Balance(null);
         $balance_ref01_match_dt0 = [];
-        [$balance_ref01_data_dt0_loaded, $err] = $balance_ref01_ent->load($balance_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $balance_ref01_data_dt0_loaded = $balance_ref01_ent->load($balance_ref01_match_dt0, null);
         $this->assertNotNull($balance_ref01_data_dt0_loaded);
 
     }

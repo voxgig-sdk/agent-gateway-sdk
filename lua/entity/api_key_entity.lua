@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata ApiKeyCreateData
+---@param ctrl? table
+---@return ApiKey
+---@return string? err
 function ApiKeyEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

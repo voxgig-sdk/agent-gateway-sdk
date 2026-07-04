@@ -49,8 +49,7 @@ class TestBalanceEntity:
         # LOAD
         balance_ref01_ent = client.Balance(None)
         balance_ref01_match_dt0 = {}
-        balance_ref01_data_dt0_loaded, err = balance_ref01_ent.load(balance_ref01_match_dt0, None)
-        assert err is None
+        balance_ref01_data_dt0_loaded = balance_ref01_ent.load(balance_ref01_match_dt0, None)
         assert balance_ref01_data_dt0_loaded is not None
 
 

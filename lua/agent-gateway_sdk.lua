@@ -244,36 +244,114 @@ end
 
 
 
+-- Idiomatic facade: client:analytics():list() / client:analytics():load({ id = ... })
+function AgentGatewaySDK:analytics(data)
+  local EntityMod = require("entity.analytics_entity")
+  if data == nil then
+    if self._analytics == nil then
+      self._analytics = EntityMod.new(self, nil)
+    end
+    return self._analytics
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:analytics() instead.
 function AgentGatewaySDK:Analytics(data)
   local EntityMod = require("entity.analytics_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:api_key():list() / client:api_key():load({ id = ... })
+function AgentGatewaySDK:api_key(data)
+  local EntityMod = require("entity.api_key_entity")
+  if data == nil then
+    if self._api_key == nil then
+      self._api_key = EntityMod.new(self, nil)
+    end
+    return self._api_key
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:api_key() instead.
 function AgentGatewaySDK:ApiKey(data)
   local EntityMod = require("entity.api_key_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:balance():list() / client:balance():load({ id = ... })
+function AgentGatewaySDK:balance(data)
+  local EntityMod = require("entity.balance_entity")
+  if data == nil then
+    if self._balance == nil then
+      self._balance = EntityMod.new(self, nil)
+    end
+    return self._balance
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:balance() instead.
 function AgentGatewaySDK:Balance(data)
   local EntityMod = require("entity.balance_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:meta():list() / client:meta():load({ id = ... })
+function AgentGatewaySDK:meta(data)
+  local EntityMod = require("entity.meta_entity")
+  if data == nil then
+    if self._meta == nil then
+      self._meta = EntityMod.new(self, nil)
+    end
+    return self._meta
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:meta() instead.
 function AgentGatewaySDK:Meta(data)
   local EntityMod = require("entity.meta_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:payment():list() / client:payment():load({ id = ... })
+function AgentGatewaySDK:payment(data)
+  local EntityMod = require("entity.payment_entity")
+  if data == nil then
+    if self._payment == nil then
+      self._payment = EntityMod.new(self, nil)
+    end
+    return self._payment
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:payment() instead.
 function AgentGatewaySDK:Payment(data)
   local EntityMod = require("entity.payment_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:service():list() / client:service():load({ id = ... })
+function AgentGatewaySDK:service(data)
+  local EntityMod = require("entity.service_entity")
+  if data == nil then
+    if self._service == nil then
+      self._service = EntityMod.new(self, nil)
+    end
+    return self._service
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:service() instead.
 function AgentGatewaySDK:Service(data)
   local EntityMod = require("entity.service_entity")
   return EntityMod.new(self, data)

@@ -45,6 +45,7 @@ class BalanceEntity
     end
   end
 
+  # @return [Balance, Hash] the current Balance data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,12 +58,18 @@ class BalanceEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Balance fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
   end
 
   
+  # Load a single Balance.
+  #
+  # @param reqmatch [BalanceLoadMatch, Hash, nil] match criteria (id/query fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Balance, Hash] the loaded Balance; raises AgentGatewayError on failure
   def load(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

@@ -14,9 +14,14 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Service,
+  ServiceLoadMatch,
+  ServiceListMatch,
+} from '../AgentGatewayTypes'
 
 // TODO: needs Entity superclass
-class ServiceEntity extends AgentGatewayEntityBase {
+class ServiceEntity extends AgentGatewayEntityBase<Service> {
 
   constructor(client: AgentGatewaySDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +37,7 @@ class ServiceEntity extends AgentGatewayEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: ServiceLoadMatch, ctrl?: Control): Promise<Service> {
 
     const utility = this._utility
 
@@ -136,14 +141,16 @@ class ServiceEntity extends AgentGatewayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Service> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: ServiceListMatch, ctrl?: Control): Promise<Service[]> {
 
     const utility = this._utility
 
@@ -243,7 +250,9 @@ class ServiceEntity extends AgentGatewayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Service[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

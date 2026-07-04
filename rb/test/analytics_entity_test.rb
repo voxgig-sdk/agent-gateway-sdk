@@ -42,8 +42,7 @@ class AnalyticsEntityTest < Minitest::Test
     # LOAD
     analytics_ref01_ent = client.Analytics(nil)
     analytics_ref01_match_dt0 = {}
-    analytics_ref01_data_dt0_loaded, err = analytics_ref01_ent.load(analytics_ref01_match_dt0, nil)
-    assert_nil err
+    analytics_ref01_data_dt0_loaded = analytics_ref01_ent.load(analytics_ref01_match_dt0, nil)
     assert !analytics_ref01_data_dt0_loaded.nil?
 
   end

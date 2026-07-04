@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Balance,
+  BalanceLoadMatch,
+} from '../AgentGatewayTypes'
 
 // TODO: needs Entity superclass
-class BalanceEntity extends AgentGatewayEntityBase {
+class BalanceEntity extends AgentGatewayEntityBase<Balance> {
 
   constructor(client: AgentGatewaySDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class BalanceEntity extends AgentGatewayEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: BalanceLoadMatch, ctrl?: Control): Promise<Balance> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class BalanceEntity extends AgentGatewayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Balance> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

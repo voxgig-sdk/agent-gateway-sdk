@@ -42,8 +42,7 @@ class MetaEntityTest < Minitest::Test
     # LOAD
     meta_ref01_ent = client.Meta(nil)
     meta_ref01_match_dt0 = {}
-    meta_ref01_data_dt0_loaded, err = meta_ref01_ent.load(meta_ref01_match_dt0, nil)
-    assert_nil err
+    meta_ref01_data_dt0_loaded = meta_ref01_ent.load(meta_ref01_match_dt0, nil)
     assert !meta_ref01_data_dt0_loaded.nil?
 
   end

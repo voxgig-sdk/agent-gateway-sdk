@@ -10,14 +10,18 @@ The Golang SDK for the AgentGateway API — an entity-oriented client using stan
 
 ## Install
 ```bash
-go get github.com/voxgig-sdk/agent-gateway-sdk/go
+go get github.com/voxgig-sdk/agent-gateway-sdk/go@latest
 ```
 
-If the module is not yet published to a registry, use a `replace` directive
-in your `go.mod` to point to a local checkout:
+The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
+release tag — see [Releases](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) for the available versions.
+
+To vendor from a local checkout instead, clone this repo alongside your
+project and add a `replace` directive pointing at the checked-out
+`go/` directory:
 
 ```bash
-go mod edit -replace github.com/voxgig-sdk/agent-gateway-sdk/go=../path/to/github.com/voxgig-sdk/agent-gateway-sdk/go
+go mod edit -replace github.com/voxgig-sdk/agent-gateway-sdk/go=../agent-gateway-sdk/go
 ```
 
 
@@ -41,11 +45,11 @@ import (
 
 func main() {
     client := sdk.NewAgentGatewaySDK(map[string]any{
-        "apikey": os.Getenv("AGENT-GATEWAY_APIKEY"),
+        "apikey": os.Getenv("AGENT_GATEWAY_APIKEY"),
     })
 ```
 
-### 3. Load a analytics
+### 3. Load an analytics
 
 ```go
     result, err = client.Analytics(nil).Load(
@@ -109,7 +113,7 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Planet(nil).Load(
+result, err := client.Analytics(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
 // result contains mock response data
@@ -144,8 +148,8 @@ client := sdk.NewAgentGatewaySDK(map[string]any{
 Create a `.env.local` file at the project root:
 
 ```
-AGENT-GATEWAY_TEST_LIVE=TRUE
-AGENT-GATEWAY_APIKEY=<your-key>
+AGENT_GATEWAY_TEST_LIVE=TRUE
+AGENT_GATEWAY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -551,11 +555,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-moon := client.Moon(nil)
-moon.Load(map[string]any{"planet_id": "earth", "id": "luna"}, nil)
+analytics := client.Analytics(nil)
+analytics.Load(map[string]any{"id": "example_id"}, nil)
 
-// moon.Data() now returns the loaded moon data
-// moon.Match() returns the last match criteria
+// analytics.Data() now returns the loaded analytics data
+// analytics.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

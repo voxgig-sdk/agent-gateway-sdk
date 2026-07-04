@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch PaymentLoadMatch
+---@param ctrl? table
+---@return Payment
+---@return string? err
 function PaymentEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -106,6 +110,10 @@ end
 
 
 
+---@param reqdata PaymentCreateData
+---@param ctrl? table
+---@return Payment
+---@return string? err
 function PaymentEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

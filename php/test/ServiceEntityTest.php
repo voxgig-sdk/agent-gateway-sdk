@@ -50,16 +50,14 @@ class ServiceEntityTest extends TestCase
         $service_ref01_ent = $client->Service(null);
         $service_ref01_match = [];
 
-        [$service_ref01_list_result, $err] = $service_ref01_ent->list($service_ref01_match, null);
-        $this->assertNull($err);
+        $service_ref01_list_result = $service_ref01_ent->list($service_ref01_match, null);
         $this->assertIsArray($service_ref01_list_result);
 
         // LOAD
         $service_ref01_match_dt0 = [
             "id" => $service_ref01_data["id"],
         ];
-        [$service_ref01_data_dt0_loaded, $err] = $service_ref01_ent->load($service_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $service_ref01_data_dt0_loaded = $service_ref01_ent->load($service_ref01_match_dt0, null);
         $service_ref01_data_dt0_load_result = Helpers::to_map($service_ref01_data_dt0_loaded);
         $this->assertNotNull($service_ref01_data_dt0_load_result);
         $this->assertEquals($service_ref01_data_dt0_load_result["id"], $service_ref01_data["id"]);

@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Meta,
+  MetaLoadMatch,
+} from '../AgentGatewayTypes'
 
 // TODO: needs Entity superclass
-class MetaEntity extends AgentGatewayEntityBase {
+class MetaEntity extends AgentGatewayEntityBase<Meta> {
 
   constructor(client: AgentGatewaySDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class MetaEntity extends AgentGatewayEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: MetaLoadMatch, ctrl?: Control): Promise<Meta> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class MetaEntity extends AgentGatewayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Meta> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

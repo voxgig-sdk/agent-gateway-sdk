@@ -9,21 +9,10 @@ The Ruby SDK for the AgentGateway API — an entity-oriented client using idioma
 
 
 ## Install
-```bash
-gem install voxgig-sdk-agent-gateway
-```
+This package is not yet published to RubyGems. Install it from the
+GitHub release tag (`rb/vX.Y.Z`):
 
-Or add to your `Gemfile`:
-
-```ruby
-gem "voxgig-sdk-agent-gateway"
-```
-
-Then run:
-
-```bash
-bundle install
-```
+- Releases: [https://github.com/voxgig-sdk/agent-gateway-sdk/releases](https://github.com/voxgig-sdk/agent-gateway-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -37,16 +26,19 @@ loading a specific record.
 require_relative "AgentGateway_sdk"
 
 client = AgentGatewaySDK.new({
-  "apikey" => ENV["AGENT-GATEWAY_APIKEY"],
+  "apikey" => ENV["AGENT_GATEWAY_APIKEY"],
 })
 ```
 
-### 3. Load a analytics
+### 3. Load an analytics
 
 ```ruby
-result, err = client.Analytics().load({ "id" => "example_id" })
-raise err if err
-puts result
+begin
+  result = client.analytics.load({ "id" => "example_id" })
+  puts result
+rescue => err
+  warn "load failed: #{err}"
+end
 ```
 
 
@@ -57,32 +49,35 @@ puts result
 For endpoints not covered by entity methods:
 
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },
 })
-raise err if err
 
 if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
+else
+  warn result["err"]
 end
 ```
 
 ### Prepare a request without sending it
 
 ```ruby
-fetchdef, err = client.prepare({
-  "path" => "/api/resource/{id}",
-  "method" => "DELETE",
-  "params" => { "id" => "example" },
-})
-raise err if err
-
-puts fetchdef["url"]
-puts fetchdef["method"]
-puts fetchdef["headers"]
+begin
+  fetchdef = client.prepare({
+    "path" => "/api/resource/{id}",
+    "method" => "DELETE",
+    "params" => { "id" => "example" },
+  })
+  puts fetchdef["url"]
+  puts fetchdef["method"]
+  puts fetchdef["headers"]
+rescue => err
+  warn "prepare failed: #{err}"
+end
 ```
 
 ### Use test mode
@@ -92,7 +87,7 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = AgentGatewaySDK.test
 
-result, err = client.AgentGateway().load({ "id" => "test01" })
+result = client.analytics.load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -123,8 +118,8 @@ client = AgentGatewaySDK.new({
 Create a `.env.local` file at the project root:
 
 ```
-AGENT-GATEWAY_TEST_LIVE=TRUE
-AGENT-GATEWAY_APIKEY=<your-key>
+AGENT_GATEWAY_TEST_LIVE=TRUE
+AGENT_GATEWAY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -169,8 +164,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | --- | --- | --- |
 | `options_map` | `() -> Hash` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> [Hash, err]` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> [Hash, err]` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `Analytics` | `(data) -> AnalyticsEntity` | Create a Analytics entity instance. |
 | `ApiKey` | `(data) -> ApiKeyEntity` | Create a ApiKey entity instance. |
 | `Balance` | `(data) -> BalanceEntity` | Create a Balance entity instance. |
@@ -184,11 +179,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> [any, err]` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> [any, err]` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> [any, err]` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> [any, err]` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> [any, err]` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -198,8 +193,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[any, err]`. The first value is a
-`Hash` with these keys:
+Entity operations return the result data directly. On failure they
+raise a `AgentGatewayError` (a `StandardError` subclass), so wrap
+calls in `begin`/`rescue` where you need to handle errors.
+
+The `direct` escape hatch is the exception: it never raises and instead
+returns a result `Hash` with these keys:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -207,8 +206,7 @@ Entity operations return `[any, err]`. The first value is a
 | `status` | `Integer` | HTTP status code. |
 | `headers` | `Hash` | Response headers. |
 | `data` | `any` | Parsed JSON response body. |
-
-On error, `ok` is `false` and `err` contains the error value.
+| `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
 
@@ -297,7 +295,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.Analytics()`
+Create an instance: `const analytics = client.analytics`
 
 #### Operations
 
@@ -308,13 +306,13 @@ Create an instance: `const analytics = client.Analytics()`
 #### Example: Load
 
 ```ts
-const analytics = await client.Analytics().load({ id: 'analytics_id' })
+const analytics = await client.analytics.load({ id: 'analytics_id' })
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.ApiKey()`
+Create an instance: `const api_key = client.api_key`
 
 #### Operations
 
@@ -332,14 +330,14 @@ Create an instance: `const api_key = client.ApiKey()`
 #### Example: Create
 
 ```ts
-const api_key = await client.ApiKey().create({
+const api_key = await client.api_key.create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.Balance()`
+Create an instance: `const balance = client.balance`
 
 #### Operations
 
@@ -357,13 +355,13 @@ Create an instance: `const balance = client.Balance()`
 #### Example: Load
 
 ```ts
-const balance = await client.Balance().load({ id: 'balance_id' })
+const balance = await client.balance.load({ id: 'balance_id' })
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.Meta()`
+Create an instance: `const meta = client.meta`
 
 #### Operations
 
@@ -380,13 +378,13 @@ Create an instance: `const meta = client.Meta()`
 #### Example: Load
 
 ```ts
-const meta = await client.Meta().load({ id: 'meta_id' })
+const meta = await client.meta.load({ id: 'meta_id' })
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.Payment()`
+Create an instance: `const payment = client.payment`
 
 #### Operations
 
@@ -413,13 +411,13 @@ Create an instance: `const payment = client.Payment()`
 #### Example: Load
 
 ```ts
-const payment = await client.Payment().load({ id: 'payment_id' })
+const payment = await client.payment.load({ id: 'payment_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const payment = await client.Payment().create({
+const payment = await client.payment.create({
   api_key: /* `$STRING` */,
   tx_hash: /* `$STRING` */,
 })
@@ -428,7 +426,7 @@ const payment = await client.Payment().create({
 
 ### Service
 
-Create an instance: `const service = client.Service()`
+Create an instance: `const service = client.service`
 
 #### Operations
 
@@ -454,13 +452,13 @@ Create an instance: `const service = client.Service()`
 #### Example: Load
 
 ```ts
-const service = await client.Service().load({ id: 'service_id' })
+const service = await client.service.load({ id: 'service_id' })
 ```
 
 #### Example: List
 
 ```ts
-const services = await client.Service().list()
+const services = await client.service.list()
 ```
 
 
@@ -535,11 +533,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-moon = client.Moon
-moon.load({ "planet_id" => "earth", "id" => "luna" })
+analytics = client.analytics
+analytics.load({ "id" => "example_id" })
 
-# moon.data_get now returns the loaded moon data
-# moon.match_get returns the last match criteria
+# analytics.data_get now returns the loaded analytics data
+# analytics.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

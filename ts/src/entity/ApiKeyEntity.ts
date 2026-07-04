@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  ApiKey,
+  ApiKeyCreateData,
+} from '../AgentGatewayTypes'
 
 // TODO: needs Entity superclass
-class ApiKeyEntity extends AgentGatewayEntityBase {
+class ApiKeyEntity extends AgentGatewayEntityBase<ApiKey> {
 
   constructor(client: AgentGatewaySDK, entopts: any) {
     super(client, entopts)
@@ -34,7 +38,7 @@ class ApiKeyEntity extends AgentGatewayEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: ApiKeyCreateData, ctrl?: Control): Promise<ApiKey> {
 
     const utility = this._utility
     const {
@@ -133,7 +137,9 @@ class ApiKeyEntity extends AgentGatewayEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<ApiKey> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

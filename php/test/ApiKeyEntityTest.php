@@ -43,8 +43,7 @@ class ApiKeyEntityTest extends TestCase
         $api_key_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.api_key"), "api_key_ref01"));
 
-        [$api_key_ref01_data_result, $err] = $api_key_ref01_ent->create($api_key_ref01_data, null);
-        $this->assertNull($err);
+        $api_key_ref01_data_result = $api_key_ref01_ent->create($api_key_ref01_data, null);
         $api_key_ref01_data = Helpers::to_map($api_key_ref01_data_result);
         $this->assertNotNull($api_key_ref01_data);
 

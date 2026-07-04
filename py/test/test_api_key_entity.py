@@ -44,9 +44,7 @@ class TestApiKeyEntity:
         api_key_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.api_key"), "api_key_ref01"))
 
-        api_key_ref01_data_result, err = api_key_ref01_ent.create(api_key_ref01_data, None)
-        assert err is None
-        api_key_ref01_data = helpers.to_map(api_key_ref01_data_result)
+        api_key_ref01_data = helpers.to_map(api_key_ref01_ent.create(api_key_ref01_data, None))
         assert api_key_ref01_data is not None
 
 

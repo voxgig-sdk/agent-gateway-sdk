@@ -49,8 +49,7 @@ class MetaEntityTest extends TestCase
         // LOAD
         $meta_ref01_ent = $client->Meta(null);
         $meta_ref01_match_dt0 = [];
-        [$meta_ref01_data_dt0_loaded, $err] = $meta_ref01_ent->load($meta_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $meta_ref01_data_dt0_loaded = $meta_ref01_ent->load($meta_ref01_match_dt0, null);
         $this->assertNotNull($meta_ref01_data_dt0_loaded);
 
     }

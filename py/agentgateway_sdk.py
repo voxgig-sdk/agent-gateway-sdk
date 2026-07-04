@@ -144,16 +144,23 @@ class AgentGatewaySDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class AgentGatewaySDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,40 +212,106 @@ class AgentGatewaySDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def analytics(self):
+        """Idiomatic facade: client.analytics.list() / client.analytics.load({"id": ...})."""
+        from entity.analytics_entity import AnalyticsEntity
+        cached = getattr(self, "_analytics", None)
+        if cached is None:
+            cached = AnalyticsEntity(self, None)
+            self._analytics = cached
+        return cached
 
     def Analytics(self, data=None):
+        # Deprecated: use client.analytics instead.
         from entity.analytics_entity import AnalyticsEntity
         return AnalyticsEntity(self, data)
 
 
+    @property
+    def api_key(self):
+        """Idiomatic facade: client.api_key.list() / client.api_key.load({"id": ...})."""
+        from entity.api_key_entity import ApiKeyEntity
+        cached = getattr(self, "_api_key", None)
+        if cached is None:
+            cached = ApiKeyEntity(self, None)
+            self._api_key = cached
+        return cached
+
     def ApiKey(self, data=None):
+        # Deprecated: use client.api_key instead.
         from entity.api_key_entity import ApiKeyEntity
         return ApiKeyEntity(self, data)
 
 
+    @property
+    def balance(self):
+        """Idiomatic facade: client.balance.list() / client.balance.load({"id": ...})."""
+        from entity.balance_entity import BalanceEntity
+        cached = getattr(self, "_balance", None)
+        if cached is None:
+            cached = BalanceEntity(self, None)
+            self._balance = cached
+        return cached
+
     def Balance(self, data=None):
+        # Deprecated: use client.balance instead.
         from entity.balance_entity import BalanceEntity
         return BalanceEntity(self, data)
 
 
+    @property
+    def meta(self):
+        """Idiomatic facade: client.meta.list() / client.meta.load({"id": ...})."""
+        from entity.meta_entity import MetaEntity
+        cached = getattr(self, "_meta", None)
+        if cached is None:
+            cached = MetaEntity(self, None)
+            self._meta = cached
+        return cached
+
     def Meta(self, data=None):
+        # Deprecated: use client.meta instead.
         from entity.meta_entity import MetaEntity
         return MetaEntity(self, data)
 
 
+    @property
+    def payment(self):
+        """Idiomatic facade: client.payment.list() / client.payment.load({"id": ...})."""
+        from entity.payment_entity import PaymentEntity
+        cached = getattr(self, "_payment", None)
+        if cached is None:
+            cached = PaymentEntity(self, None)
+            self._payment = cached
+        return cached
+
     def Payment(self, data=None):
+        # Deprecated: use client.payment instead.
         from entity.payment_entity import PaymentEntity
         return PaymentEntity(self, data)
 
 
+    @property
+    def service(self):
+        """Idiomatic facade: client.service.list() / client.service.load({"id": ...})."""
+        from entity.service_entity import ServiceEntity
+        cached = getattr(self, "_service", None)
+        if cached is None:
+            cached = ServiceEntity(self, None)
+            self._service = cached
+        return cached
+
     def Service(self, data=None):
+        # Deprecated: use client.service instead.
         from entity.service_entity import ServiceEntity
         return ServiceEntity(self, data)
 

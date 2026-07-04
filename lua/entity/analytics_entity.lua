@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch AnalyticsLoadMatch
+---@param ctrl? table
+---@return Analytics
+---@return string? err
 function AnalyticsEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

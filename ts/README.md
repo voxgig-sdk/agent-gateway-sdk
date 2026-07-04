@@ -9,9 +9,12 @@ The TypeScript SDK for the AgentGateway API — a type-safe, entity-oriented cli
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/agent-gateway
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/agent-gateway-sdk/releases](https://github.com/voxgig-sdk/agent-gateway-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AgentGatewaySDK } from 'agent-gateway'
+import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway'
 
 const client = new AgentGatewaySDK({
-  apikey: process.env.AGENT-GATEWAY_APIKEY,
+  apikey: process.env.AGENT_GATEWAY_APIKEY,
 })
 ```
 
-### 3. Load a analytics
+### 3. Load an analytics
 
 ```ts
-const result = await client.Analytics().load({ id: 'example_id' })
+const result = await client.analytics.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AgentGatewaySDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.analytics.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -96,7 +99,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.analytics
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -133,8 +136,8 @@ const client = new AgentGatewaySDK({
 Create a `.env.local` file at the project root:
 
 ```
-AGENT-GATEWAY_TEST_LIVE=TRUE
-AGENT-GATEWAY_APIKEY=<your-key>
+AGENT_GATEWAY_TEST_LIVE=TRUE
+AGENT_GATEWAY_APIKEY=<your-key>
 ```
 
 Then run:
@@ -339,7 +342,7 @@ API path: `/api/services`
 
 ### Analytics
 
-Create an instance: `const analytics = client.Analytics()`
+Create an instance: `const analytics = client.analytics`
 
 #### Operations
 
@@ -350,13 +353,13 @@ Create an instance: `const analytics = client.Analytics()`
 #### Example: Load
 
 ```ts
-const analytics = await client.Analytics().load({ id: 'analytics_id' })
+const analytics = await client.analytics.load({ id: 'analytics_id' })
 ```
 
 
 ### ApiKey
 
-Create an instance: `const api_key = client.ApiKey()`
+Create an instance: `const api_key = client.api_key`
 
 #### Operations
 
@@ -374,14 +377,14 @@ Create an instance: `const api_key = client.ApiKey()`
 #### Example: Create
 
 ```ts
-const api_key = await client.ApiKey().create({
+const api_key = await client.api_key.create({
 })
 ```
 
 
 ### Balance
 
-Create an instance: `const balance = client.Balance()`
+Create an instance: `const balance = client.balance`
 
 #### Operations
 
@@ -399,13 +402,13 @@ Create an instance: `const balance = client.Balance()`
 #### Example: Load
 
 ```ts
-const balance = await client.Balance().load({ id: 'balance_id' })
+const balance = await client.balance.load({ id: 'balance_id' })
 ```
 
 
 ### Meta
 
-Create an instance: `const meta = client.Meta()`
+Create an instance: `const meta = client.meta`
 
 #### Operations
 
@@ -422,13 +425,13 @@ Create an instance: `const meta = client.Meta()`
 #### Example: Load
 
 ```ts
-const meta = await client.Meta().load({ id: 'meta_id' })
+const meta = await client.meta.load({ id: 'meta_id' })
 ```
 
 
 ### Payment
 
-Create an instance: `const payment = client.Payment()`
+Create an instance: `const payment = client.payment`
 
 #### Operations
 
@@ -455,13 +458,13 @@ Create an instance: `const payment = client.Payment()`
 #### Example: Load
 
 ```ts
-const payment = await client.Payment().load({ id: 'payment_id' })
+const payment = await client.payment.load({ id: 'payment_id' })
 ```
 
 #### Example: Create
 
 ```ts
-const payment = await client.Payment().create({
+const payment = await client.payment.create({
   api_key: /* `$STRING` */,
   tx_hash: /* `$STRING` */,
 })
@@ -470,7 +473,7 @@ const payment = await client.Payment().create({
 
 ### Service
 
-Create an instance: `const service = client.Service()`
+Create an instance: `const service = client.service`
 
 #### Operations
 
@@ -496,13 +499,13 @@ Create an instance: `const service = client.Service()`
 #### Example: Load
 
 ```ts
-const service = await client.Service().load({ id: 'service_id' })
+const service = await client.service.load({ id: 'service_id' })
 ```
 
 #### Example: List
 
 ```ts
-const services = await client.Service().list()
+const services = await client.service.list()
 ```
 
 
@@ -563,7 +566,7 @@ agent-gateway/
 Import the SDK from the package root:
 
 ```ts
-import { AgentGatewaySDK } from 'agent-gateway'
+import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway'
 ```
 
 ### Entity state
@@ -573,11 +576,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const analytics = client.analytics
+await analytics.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// analytics.data() now returns the loaded analytics data
+// analytics.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

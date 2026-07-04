@@ -7,6 +7,8 @@ import { MetaEntity } from './entity/MetaEntity'
 import { PaymentEntity } from './entity/PaymentEntity'
 import { ServiceEntity } from './entity/ServiceEntity'
 
+export type * from './AgentGatewayTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -207,36 +209,84 @@ class AgentGatewaySDK {
 
 
 
+  _analytics?: AnalyticsEntity
+
+  // Idiomatic facade: `client.analytics.list()` / `client.analytics.load({ id })`.
+  get analytics(): AnalyticsEntity {
+    return (this._analytics ??= new AnalyticsEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.analytics` instead. */
   Analytics(data?: any) {
     const self = this
     return new AnalyticsEntity(self,data)
   }
 
 
+  _api_key?: ApiKeyEntity
+
+  // Idiomatic facade: `client.api_key.list()` / `client.api_key.load({ id })`.
+  get api_key(): ApiKeyEntity {
+    return (this._api_key ??= new ApiKeyEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.api_key` instead. */
   ApiKey(data?: any) {
     const self = this
     return new ApiKeyEntity(self,data)
   }
 
 
+  _balance?: BalanceEntity
+
+  // Idiomatic facade: `client.balance.list()` / `client.balance.load({ id })`.
+  get balance(): BalanceEntity {
+    return (this._balance ??= new BalanceEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.balance` instead. */
   Balance(data?: any) {
     const self = this
     return new BalanceEntity(self,data)
   }
 
 
+  _meta?: MetaEntity
+
+  // Idiomatic facade: `client.meta.list()` / `client.meta.load({ id })`.
+  get meta(): MetaEntity {
+    return (this._meta ??= new MetaEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.meta` instead. */
   Meta(data?: any) {
     const self = this
     return new MetaEntity(self,data)
   }
 
 
+  _payment?: PaymentEntity
+
+  // Idiomatic facade: `client.payment.list()` / `client.payment.load({ id })`.
+  get payment(): PaymentEntity {
+    return (this._payment ??= new PaymentEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.payment` instead. */
   Payment(data?: any) {
     const self = this
     return new PaymentEntity(self,data)
   }
 
 
+  _service?: ServiceEntity
+
+  // Idiomatic facade: `client.service.list()` / `client.service.load({ id })`.
+  get service(): ServiceEntity {
+    return (this._service ??= new ServiceEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.service` instead. */
   Service(data?: any) {
     const self = this
     return new ServiceEntity(self,data)

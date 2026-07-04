@@ -49,8 +49,7 @@ class TestAnalyticsEntity:
         # LOAD
         analytics_ref01_ent = client.Analytics(None)
         analytics_ref01_match_dt0 = {}
-        analytics_ref01_data_dt0_loaded, err = analytics_ref01_ent.load(analytics_ref01_match_dt0, None)
-        assert err is None
+        analytics_ref01_data_dt0_loaded = analytics_ref01_ent.load(analytics_ref01_match_dt0, None)
         assert analytics_ref01_data_dt0_loaded is not None
 
 

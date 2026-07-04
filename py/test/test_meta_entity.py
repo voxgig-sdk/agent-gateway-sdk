@@ -49,8 +49,7 @@ class TestMetaEntity:
         # LOAD
         meta_ref01_ent = client.Meta(None)
         meta_ref01_match_dt0 = {}
-        meta_ref01_data_dt0_loaded, err = meta_ref01_ent.load(meta_ref01_match_dt0, None)
-        assert err is None
+        meta_ref01_data_dt0_loaded = meta_ref01_ent.load(meta_ref01_match_dt0, None)
         assert meta_ref01_data_dt0_loaded is not None
 
 
