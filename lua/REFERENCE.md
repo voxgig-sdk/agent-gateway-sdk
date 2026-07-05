@@ -114,7 +114,7 @@ local analytics = client:Analytics(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Analytics():load({ id = "analytics_id" })
+local result, err = client:Analytics():load()
 ```
 
 ### Common Methods
@@ -157,8 +157,8 @@ local api_key = client:ApiKey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | ``$INTEGER`` | No |  |
-| `key` | ``$STRING`` | No |  |
+| `credit` | `number` | No |  |
+| `key` | `string` | No |  |
 
 ### Operations
 
@@ -211,8 +211,8 @@ local balance = client:Balance(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$INTEGER`` | No |  |
-| `credit` | ``$INTEGER`` | No |  |
+| `created_at` | `number` | No |  |
+| `credit` | `number` | No |  |
 
 ### Operations
 
@@ -221,7 +221,7 @@ local balance = client:Balance(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Balance():load({ id = "balance_id" })
+local result, err = client:Balance():load()
 ```
 
 ### Common Methods
@@ -264,7 +264,7 @@ local meta = client:Meta(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -273,7 +273,7 @@ local meta = client:Meta(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Meta():load({ id = "meta_id" })
+local result, err = client:Meta():load()
 ```
 
 ### Common Methods
@@ -316,16 +316,16 @@ local payment = client:Payment(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `api_key` | ``$STRING`` | Yes |  |
-| `chain` | ``$STRING`` | No |  |
-| `credits_added` | ``$INTEGER`` | No |  |
-| `ok` | ``$BOOLEAN`` | No |  |
-| `rate` | ``$STRING`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `total_credit` | ``$INTEGER`` | No |  |
-| `tx_hash` | ``$STRING`` | Yes |  |
-| `usdc` | ``$NUMBER`` | No |  |
+| `address` | `string` | No |  |
+| `api_key` | `string` | Yes |  |
+| `chain` | `string` | No |  |
+| `credits_added` | `number` | No |  |
+| `ok` | `boolean` | No |  |
+| `rate` | `string` | No |  |
+| `token` | `string` | No |  |
+| `total_credit` | `number` | No |  |
+| `tx_hash` | `string` | Yes |  |
+| `usdc` | `number` | No |  |
 
 ### Operations
 
@@ -335,8 +335,8 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Payment():create({
-  api_key = --[[ `$STRING` ]],
-  tx_hash = --[[ `$STRING` ]],
+  api_key = --[[ string ]],
+  tx_hash = --[[ string ]],
 })
 ```
 
@@ -345,7 +345,7 @@ local result, err = client:Payment():create({
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Payment():load({ id = "payment_id" })
+local result, err = client:Payment():load()
 ```
 
 ### Common Methods
@@ -388,15 +388,15 @@ local service = client:Service(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | ``$STRING`` | No |  |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `endpoint` | ``$ARRAY`` | No |  |
-| `icon` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `latency` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `api_url` | `string` | No |  |
+| `category` | `string` | No |  |
+| `description` | `string` | No |  |
+| `endpoint` | `table` | No |  |
+| `icon` | `string` | No |  |
+| `id` | `string` | No |  |
+| `latency` | `number` | No |  |
+| `name` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 

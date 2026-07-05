@@ -12,7 +12,7 @@
 class Analytics
 end
 
-# Match filter for Analytics#load (any subset of Analytics fields).
+# Request payload for Analytics#load.
 class AnalyticsLoadMatch
 end
 
@@ -29,7 +29,7 @@ ApiKey = Struct.new(
   keyword_init: true
 )
 
-# Match filter for ApiKey#create (any subset of ApiKey fields).
+# Request payload for ApiKey#create.
 #
 # @!attribute [rw] credit
 #   @return [Integer, nil]
@@ -55,7 +55,7 @@ Balance = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Balance#load (any subset of Balance fields).
+# Request payload for Balance#load.
 #
 # @!attribute [rw] created_at
 #   @return [Integer, nil]
@@ -77,7 +77,7 @@ Meta = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Meta#load (any subset of Meta fields).
+# Request payload for Meta#load.
 #
 # @!attribute [rw] status
 #   @return [String, nil]
@@ -131,7 +131,7 @@ Payment = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Payment#load (any subset of Payment fields).
+# Request payload for Payment#load.
 #
 # @!attribute [rw] address
 #   @return [String, nil]
@@ -176,13 +176,13 @@ PaymentLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Payment#create (any subset of Payment fields).
+# Request payload for Payment#create.
 #
 # @!attribute [rw] address
 #   @return [String, nil]
 #
 # @!attribute [rw] api_key
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] chain
 #   @return [String, nil]
@@ -203,7 +203,7 @@ PaymentLoadMatch = Struct.new(
 #   @return [Integer, nil]
 #
 # @!attribute [rw] tx_hash
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] usdc
 #   @return [Float, nil]
@@ -271,7 +271,7 @@ ServiceLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Service#list (any subset of Service fields).
+# Request payload for Service#list.
 #
 # @!attribute [rw] api_url
 #   @return [String, nil]

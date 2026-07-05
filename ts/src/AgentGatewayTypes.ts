@@ -8,27 +8,36 @@
 export interface Analytics {
 }
 
-export type AnalyticsLoadMatch = Partial<Analytics>
+export interface AnalyticsLoadMatch {
+}
 
 export interface ApiKey {
   credit?: number
   key?: string
 }
 
-export type ApiKeyCreateData = Partial<ApiKey>
+export interface ApiKeyCreateData {
+  credit?: number
+  key?: string
+}
 
 export interface Balance {
   created_at?: number
   credit?: number
 }
 
-export type BalanceLoadMatch = Partial<Balance>
+export interface BalanceLoadMatch {
+  created_at?: number
+  credit?: number
+}
 
 export interface Meta {
   status?: string
 }
 
-export type MetaLoadMatch = Partial<Meta>
+export interface MetaLoadMatch {
+  status?: string
+}
 
 export interface Payment {
   address?: string
@@ -43,9 +52,31 @@ export interface Payment {
   usdc?: number
 }
 
-export type PaymentLoadMatch = Partial<Payment>
+export interface PaymentLoadMatch {
+  address?: string
+  api_key?: string
+  chain?: string
+  credits_added?: number
+  ok?: boolean
+  rate?: string
+  token?: string
+  total_credit?: number
+  tx_hash?: string
+  usdc?: number
+}
 
-export type PaymentCreateData = Partial<Payment>
+export interface PaymentCreateData {
+  address?: string
+  api_key: string
+  chain?: string
+  credits_added?: number
+  ok?: boolean
+  rate?: string
+  token?: string
+  total_credit?: number
+  tx_hash: string
+  usdc?: number
+}
 
 export interface Service {
   api_url?: string
@@ -63,5 +94,15 @@ export interface ServiceLoadMatch {
   id: string
 }
 
-export type ServiceListMatch = Partial<Service>
+export interface ServiceListMatch {
+  api_url?: string
+  category?: string
+  description?: string
+  endpoint?: any[]
+  icon?: string
+  id?: string
+  latency?: number
+  name?: string
+  status?: string
+}
 

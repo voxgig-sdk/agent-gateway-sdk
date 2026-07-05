@@ -17,7 +17,7 @@ class Analytics
 {
 }
 
-/** Match filter for Analytics#load (any subset of Analytics fields). */
+/** Request payload for Analytics#load. */
 class AnalyticsLoadMatch
 {
 }
@@ -29,7 +29,7 @@ class ApiKey
     public ?string $key = null;
 }
 
-/** Match filter for ApiKey#create (any subset of ApiKey fields). */
+/** Request payload for ApiKey#create. */
 class ApiKeyCreateData
 {
     public ?int $credit = null;
@@ -43,7 +43,7 @@ class Balance
     public ?int $credit = null;
 }
 
-/** Match filter for Balance#load (any subset of Balance fields). */
+/** Request payload for Balance#load. */
 class BalanceLoadMatch
 {
     public ?int $created_at = null;
@@ -56,7 +56,7 @@ class Meta
     public ?string $status = null;
 }
 
-/** Match filter for Meta#load (any subset of Meta fields). */
+/** Request payload for Meta#load. */
 class MetaLoadMatch
 {
     public ?string $status = null;
@@ -77,7 +77,7 @@ class Payment
     public ?float $usdc = null;
 }
 
-/** Match filter for Payment#load (any subset of Payment fields). */
+/** Request payload for Payment#load. */
 class PaymentLoadMatch
 {
     public ?string $address = null;
@@ -92,18 +92,18 @@ class PaymentLoadMatch
     public ?float $usdc = null;
 }
 
-/** Match filter for Payment#create (any subset of Payment fields). */
+/** Request payload for Payment#create. */
 class PaymentCreateData
 {
     public ?string $address = null;
-    public ?string $api_key = null;
+    public string $api_key;
     public ?string $chain = null;
     public ?int $credits_added = null;
     public ?bool $ok = null;
     public ?string $rate = null;
     public ?string $token = null;
     public ?int $total_credit = null;
-    public ?string $tx_hash = null;
+    public string $tx_hash;
     public ?float $usdc = null;
 }
 
@@ -127,7 +127,7 @@ class ServiceLoadMatch
     public string $id;
 }
 
-/** Match filter for Service#list (any subset of Service fields). */
+/** Request payload for Service#list. */
 class ServiceListMatch
 {
     public ?string $api_url = null;

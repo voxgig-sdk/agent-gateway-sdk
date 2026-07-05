@@ -221,37 +221,37 @@ class AgentGatewaySDK:
 
 
     def Analytics(self, data=None) -> "AnalyticsEntity":
-        """Entity factory: client.Analytics().list({}) / client.Analytics().load({"id": ...})."""
+        """Entity factory: client.Analytics().list() / client.Analytics().load({"id": ...})."""
         from entity.analytics_entity import AnalyticsEntity
         return AnalyticsEntity(self, data)
 
 
     def ApiKey(self, data=None) -> "ApiKeyEntity":
-        """Entity factory: client.ApiKey().list({}) / client.ApiKey().load({"id": ...})."""
+        """Entity factory: client.ApiKey().list() / client.ApiKey().load({"id": ...})."""
         from entity.api_key_entity import ApiKeyEntity
         return ApiKeyEntity(self, data)
 
 
     def Balance(self, data=None) -> "BalanceEntity":
-        """Entity factory: client.Balance().list({}) / client.Balance().load({"id": ...})."""
+        """Entity factory: client.Balance().list() / client.Balance().load({"id": ...})."""
         from entity.balance_entity import BalanceEntity
         return BalanceEntity(self, data)
 
 
     def Meta(self, data=None) -> "MetaEntity":
-        """Entity factory: client.Meta().list({}) / client.Meta().load({"id": ...})."""
+        """Entity factory: client.Meta().list() / client.Meta().load({"id": ...})."""
         from entity.meta_entity import MetaEntity
         return MetaEntity(self, data)
 
 
     def Payment(self, data=None) -> "PaymentEntity":
-        """Entity factory: client.Payment().list({}) / client.Payment().load({"id": ...})."""
+        """Entity factory: client.Payment().list() / client.Payment().load({"id": ...})."""
         from entity.payment_entity import PaymentEntity
         return PaymentEntity(self, data)
 
 
     def Service(self, data=None) -> "ServiceEntity":
-        """Entity factory: client.Service().list({}) / client.Service().load({"id": ...})."""
+        """Entity factory: client.Service().list() / client.Service().load({"id": ...})."""
         from entity.service_entity import ServiceEntity
         return ServiceEntity(self, data)
 

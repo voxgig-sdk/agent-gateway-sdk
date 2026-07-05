@@ -4,6 +4,8 @@
 
 The PHP SDK for the AgentGateway API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Analytics()` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -36,10 +38,41 @@ $client = new AgentGatewaySDK([
 ```php
 try {
     // load() returns the bare Analytics record (throws on error).
-    $analytics = $client->Analytics()->load(["id" => "example_id"]);
+    $analytics = $client->Analytics()->load();
     print_r($analytics);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
+}
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $analytics = $client->Analytics()->load();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -63,7 +96,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -84,16 +120,13 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required. Seed fixture
-data via the `entity` option so offline calls resolve without a live server:
+Create a mock client for unit testing — no server required:
 
 ```php
-$client = AgentGatewaySDK::test([
-    "entity" => ["analytics" => ["test01" => ["id" => "test01"]]],
-]);
+$client = AgentGatewaySDK::test();
 
-// load() returns the bare mock record (throws on error).
-$analytics = $client->Analytics()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$analytics = $client->Analytics()->load();
 print_r($analytics);
 ```
 
@@ -189,10 +222,8 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
-| `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
-| `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -317,7 +348,7 @@ Create an instance: `$analytics = $client->Analytics();`
 
 ```php
 // load() returns the bare Analytics record (throws on error).
-$analytics = $client->Analytics()->load(["id" => "analytics_id"]);
+$analytics = $client->Analytics()->load();
 ```
 
 
@@ -335,8 +366,8 @@ Create an instance: `$api_key = $client->ApiKey();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | ``$INTEGER`` |  |
-| `key` | ``$STRING`` |  |
+| `credit` | `int` |  |
+| `key` | `string` |  |
 
 #### Example: Create
 
@@ -360,14 +391,14 @@ Create an instance: `$balance = $client->Balance();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$INTEGER`` |  |
-| `credit` | ``$INTEGER`` |  |
+| `created_at` | `int` |  |
+| `credit` | `int` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Balance record (throws on error).
-$balance = $client->Balance()->load(["id" => "balance_id"]);
+$balance = $client->Balance()->load();
 ```
 
 
@@ -385,13 +416,13 @@ Create an instance: `$meta = $client->Meta();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Meta record (throws on error).
-$meta = $client->Meta()->load(["id" => "meta_id"]);
+$meta = $client->Meta()->load();
 ```
 
 
@@ -410,30 +441,30 @@ Create an instance: `$payment = $client->Payment();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `api_key` | ``$STRING`` |  |
-| `chain` | ``$STRING`` |  |
-| `credits_added` | ``$INTEGER`` |  |
-| `ok` | ``$BOOLEAN`` |  |
-| `rate` | ``$STRING`` |  |
-| `token` | ``$STRING`` |  |
-| `total_credit` | ``$INTEGER`` |  |
-| `tx_hash` | ``$STRING`` |  |
-| `usdc` | ``$NUMBER`` |  |
+| `address` | `string` |  |
+| `api_key` | `string` |  |
+| `chain` | `string` |  |
+| `credits_added` | `int` |  |
+| `ok` | `bool` |  |
+| `rate` | `string` |  |
+| `token` | `string` |  |
+| `total_credit` | `int` |  |
+| `tx_hash` | `string` |  |
+| `usdc` | `float` |  |
 
 #### Example: Load
 
 ```php
 // load() returns the bare Payment record (throws on error).
-$payment = $client->Payment()->load(["id" => "payment_id"]);
+$payment = $client->Payment()->load();
 ```
 
 #### Example: Create
 
 ```php
 $payment = $client->Payment()->create([
-    "api_key" => null, // `$STRING`
-    "tx_hash" => null, // `$STRING`
+    "api_key" => null, // string
+    "tx_hash" => null, // string
 ]);
 ```
 
@@ -453,15 +484,15 @@ Create an instance: `$service = $client->Service();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | ``$STRING`` |  |
-| `category` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `endpoint` | ``$ARRAY`` |  |
-| `icon` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `latency` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `api_url` | `string` |  |
+| `category` | `string` |  |
+| `description` | `string` |  |
+| `endpoint` | `array` |  |
+| `icon` | `string` |  |
+| `id` | `string` |  |
+| `latency` | `float` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
@@ -478,12 +509,16 @@ $services = $client->Service()->list();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -500,8 +535,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -550,10 +586,10 @@ stores the returned data and match criteria internally.
 
 ```php
 $analytics = $client->Analytics();
-$analytics->load(["id" => "example_id"]);
+$analytics->load();
 
-// $analytics->dataGet() now returns the loaded analytics data
-// $analytics->matchGet() returns the last match criteria
+// $analytics->data_get() now returns the analytics data from the last load
+// $analytics->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

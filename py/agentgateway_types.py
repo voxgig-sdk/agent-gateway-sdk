@@ -81,16 +81,19 @@ class PaymentLoadMatch(TypedDict, total=False):
     usdc: float
 
 
-class PaymentCreateData(TypedDict, total=False):
-    address: str
+class PaymentCreateDataRequired(TypedDict):
     api_key: str
+    tx_hash: str
+
+
+class PaymentCreateData(PaymentCreateDataRequired, total=False):
+    address: str
     chain: str
     credits_added: int
     ok: bool
     rate: str
     token: str
     total_credit: int
-    tx_hash: str
     usdc: float
 
 

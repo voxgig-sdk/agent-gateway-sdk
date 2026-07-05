@@ -8,7 +8,7 @@ Complete API reference for the AgentGateway Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'agent-gateway_sdk'
+require_relative 'AgentGateway_sdk'
 
 client = AgentGatewaySDK.new(options)
 ```
@@ -117,7 +117,7 @@ analytics = client.Analytics
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Analytics.load({ "id" => "analytics_id" })
+result = client.Analytics.load()
 ```
 
 ### Common Methods
@@ -160,8 +160,8 @@ api_key = client.ApiKey
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | ``$INTEGER`` | No |  |
-| `key` | ``$STRING`` | No |  |
+| `credit` | `Integer` | No |  |
+| `key` | `String` | No |  |
 
 ### Operations
 
@@ -214,8 +214,8 @@ balance = client.Balance
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$INTEGER`` | No |  |
-| `credit` | ``$INTEGER`` | No |  |
+| `created_at` | `Integer` | No |  |
+| `credit` | `Integer` | No |  |
 
 ### Operations
 
@@ -224,7 +224,7 @@ balance = client.Balance
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Balance.load({ "id" => "balance_id" })
+result = client.Balance.load()
 ```
 
 ### Common Methods
@@ -267,7 +267,7 @@ meta = client.Meta
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
@@ -276,7 +276,7 @@ meta = client.Meta
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Meta.load({ "id" => "meta_id" })
+result = client.Meta.load()
 ```
 
 ### Common Methods
@@ -319,16 +319,16 @@ payment = client.Payment
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `api_key` | ``$STRING`` | Yes |  |
-| `chain` | ``$STRING`` | No |  |
-| `credits_added` | ``$INTEGER`` | No |  |
-| `ok` | ``$BOOLEAN`` | No |  |
-| `rate` | ``$STRING`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `total_credit` | ``$INTEGER`` | No |  |
-| `tx_hash` | ``$STRING`` | Yes |  |
-| `usdc` | ``$NUMBER`` | No |  |
+| `address` | `String` | No |  |
+| `api_key` | `String` | Yes |  |
+| `chain` | `String` | No |  |
+| `credits_added` | `Integer` | No |  |
+| `ok` | `Boolean` | No |  |
+| `rate` | `String` | No |  |
+| `token` | `String` | No |  |
+| `total_credit` | `Integer` | No |  |
+| `tx_hash` | `String` | Yes |  |
+| `usdc` | `Float` | No |  |
 
 ### Operations
 
@@ -338,8 +338,8 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Payment.create({
-  "api_key" => # `$STRING`,
-  "tx_hash" => # `$STRING`,
+  "api_key" => "example", # String
+  "tx_hash" => "example", # String
 })
 ```
 
@@ -348,7 +348,7 @@ result = client.Payment.create({
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Payment.load({ "id" => "payment_id" })
+result = client.Payment.load()
 ```
 
 ### Common Methods
@@ -391,24 +391,24 @@ service = client.Service
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | ``$STRING`` | No |  |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `endpoint` | ``$ARRAY`` | No |  |
-| `icon` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `latency` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `api_url` | `String` | No |  |
+| `category` | `String` | No |  |
+| `description` | `String` | No |  |
+| `endpoint` | `Array` | No |  |
+| `icon` | `String` | No |  |
+| `id` | `String` | No |  |
+| `latency` | `Float` | No |  |
+| `name` | `String` | No |  |
+| `status` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Service.list(nil)
+results = client.Service.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`

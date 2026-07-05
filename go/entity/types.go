@@ -12,8 +12,7 @@ import "encoding/json"
 type Analytics struct {
 }
 
-// AnalyticsLoadMatch mirrors the analytics fields as an all-optional match
-// filter (Go analog of Partial<Analytics>).
+// AnalyticsLoadMatch is the typed request payload for Analytics.LoadTyped.
 type AnalyticsLoadMatch struct {
 }
 
@@ -23,8 +22,7 @@ type ApiKey struct {
 	Key *string `json:"key,omitempty"`
 }
 
-// ApiKeyCreateData mirrors the api_key fields as an all-optional match
-// filter (Go analog of Partial<ApiKey>).
+// ApiKeyCreateData is the typed request payload for ApiKey.CreateTyped.
 type ApiKeyCreateData struct {
 	Credit *int `json:"credit,omitempty"`
 	Key *string `json:"key,omitempty"`
@@ -36,8 +34,7 @@ type Balance struct {
 	Credit *int `json:"credit,omitempty"`
 }
 
-// BalanceLoadMatch mirrors the balance fields as an all-optional match
-// filter (Go analog of Partial<Balance>).
+// BalanceLoadMatch is the typed request payload for Balance.LoadTyped.
 type BalanceLoadMatch struct {
 	CreatedAt *int `json:"created_at,omitempty"`
 	Credit *int `json:"credit,omitempty"`
@@ -48,8 +45,7 @@ type Meta struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// MetaLoadMatch mirrors the meta fields as an all-optional match
-// filter (Go analog of Partial<Meta>).
+// MetaLoadMatch is the typed request payload for Meta.LoadTyped.
 type MetaLoadMatch struct {
 	Status *string `json:"status,omitempty"`
 }
@@ -68,8 +64,7 @@ type Payment struct {
 	Usdc *float64 `json:"usdc,omitempty"`
 }
 
-// PaymentLoadMatch mirrors the payment fields as an all-optional match
-// filter (Go analog of Partial<Payment>).
+// PaymentLoadMatch is the typed request payload for Payment.LoadTyped.
 type PaymentLoadMatch struct {
 	Address *string `json:"address,omitempty"`
 	ApiKey *string `json:"api_key,omitempty"`
@@ -83,18 +78,17 @@ type PaymentLoadMatch struct {
 	Usdc *float64 `json:"usdc,omitempty"`
 }
 
-// PaymentCreateData mirrors the payment fields as an all-optional match
-// filter (Go analog of Partial<Payment>).
+// PaymentCreateData is the typed request payload for Payment.CreateTyped.
 type PaymentCreateData struct {
 	Address *string `json:"address,omitempty"`
-	ApiKey *string `json:"api_key,omitempty"`
+	ApiKey string `json:"api_key"`
 	Chain *string `json:"chain,omitempty"`
 	CreditsAdded *int `json:"credits_added,omitempty"`
 	Ok *bool `json:"ok,omitempty"`
 	Rate *string `json:"rate,omitempty"`
 	Token *string `json:"token,omitempty"`
 	TotalCredit *int `json:"total_credit,omitempty"`
-	TxHash *string `json:"tx_hash,omitempty"`
+	TxHash string `json:"tx_hash"`
 	Usdc *float64 `json:"usdc,omitempty"`
 }
 
@@ -116,8 +110,7 @@ type ServiceLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// ServiceListMatch mirrors the service fields as an all-optional match
-// filter (Go analog of Partial<Service>).
+// ServiceListMatch is the typed request payload for Service.ListTyped.
 type ServiceListMatch struct {
 	ApiUrl *string `json:"api_url,omitempty"`
 	Category *string `json:"category,omitempty"`

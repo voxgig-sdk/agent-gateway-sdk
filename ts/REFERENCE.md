@@ -180,7 +180,7 @@ const analytics = client.Analytics()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Analytics().load({ id: 'analytics_id' })
+const result = await client.Analytics().load()
 ```
 
 ### Common Methods
@@ -221,8 +221,8 @@ const api_key = client.ApiKey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | ``$INTEGER`` | No |  |
-| `key` | ``$STRING`` | No |  |
+| `credit` | `number` | No |  |
+| `key` | `string` | No |  |
 
 ### Operations
 
@@ -273,8 +273,8 @@ const balance = client.Balance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$INTEGER`` | No |  |
-| `credit` | ``$INTEGER`` | No |  |
+| `created_at` | `number` | No |  |
+| `credit` | `number` | No |  |
 
 ### Operations
 
@@ -283,7 +283,7 @@ const balance = client.Balance()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Balance().load({ id: 'balance_id' })
+const result = await client.Balance().load()
 ```
 
 ### Common Methods
@@ -324,7 +324,7 @@ const meta = client.Meta()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -333,7 +333,7 @@ const meta = client.Meta()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Meta().load({ id: 'meta_id' })
+const result = await client.Meta().load()
 ```
 
 ### Common Methods
@@ -374,16 +374,16 @@ const payment = client.Payment()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `api_key` | ``$STRING`` | Yes |  |
-| `chain` | ``$STRING`` | No |  |
-| `credits_added` | ``$INTEGER`` | No |  |
-| `ok` | ``$BOOLEAN`` | No |  |
-| `rate` | ``$STRING`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `total_credit` | ``$INTEGER`` | No |  |
-| `tx_hash` | ``$STRING`` | Yes |  |
-| `usdc` | ``$NUMBER`` | No |  |
+| `address` | `string` | No |  |
+| `api_key` | `string` | Yes |  |
+| `chain` | `string` | No |  |
+| `credits_added` | `number` | No |  |
+| `ok` | `boolean` | No |  |
+| `rate` | `string` | No |  |
+| `token` | `string` | No |  |
+| `total_credit` | `number` | No |  |
+| `tx_hash` | `string` | Yes |  |
+| `usdc` | `number` | No |  |
 
 ### Operations
 
@@ -393,8 +393,8 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Payment().create({
-  api_key: /* `$STRING` */,
-  tx_hash: /* `$STRING` */,
+  api_key: /* string */,
+  tx_hash: /* string */,
 })
 ```
 
@@ -403,7 +403,7 @@ const result = await client.Payment().create({
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Payment().load({ id: 'payment_id' })
+const result = await client.Payment().load()
 ```
 
 ### Common Methods
@@ -444,15 +444,15 @@ const service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | ``$STRING`` | No |  |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `endpoint` | ``$ARRAY`` | No |  |
-| `icon` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `latency` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `api_url` | `string` | No |  |
+| `category` | `string` | No |  |
+| `description` | `string` | No |  |
+| `endpoint` | `any[]` | No |  |
+| `icon` | `string` | No |  |
+| `id` | `string` | No |  |
+| `latency` | `number` | No |  |
+| `name` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 

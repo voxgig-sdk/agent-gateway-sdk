@@ -8,7 +8,7 @@ Complete API reference for the AgentGateway PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/agent-gateway_sdk.php';
+require_once __DIR__ . '/agentgateway_sdk.php';
 
 $client = new AgentGatewaySDK($options);
 ```
@@ -66,11 +66,11 @@ Create a new `PaymentEntity` instance. Pass `null` for no initial data.
 
 Create a new `ServiceEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): AgentGatewayUtility`
 
 Return a copy of the SDK utility object.
 
@@ -116,24 +116,24 @@ $analytics = $client->Analytics();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Analytics()->load(["id" => "analytics_id"]);
+$result = $client->Analytics()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -142,7 +142,7 @@ Set the entity match criteria.
 Create a new `AnalyticsEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -159,8 +159,8 @@ $api_key = $client->ApiKey();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | ``$INTEGER`` | No |  |
-| `key` | ``$STRING`` | No |  |
+| `credit` | `int` | No |  |
+| `key` | `string` | No |  |
 
 ### Operations
 
@@ -175,19 +175,19 @@ $result = $client->ApiKey()->create([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -196,7 +196,7 @@ Set the entity match criteria.
 Create a new `ApiKeyEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -213,8 +213,8 @@ $balance = $client->Balance();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$INTEGER`` | No |  |
-| `credit` | ``$INTEGER`` | No |  |
+| `created_at` | `int` | No |  |
+| `credit` | `int` | No |  |
 
 ### Operations
 
@@ -223,24 +223,24 @@ $balance = $client->Balance();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Balance()->load(["id" => "balance_id"]);
+$result = $client->Balance()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -249,7 +249,7 @@ Set the entity match criteria.
 Create a new `BalanceEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -266,7 +266,7 @@ $meta = $client->Meta();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -275,24 +275,24 @@ $meta = $client->Meta();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Meta()->load(["id" => "meta_id"]);
+$result = $client->Meta()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -301,7 +301,7 @@ Set the entity match criteria.
 Create a new `MetaEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -318,16 +318,16 @@ $payment = $client->Payment();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `api_key` | ``$STRING`` | Yes |  |
-| `chain` | ``$STRING`` | No |  |
-| `credits_added` | ``$INTEGER`` | No |  |
-| `ok` | ``$BOOLEAN`` | No |  |
-| `rate` | ``$STRING`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `total_credit` | ``$INTEGER`` | No |  |
-| `tx_hash` | ``$STRING`` | Yes |  |
-| `usdc` | ``$NUMBER`` | No |  |
+| `address` | `string` | No |  |
+| `api_key` | `string` | Yes |  |
+| `chain` | `string` | No |  |
+| `credits_added` | `int` | No |  |
+| `ok` | `bool` | No |  |
+| `rate` | `string` | No |  |
+| `token` | `string` | No |  |
+| `total_credit` | `int` | No |  |
+| `tx_hash` | `string` | Yes |  |
+| `usdc` | `float` | No |  |
 
 ### Operations
 
@@ -337,8 +337,8 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Payment()->create([
-  "api_key" => /* `$STRING` */,
-  "tx_hash" => /* `$STRING` */,
+  "api_key" => null, // string
+  "tx_hash" => null, // string
 ]);
 ```
 
@@ -347,24 +347,24 @@ $result = $client->Payment()->create([
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Payment()->load(["id" => "payment_id"]);
+$result = $client->Payment()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -373,7 +373,7 @@ Set the entity match criteria.
 Create a new `PaymentEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -390,24 +390,24 @@ $service = $client->Service();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | ``$STRING`` | No |  |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `endpoint` | ``$ARRAY`` | No |  |
-| `icon` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `latency` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `api_url` | `string` | No |  |
+| `category` | `string` | No |  |
+| `description` | `string` | No |  |
+| `endpoint` | `array` | No |  |
+| `icon` | `string` | No |  |
+| `id` | `string` | No |  |
+| `latency` | `float` | No |  |
+| `name` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Service()->list([]);
+$results = $client->Service()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -420,19 +420,19 @@ $result = $client->Service()->load(["id" => "service_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -441,7 +441,7 @@ Set the entity match criteria.
 Create a new `ServiceEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

@@ -4,6 +4,8 @@
 
 The Golang SDK for the AgentGateway API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Analytics(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -52,12 +54,41 @@ func main() {
     })
 
     // Load a single analytics — the value is the loaded record.
-    analytics, err := client.Analytics(nil).Load(map[string]any{"id": "example_id"}, nil)
+    analytics, err := client.Analytics(nil).Load(nil, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(analytics)
 }
+```
+
+
+## Error handling
+
+Every entity operation returns `(value, error)`. Check `err` before
+using the value — there is no exception to catch:
+
+```go
+analytics, err := client.Analytics(nil).Load(nil, nil)
+if err != nil {
+    // handle err
+    return
+}
+_ = analytics
+```
+
+`Direct` follows the same `(value, error)` convention:
+
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
+    "method": "GET",
+    "params": map[string]any{"id": "example_id"},
+})
+if err != nil {
+    // handle err
+}
+_ = result
 ```
 
 
@@ -108,12 +139,12 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 analytics, err := client.Analytics(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+    nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(analytics) // the loaded mock data
+fmt.Println(analytics) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -208,8 +239,6 @@ All entities implement the `AgentGatewayEntity` interface.
 | `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
 | `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
 | `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
-| `Update` | `(reqdata, ctrl map[string]any) (any, error)` | Update an existing entity. |
-| `Remove` | `(reqmatch, ctrl map[string]any) (any, error)` | Remove an entity. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -222,16 +251,16 @@ operation's data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `Load` / `Create` | the entity record (`map[string]any`) |
 | `List` | a `[]any` of entity records |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    analytics, err := client.Analytics(nil).Load(map[string]any{"id": "example_id"}, nil)
+    analytics, err := client.Analytics(nil).Load(nil, nil)
     if err != nil { /* handle */ }
-    // analytics is the loaded record
+    // analytics is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -334,7 +363,7 @@ Create an instance: `analytics := client.Analytics(nil)`
 #### Example: Load
 
 ```go
-analytics, err := client.Analytics(nil).Load(map[string]any{"id": "analytics_id"}, nil)
+analytics, err := client.Analytics(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -356,8 +385,8 @@ Create an instance: `api_key := client.ApiKey(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | ``$INTEGER`` |  |
-| `key` | ``$STRING`` |  |
+| `credit` | `int` |  |
+| `key` | `string` |  |
 
 #### Example: Create
 
@@ -381,13 +410,13 @@ Create an instance: `balance := client.Balance(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | ``$INTEGER`` |  |
-| `credit` | ``$INTEGER`` |  |
+| `created_at` | `int` |  |
+| `credit` | `int` |  |
 
 #### Example: Load
 
 ```go
-balance, err := client.Balance(nil).Load(map[string]any{"id": "balance_id"}, nil)
+balance, err := client.Balance(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -409,12 +438,12 @@ Create an instance: `meta := client.Meta(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `status` | ``$STRING`` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
 ```go
-meta, err := client.Meta(nil).Load(map[string]any{"id": "meta_id"}, nil)
+meta, err := client.Meta(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -437,21 +466,21 @@ Create an instance: `payment := client.Payment(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | ``$STRING`` |  |
-| `api_key` | ``$STRING`` |  |
-| `chain` | ``$STRING`` |  |
-| `credits_added` | ``$INTEGER`` |  |
-| `ok` | ``$BOOLEAN`` |  |
-| `rate` | ``$STRING`` |  |
-| `token` | ``$STRING`` |  |
-| `total_credit` | ``$INTEGER`` |  |
-| `tx_hash` | ``$STRING`` |  |
-| `usdc` | ``$NUMBER`` |  |
+| `address` | `string` |  |
+| `api_key` | `string` |  |
+| `chain` | `string` |  |
+| `credits_added` | `int` |  |
+| `ok` | `bool` |  |
+| `rate` | `string` |  |
+| `token` | `string` |  |
+| `total_credit` | `int` |  |
+| `tx_hash` | `string` |  |
+| `usdc` | `float64` |  |
 
 #### Example: Load
 
 ```go
-payment, err := client.Payment(nil).Load(map[string]any{"id": "payment_id"}, nil)
+payment, err := client.Payment(nil).Load(nil, nil)
 if err != nil {
     panic(err)
 }
@@ -462,8 +491,8 @@ fmt.Println(payment) // the loaded record
 
 ```go
 result, err := client.Payment(nil).Create(map[string]any{
-    "api_key": /* `$STRING` */,
-    "tx_hash": /* `$STRING` */,
+    "api_key": /* string */,
+    "tx_hash": /* string */,
 }, nil)
 ```
 
@@ -483,15 +512,15 @@ Create an instance: `service := client.Service(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | ``$STRING`` |  |
-| `category` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `endpoint` | ``$ARRAY`` |  |
-| `icon` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `latency` | ``$NUMBER`` |  |
-| `name` | ``$STRING`` |  |
-| `status` | ``$STRING`` |  |
+| `api_url` | `string` |  |
+| `category` | `string` |  |
+| `description` | `string` |  |
+| `endpoint` | `[]any` |  |
+| `icon` | `string` |  |
+| `id` | `string` |  |
+| `latency` | `float64` |  |
+| `name` | `string` |  |
+| `status` | `string` |  |
 
 #### Example: Load
 
@@ -514,12 +543,16 @@ fmt.Println(services) // the array of records
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -536,9 +569,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller. An unexpected panic triggers the
-`PreUnexpected` hook.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -584,9 +617,9 @@ stores the returned data and match criteria internally.
 
 ```go
 analytics := client.Analytics(nil)
-analytics.Load(map[string]any{"id": "example_id"}, nil)
+analytics.Load(nil, nil)
 
-// analytics.Data() now returns the loaded analytics data
+// analytics.Data() now returns the analytics data from the last load
 // analytics.Match() returns the last match criteria
 ```
 

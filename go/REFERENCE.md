@@ -121,7 +121,7 @@ analytics := client.Analytics(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Analytics(nil).Load(map[string]any{"id": "analytics_id"}, nil)
+result, err := client.Analytics(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -158,8 +158,8 @@ api_key := client.ApiKey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | ``$INTEGER`` | No |  |
-| `key` | ``$STRING`` | No |  |
+| `credit` | `int` | No |  |
+| `key` | `string` | No |  |
 
 ### Operations
 
@@ -206,8 +206,8 @@ balance := client.Balance(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$INTEGER`` | No |  |
-| `credit` | ``$INTEGER`` | No |  |
+| `created_at` | `int` | No |  |
+| `credit` | `int` | No |  |
 
 ### Operations
 
@@ -216,7 +216,7 @@ balance := client.Balance(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Balance(nil).Load(map[string]any{"id": "balance_id"}, nil)
+result, err := client.Balance(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -253,7 +253,7 @@ meta := client.Meta(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 
@@ -262,7 +262,7 @@ meta := client.Meta(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Meta(nil).Load(map[string]any{"id": "meta_id"}, nil)
+result, err := client.Meta(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -299,16 +299,16 @@ payment := client.Payment(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `api_key` | ``$STRING`` | Yes |  |
-| `chain` | ``$STRING`` | No |  |
-| `credits_added` | ``$INTEGER`` | No |  |
-| `ok` | ``$BOOLEAN`` | No |  |
-| `rate` | ``$STRING`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `total_credit` | ``$INTEGER`` | No |  |
-| `tx_hash` | ``$STRING`` | Yes |  |
-| `usdc` | ``$NUMBER`` | No |  |
+| `address` | `string` | No |  |
+| `api_key` | `string` | Yes |  |
+| `chain` | `string` | No |  |
+| `credits_added` | `int` | No |  |
+| `ok` | `bool` | No |  |
+| `rate` | `string` | No |  |
+| `token` | `string` | No |  |
+| `total_credit` | `int` | No |  |
+| `tx_hash` | `string` | Yes |  |
+| `usdc` | `float64` | No |  |
 
 ### Operations
 
@@ -318,8 +318,8 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Payment(nil).Create(map[string]any{
-    "api_key": /* `$STRING` */,
-    "tx_hash": /* `$STRING` */,
+    "api_key": /* string */,
+    "tx_hash": /* string */,
 }, nil)
 ```
 
@@ -328,7 +328,7 @@ result, err := client.Payment(nil).Create(map[string]any{
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Payment(nil).Load(map[string]any{"id": "payment_id"}, nil)
+result, err := client.Payment(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -365,15 +365,15 @@ service := client.Service(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | ``$STRING`` | No |  |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `endpoint` | ``$ARRAY`` | No |  |
-| `icon` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `latency` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `api_url` | `string` | No |  |
+| `category` | `string` | No |  |
+| `description` | `string` | No |  |
+| `endpoint` | `[]any` | No |  |
+| `icon` | `string` | No |  |
+| `id` | `string` | No |  |
+| `latency` | `float64` | No |  |
+| `name` | `string` | No |  |
+| `status` | `string` | No |  |
 
 ### Operations
 

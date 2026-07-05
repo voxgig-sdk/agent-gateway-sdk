@@ -8,7 +8,7 @@ Complete API reference for the AgentGateway Python SDK.
 ### Constructor
 
 ```python
-from agent-gateway_sdk import AgentGatewaySDK
+from agentgateway_sdk import AgentGatewaySDK
 
 client = AgentGatewaySDK(options)
 ```
@@ -111,7 +111,7 @@ analytics = client.Analytics()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Analytics().load({"id": "analytics_id"})
+result = client.Analytics().load()
 ```
 
 ### Common Methods
@@ -153,8 +153,8 @@ api_key = client.ApiKey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | ``$INTEGER`` | No |  |
-| `key` | ``$STRING`` | No |  |
+| `credit` | `int` | No |  |
+| `key` | `str` | No |  |
 
 ### Operations
 
@@ -206,8 +206,8 @@ balance = client.Balance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | ``$INTEGER`` | No |  |
-| `credit` | ``$INTEGER`` | No |  |
+| `created_at` | `int` | No |  |
+| `credit` | `int` | No |  |
 
 ### Operations
 
@@ -216,7 +216,7 @@ balance = client.Balance()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Balance().load({"id": "balance_id"})
+result = client.Balance().load()
 ```
 
 ### Common Methods
@@ -258,7 +258,7 @@ meta = client.Meta()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `status` | ``$STRING`` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
@@ -267,7 +267,7 @@ meta = client.Meta()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Meta().load({"id": "meta_id"})
+result = client.Meta().load()
 ```
 
 ### Common Methods
@@ -309,16 +309,16 @@ payment = client.Payment()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | ``$STRING`` | No |  |
-| `api_key` | ``$STRING`` | Yes |  |
-| `chain` | ``$STRING`` | No |  |
-| `credits_added` | ``$INTEGER`` | No |  |
-| `ok` | ``$BOOLEAN`` | No |  |
-| `rate` | ``$STRING`` | No |  |
-| `token` | ``$STRING`` | No |  |
-| `total_credit` | ``$INTEGER`` | No |  |
-| `tx_hash` | ``$STRING`` | Yes |  |
-| `usdc` | ``$NUMBER`` | No |  |
+| `address` | `str` | No |  |
+| `api_key` | `str` | Yes |  |
+| `chain` | `str` | No |  |
+| `credits_added` | `int` | No |  |
+| `ok` | `bool` | No |  |
+| `rate` | `str` | No |  |
+| `token` | `str` | No |  |
+| `total_credit` | `int` | No |  |
+| `tx_hash` | `str` | Yes |  |
+| `usdc` | `float` | No |  |
 
 ### Operations
 
@@ -328,8 +328,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Payment().create({
-    "api_key": ...,  # `$STRING`
-    "tx_hash": ...,  # `$STRING`
+    "api_key": "example",  # str
+    "tx_hash": "example",  # str
 })
 ```
 
@@ -338,7 +338,7 @@ result = client.Payment().create({
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Payment().load({"id": "payment_id"})
+result = client.Payment().load()
 ```
 
 ### Common Methods
@@ -380,24 +380,24 @@ service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | ``$STRING`` | No |  |
-| `category` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `endpoint` | ``$ARRAY`` | No |  |
-| `icon` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `latency` | ``$NUMBER`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `status` | ``$STRING`` | No |  |
+| `api_url` | `str` | No |  |
+| `category` | `str` | No |  |
+| `description` | `str` | No |  |
+| `endpoint` | `list` | No |  |
+| `icon` | `str` | No |  |
+| `id` | `str` | No |  |
+| `latency` | `float` | No |  |
+| `name` | `str` | No |  |
+| `status` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Service().list({})
+results = client.Service().list()
 for service in results:
     print(service)
 ```
