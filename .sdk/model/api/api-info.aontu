@@ -12,15 +12,22 @@ main: {
       license: {
         name: "Proprietary"
       }
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "bearerAuth"
+        type: "http"
+      }
       servers: [
         {
           description: "Production API"
           url: "https://agent-gateway-kappa.vercel.app"
         }
       ]
+      summary: "34 production-ready API services for AI agents."
       title: "Agent Gateway"
       version: "1.0.0"
+      website: "https://agent-gateway-kappa.vercel.app"
     }
   }
-}
-

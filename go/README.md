@@ -373,7 +373,7 @@ fmt.Println(analytics) // the loaded record
 
 ### ApiKey
 
-Create an instance: `api_key := client.ApiKey(nil)`
+Create an instance: `apiKey := client.ApiKey(nil)`
 
 #### Operations
 
@@ -393,6 +393,10 @@ Create an instance: `api_key := client.ApiKey(nil)`
 ```go
 result, err := client.ApiKey(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
@@ -459,8 +463,8 @@ Create an instance: `payment := client.Payment(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 
 #### Fields
 
@@ -491,9 +495,13 @@ fmt.Println(payment) // the loaded record
 
 ```go
 result, err := client.Payment(nil).Create(map[string]any{
-    "api_key": /* string */,
-    "tx_hash": /* string */,
+    "api_key": "example_api_key",
+    "tx_hash": "example_tx_hash",
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

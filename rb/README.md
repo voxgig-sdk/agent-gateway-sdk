@@ -453,8 +453,8 @@ payment = client.Payment.load()
 
 ```ruby
 payment = client.Payment.create({
-  "api_key" => "example", # String
-  "tx_hash" => "example", # String
+  "api_key" => "example_api_key", # String
+  "tx_hash" => "example_tx_hash", # String
 })
 ```
 

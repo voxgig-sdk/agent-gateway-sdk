@@ -441,8 +441,8 @@ local payment, err = client:Payment():load()
 
 ```lua
 local payment, err = client:Payment():create({
-  api_key = nil, -- string
-  tx_hash = nil, -- string
+  api_key = "example_api_key", -- string
+  tx_hash = "example_tx_hash", -- string
 })
 ```
 

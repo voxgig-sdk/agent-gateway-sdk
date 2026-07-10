@@ -112,6 +112,7 @@ same parameters as `Direct()`.
 
 ```go
 analytics := client.Analytics(nil)
+fmt.Println(analytics.GetName()) // "analytics"
 ```
 
 ### Operations
@@ -122,6 +123,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Analytics(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -151,7 +156,8 @@ Return the entity name.
 ## ApiKeyEntity
 
 ```go
-api_key := client.ApiKey(nil)
+apiKey := client.ApiKey(nil)
+fmt.Println(apiKey.GetName()) // "api_key"
 ```
 
 ### Fields
@@ -170,6 +176,10 @@ Create a new entity with the given data.
 ```go
 result, err := client.ApiKey(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -200,6 +210,7 @@ Return the entity name.
 
 ```go
 balance := client.Balance(nil)
+fmt.Println(balance.GetName()) // "balance"
 ```
 
 ### Fields
@@ -217,6 +228,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Balance(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -247,6 +262,7 @@ Return the entity name.
 
 ```go
 meta := client.Meta(nil)
+fmt.Println(meta.GetName()) // "meta"
 ```
 
 ### Fields
@@ -263,6 +279,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Meta(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -293,6 +313,7 @@ Return the entity name.
 
 ```go
 payment := client.Payment(nil)
+fmt.Println(payment.GetName()) // "payment"
 ```
 
 ### Fields
@@ -312,23 +333,31 @@ payment := client.Payment(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Payment(nil).Create(map[string]any{
-    "api_key": /* string */,
-    "tx_hash": /* string */,
-}, nil)
-```
-
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
 
 Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Payment(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
+
+Create a new entity with the given data.
+
+```go
+result, err := client.Payment(nil).Create(map[string]any{
+    "api_key": "example_api_key",
+    "tx_hash": "example_tx_hash",
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -359,6 +388,7 @@ Return the entity name.
 
 ```go
 service := client.Service(nil)
+fmt.Println(service.GetName()) // "service"
 ```
 
 ### Fields
@@ -383,6 +413,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Service(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -391,6 +425,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Service(nil).Load(map[string]any{"id": "service_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -790,14 +787,24 @@
         "license": {
           "name": "Proprietary"
         },
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "Authorization",
+          "prefix": "Bearer",
+          "scheme": "bearerAuth",
+          "type": "http"
+        },
         "servers": [
           {
             "description": "Production API",
             "url": "https://agent-gateway-kappa.vercel.app"
           }
         ],
+        "summary": "34 production-ready API services for AI agents.",
         "title": "Agent Gateway",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://agent-gateway-kappa.vercel.app"
       },
       "option": {},
       "target": {
@@ -850,6 +857,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -900,6 +910,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

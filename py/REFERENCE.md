@@ -328,8 +328,8 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Payment().create({
-    "api_key": "example",  # str
-    "tx_hash": "example",  # str
+    "api_key": "example_api_key",  # str
+    "tx_hash": "example_tx_hash",  # str
 })
 ```
 

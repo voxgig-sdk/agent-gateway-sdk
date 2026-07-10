@@ -1,8 +1,0 @@
-# Flows
-
-@"BasicAnalyticsFlow.jsonic"
-@"BasicApiKeyFlow.jsonic"
-@"BasicBalanceFlow.jsonic"
-@"BasicMetaFlow.jsonic"
-@"BasicPaymentFlow.jsonic"
-@"BasicServiceFlow.jsonic"

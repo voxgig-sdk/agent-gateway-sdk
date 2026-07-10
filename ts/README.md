@@ -503,8 +503,8 @@ const payment = await client.Payment().load()
 
 ```ts
 const payment = await client.Payment().create({
-  api_key: /* string */,
-  tx_hash: /* string */,
+  api_key: 'example_api_key',
+  tx_hash: 'example_tx_hash',
 })
 ```
 
