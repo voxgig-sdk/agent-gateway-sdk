@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- AgentGateway SDK exists test
 
 local sdk = require("agent-gateway_sdk")
 
