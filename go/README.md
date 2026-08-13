@@ -69,12 +69,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-analytics, err := client.Analytics(nil).Load(nil, nil)
+balance, err := client.Balance(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = analytics
+_ = balance
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -138,13 +138,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-analytics, err := client.Analytics(nil).Load(
+balance, err := client.Balance(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(analytics) // the returned mock data
+fmt.Println(balance) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -280,7 +280,7 @@ API path: `/api/stats`
 
 | Field | Description |
 | --- | --- |
-| `"credit"` |  |
+| `"credits"` |  |
 | `"key"` |  |
 
 Operations: Create.
@@ -291,8 +291,8 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `"created_at"` |  |
-| `"credit"` |  |
+| `"createdAt"` |  |
+| `"credits"` |  |
 
 Operations: Load.
 
@@ -319,7 +319,7 @@ API path: `/health`
 | `"ok"` |  |
 | `"rate"` |  |
 | `"token"` |  |
-| `"total_credit"` |  |
+| `"total_credits"` |  |
 | `"tx_hash"` |  |
 | `"usdc"` |  |
 
@@ -331,10 +331,10 @@ API path: `/api/credits/topup`
 
 | Field | Description |
 | --- | --- |
-| `"api_url"` |  |
+| `"apiUrl"` |  |
 | `"category"` |  |
 | `"description"` |  |
-| `"endpoint"` |  |
+| `"endpoints"` |  |
 | `"icon"` |  |
 | `"id"` |  |
 | `"latency"` |  |
@@ -385,7 +385,7 @@ Create an instance: `apiKey := client.ApiKey(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | `int` |  |
+| `credits` | `int` |  |
 | `key` | `string` |  |
 
 #### Example: Create
@@ -414,8 +414,8 @@ Create an instance: `balance := client.Balance(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `int` |  |
-| `credit` | `int` |  |
+| `createdAt` | `int` |  |
+| `credits` | `int` |  |
 
 #### Example: Load
 
@@ -477,7 +477,7 @@ Create an instance: `payment := client.Payment(nil)`
 | `ok` | `bool` |  |
 | `rate` | `string` |  |
 | `token` | `string` |  |
-| `total_credit` | `int` |  |
+| `total_credits` | `int` |  |
 | `tx_hash` | `string` |  |
 | `usdc` | `float64` |  |
 
@@ -520,10 +520,10 @@ Create an instance: `service := client.Service(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | `string` |  |
+| `apiUrl` | `string` |  |
 | `category` | `string` |  |
 | `description` | `string` |  |
-| `endpoint` | `[]any` |  |
+| `endpoints` | `[]any` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
 | `latency` | `float64` |  |
@@ -624,11 +624,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-analytics := client.Analytics(nil)
-analytics.Load(nil, nil)
+balance := client.Balance(nil)
+balance.Load(nil, nil)
 
-// analytics.Data() now returns the analytics data from the last load
-// analytics.Match() returns the last match criteria
+// balance.Data() now returns the balance data from the last load
+// balance.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

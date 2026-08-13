@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# AgentGateway SDK exists test
 
 import pytest
 from agentgateway_sdk import AgentGatewaySDK

@@ -9,7 +9,7 @@
         "ok": true,
         "rate": "s69",
         "token": "s6a",
-        "total_credit": "s6b",
+        "total_credits": "s6b",
         "tx_hash": "s6c",
         "usdc": 109,
         "id": "PAYMENT00"
@@ -22,7 +22,7 @@
         "ok": true,
         "rate": "scd",
         "token": "sce",
-        "total_credit": "scf",
+        "total_credits": "scf",
         "tx_hash": "sd0",
         "usdc": 209,
         "id": "PAYMENT01"
@@ -35,7 +35,7 @@
         "ok": true,
         "rate": "s131",
         "token": "s132",
-        "total_credit": "s133",
+        "total_credits": "s133",
         "tx_hash": "s134",
         "usdc": 309,
         "id": "PAYMENT02"
@@ -52,7 +52,7 @@
         "ok": true,
         "rate": "s195",
         "token": "s196",
-        "total_credit": "s197",
+        "total_credits": "s197",
         "tx_hash": "s198",
         "usdc": 409
       }

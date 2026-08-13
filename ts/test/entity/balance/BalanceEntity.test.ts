@@ -26,8 +26,8 @@ import {
 describe('BalanceEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AGENTGATEWAY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AGENTGATEWAY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AGENT_GATEWAY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AGENT_GATEWAY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AgentGatewaySDK.test()
@@ -62,7 +62,7 @@ describe('BalanceEntity', async () => {
     // LOAD
     const balance_ref01_ent = client.Balance()
     const balance_ref01_match_dt0: any = {}
-    const balance_ref01_data_dt0 = await balance_ref01_ent.load(balance_ref01_match_dt0)
+    const balance_ref01_data_dt0 = (await balance_ref01_ent.load(balance_ref01_match_dt0)).data()
     assert(null != balance_ref01_data_dt0)
 
 

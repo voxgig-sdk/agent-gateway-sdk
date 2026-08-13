@@ -12,23 +12,23 @@ export interface AnalyticsLoadMatch {
 }
 
 export interface ApiKey {
-  credit?: number
+  credits?: number
   key?: string
 }
 
 export interface ApiKeyCreateData {
-  credit?: number
+  credits?: number
   key?: string
 }
 
 export interface Balance {
-  created_at?: number
-  credit?: number
+  createdAt?: number
+  credits?: number
 }
 
 export interface BalanceLoadMatch {
-  created_at?: number
-  credit?: number
+  createdAt?: number
+  credits?: number
 }
 
 export interface Meta {
@@ -47,7 +47,7 @@ export interface Payment {
   ok?: boolean
   rate?: string
   token?: string
-  total_credit?: number
+  total_credits?: number
   tx_hash: string
   usdc?: number
 }
@@ -60,9 +60,15 @@ export interface PaymentLoadMatch {
   ok?: boolean
   rate?: string
   token?: string
-  total_credit?: number
+  total_credits?: number
   tx_hash?: string
   usdc?: number
+
+  // Selects a custom action instead of the plain load:
+  //   'info'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 
 export interface PaymentCreateData {
@@ -73,16 +79,16 @@ export interface PaymentCreateData {
   ok?: boolean
   rate?: string
   token?: string
-  total_credit?: number
+  total_credits?: number
   tx_hash: string
   usdc?: number
 }
 
 export interface Service {
-  api_url?: string
+  apiUrl?: string
   category?: string
   description?: string
-  endpoint?: any[]
+  endpoints?: any[]
   icon?: string
   id?: string
   latency?: number
@@ -95,14 +101,20 @@ export interface ServiceLoadMatch {
 }
 
 export interface ServiceListMatch {
-  api_url?: string
+  apiUrl?: string
   category?: string
   description?: string
-  endpoint?: any[]
+  endpoints?: any[]
   icon?: string
   id?: string
   latency?: number
   name?: string
   status?: string
+
+  // Selects a custom action instead of the plain list:
+  //   'health'
+  // The remaining keys are that action's own payload.
+  $action?: string
+  [action: string]: any
 }
 

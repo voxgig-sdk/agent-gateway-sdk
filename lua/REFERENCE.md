@@ -157,7 +157,7 @@ local api_key = client:ApiKey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | `number` | No |  |
+| `credits` | `number` | No |  |
 | `key` | `string` | No |  |
 
 ### Operations
@@ -211,8 +211,8 @@ local balance = client:Balance(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `number` | No |  |
-| `credit` | `number` | No |  |
+| `createdAt` | `number` | No |  |
+| `credits` | `number` | No |  |
 
 ### Operations
 
@@ -323,7 +323,7 @@ local payment = client:Payment(nil)
 | `ok` | `boolean` | No |  |
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
-| `total_credit` | `number` | No |  |
+| `total_credits` | `number` | No |  |
 | `tx_hash` | `string` | Yes |  |
 | `usdc` | `number` | No |  |
 
@@ -388,10 +388,10 @@ local service = client:Service(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | `string` | No |  |
+| `apiUrl` | `string` | No |  |
 | `category` | `string` | No |  |
 | `description` | `string` | No |  |
-| `endpoint` | `table` | No |  |
+| `endpoints` | `table` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
 | `latency` | `number` | No |  |

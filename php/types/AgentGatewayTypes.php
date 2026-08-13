@@ -25,29 +25,29 @@ class AnalyticsLoadMatch
 /** ApiKey entity data model. */
 class ApiKey
 {
-    public ?int $credit = null;
+    public ?int $credits = null;
     public ?string $key = null;
 }
 
 /** Request payload for ApiKey#create. */
 class ApiKeyCreateData
 {
-    public ?int $credit = null;
+    public ?int $credits = null;
     public ?string $key = null;
 }
 
 /** Balance entity data model. */
 class Balance
 {
-    public ?int $created_at = null;
-    public ?int $credit = null;
+    public ?int $createdAt = null;
+    public ?int $credits = null;
 }
 
 /** Request payload for Balance#load. */
 class BalanceLoadMatch
 {
-    public ?int $created_at = null;
-    public ?int $credit = null;
+    public ?int $createdAt = null;
+    public ?int $credits = null;
 }
 
 /** Meta entity data model. */
@@ -72,7 +72,7 @@ class Payment
     public ?bool $ok = null;
     public ?string $rate = null;
     public ?string $token = null;
-    public ?int $total_credit = null;
+    public ?int $total_credits = null;
     public string $tx_hash;
     public ?float $usdc = null;
 }
@@ -87,7 +87,7 @@ class PaymentLoadMatch
     public ?bool $ok = null;
     public ?string $rate = null;
     public ?string $token = null;
-    public ?int $total_credit = null;
+    public ?int $total_credits = null;
     public ?string $tx_hash = null;
     public ?float $usdc = null;
 }
@@ -102,7 +102,7 @@ class PaymentCreateData
     public ?bool $ok = null;
     public ?string $rate = null;
     public ?string $token = null;
-    public ?int $total_credit = null;
+    public ?int $total_credits = null;
     public string $tx_hash;
     public ?float $usdc = null;
 }
@@ -110,10 +110,10 @@ class PaymentCreateData
 /** Service entity data model. */
 class Service
 {
-    public ?string $api_url = null;
+    public ?string $apiUrl = null;
     public ?string $category = null;
     public ?string $description = null;
-    public ?array $endpoint = null;
+    public ?array $endpoints = null;
     public ?string $icon = null;
     public ?string $id = null;
     public ?float $latency = null;
@@ -130,10 +130,10 @@ class ServiceLoadMatch
 /** Request payload for Service#list. */
 class ServiceListMatch
 {
-    public ?string $api_url = null;
+    public ?string $apiUrl = null;
     public ?string $category = null;
     public ?string $description = null;
-    public ?array $endpoint = null;
+    public ?array $endpoints = null;
     public ?string $icon = null;
     public ?string $id = null;
     public ?float $latency = null;

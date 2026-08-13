@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'AgentGateway',
   }
 
 
@@ -82,6 +82,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/api/stats",
               "parts": [
@@ -107,7 +108,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "credit",
+          "name": "credits",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 0
@@ -129,6 +130,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/keys/create",
               "parts": [
@@ -155,14 +157,14 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "created_at",
+          "name": "createdAt",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 0
         },
         {
           "active": true,
-          "name": "credit",
+          "name": "credits",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 1
@@ -177,6 +179,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/api/keys/balance",
               "parts": [
@@ -218,6 +221,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/health",
               "parts": [
@@ -291,7 +295,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "total_credit",
+          "name": "total_credits",
           "req": false,
           "type": "`$INTEGER`",
           "index$": 7
@@ -320,6 +324,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "POST",
               "orig": "/api/credits/topup",
               "parts": [
@@ -344,6 +349,7 @@ class Config {
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/api/payments/info",
               "parts": [
@@ -372,7 +378,7 @@ class Config {
       "fields": [
         {
           "active": true,
-          "name": "api_url",
+          "name": "apiUrl",
           "req": false,
           "type": "`$STRING`",
           "index$": 0
@@ -393,7 +399,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "endpoint",
+          "name": "endpoints",
           "req": false,
           "type": "`$ARRAY`",
           "index$": 3
@@ -462,6 +468,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/services",
               "parts": [
@@ -476,13 +483,14 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.services`"
               },
               "index$": 0
             },
             {
               "active": true,
               "args": {},
+              "kind": "http",
               "method": "GET",
               "orig": "/api/services/health",
               "parts": [
@@ -495,7 +503,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.services`"
               },
               "index$": 1
             }
@@ -522,6 +530,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/api/services/{id}",
               "parts": [

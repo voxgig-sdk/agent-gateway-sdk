@@ -26,8 +26,8 @@ import {
 describe('ApiKeyEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AGENTGATEWAY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AGENTGATEWAY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AGENT_GATEWAY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AGENT_GATEWAY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AgentGatewaySDK.test()
@@ -62,7 +62,7 @@ describe('ApiKeyEntity', async () => {
     const api_key_ref01_ent = client.ApiKey()
     let api_key_ref01_data = setup.data.new.api_key['api_key_ref01']
 
-    api_key_ref01_data = await api_key_ref01_ent.create(api_key_ref01_data)
+    api_key_ref01_data = (await api_key_ref01_ent.create(api_key_ref01_data)).data()
     assert(null != api_key_ref01_data)
 
 

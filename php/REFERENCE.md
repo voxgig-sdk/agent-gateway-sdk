@@ -159,7 +159,7 @@ $api_key = $client->ApiKey();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | `int` | No |  |
+| `credits` | `int` | No |  |
 | `key` | `string` | No |  |
 
 ### Operations
@@ -213,8 +213,8 @@ $balance = $client->Balance();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `int` | No |  |
-| `credit` | `int` | No |  |
+| `createdAt` | `int` | No |  |
+| `credits` | `int` | No |  |
 
 ### Operations
 
@@ -325,7 +325,7 @@ $payment = $client->Payment();
 | `ok` | `bool` | No |  |
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
-| `total_credit` | `int` | No |  |
+| `total_credits` | `int` | No |  |
 | `tx_hash` | `string` | Yes |  |
 | `usdc` | `float` | No |  |
 
@@ -390,10 +390,10 @@ $service = $client->Service();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | `string` | No |  |
+| `apiUrl` | `string` | No |  |
 | `category` | `string` | No |  |
 | `description` | `string` | No |  |
-| `endpoint` | `array` | No |  |
+| `endpoints` | `array` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
 | `latency` | `float` | No |  |

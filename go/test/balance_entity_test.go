@@ -44,7 +44,7 @@ func TestBalanceEntity(t *testing.T) {
 		// The basic flow consumes synthetic IDs from the fixture. In live mode
 		// without an *_ENTID env override, those IDs hit the live API and 4xx.
 		if setup.syntheticOnly {
-			t.Skip("live entity test uses synthetic IDs from fixture — set AGENTGATEWAY_TEST_BALANCE_ENTID JSON to run live")
+			t.Skip("live entity test uses synthetic IDs from fixture — set AGENT_GATEWAY_TEST_BALANCE_ENTID JSON to run live")
 			return
 		}
 		client := setup.client
@@ -110,38 +110,38 @@ func balanceBasicSetup(extra map[string]any) *entityTestSetup {
 	// Detect ENTID env override before envOverride consumes it. When live
 	// mode is on without a real override, the basic test runs against synthetic
 	// IDs from the fixture and 4xx's. Surface this so the test can skip.
-	entidEnvRaw := os.Getenv("AGENTGATEWAY_TEST_BALANCE_ENTID")
+	entidEnvRaw := os.Getenv("AGENT_GATEWAY_TEST_BALANCE_ENTID")
 	idmapOverridden := entidEnvRaw != "" && strings.HasPrefix(strings.TrimSpace(entidEnvRaw), "{")
 
 	env := envOverride(map[string]any{
-		"AGENTGATEWAY_TEST_BALANCE_ENTID": idmap,
-		"AGENTGATEWAY_TEST_LIVE":      "FALSE",
-		"AGENTGATEWAY_TEST_EXPLAIN":   "FALSE",
-		"AGENTGATEWAY_APIKEY":         "NONE",
+		"AGENT_GATEWAY_TEST_BALANCE_ENTID": idmap,
+		"AGENT_GATEWAY_TEST_LIVE":      "FALSE",
+		"AGENT_GATEWAY_TEST_EXPLAIN":   "FALSE",
+		"AGENT_GATEWAY_APIKEY":         "NONE",
 	})
 
-	idmapResolved := core.ToMapAny(env["AGENTGATEWAY_TEST_BALANCE_ENTID"])
+	idmapResolved := core.ToMapAny(env["AGENT_GATEWAY_TEST_BALANCE_ENTID"])
 	if idmapResolved == nil {
 		idmapResolved = core.ToMapAny(idmap)
 	}
 
-	if env["AGENTGATEWAY_TEST_LIVE"] == "TRUE" {
+	if env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
-				"apikey": env["AGENTGATEWAY_APIKEY"],
+				"apikey": env["AGENT_GATEWAY_APIKEY"],
 			},
 			extra,
 		})
 		client = sdk.NewAgentGatewaySDK(core.ToMapAny(mergedOpts))
 	}
 
-	live := env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
+	live := env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE"
 	return &entityTestSetup{
 		client:        client,
 		data:          entityData,
 		idmap:         idmapResolved,
 		env:           env,
-		explain:       env["AGENTGATEWAY_TEST_EXPLAIN"] == "TRUE",
+		explain:       env["AGENT_GATEWAY_TEST_EXPLAIN"] == "TRUE",
 		live:          live,
 		syntheticOnly: live && !idmapOverridden,
 		now:           time.Now().UnixMilli(),

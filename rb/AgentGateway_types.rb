@@ -18,53 +18,53 @@ end
 
 # ApiKey entity data model.
 #
-# @!attribute [rw] credit
+# @!attribute [rw] credits
 #   @return [Integer, nil]
 #
 # @!attribute [rw] key
 #   @return [String, nil]
 ApiKey = Struct.new(
-  :credit,
+  :credits,
   :key,
   keyword_init: true
 )
 
 # Request payload for ApiKey#create.
 #
-# @!attribute [rw] credit
+# @!attribute [rw] credits
 #   @return [Integer, nil]
 #
 # @!attribute [rw] key
 #   @return [String, nil]
 ApiKeyCreateData = Struct.new(
-  :credit,
+  :credits,
   :key,
   keyword_init: true
 )
 
 # Balance entity data model.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [Integer, nil]
 #
-# @!attribute [rw] credit
+# @!attribute [rw] credits
 #   @return [Integer, nil]
 Balance = Struct.new(
-  :created_at,
-  :credit,
+  :createdAt,
+  :credits,
   keyword_init: true
 )
 
 # Request payload for Balance#load.
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [Integer, nil]
 #
-# @!attribute [rw] credit
+# @!attribute [rw] credits
 #   @return [Integer, nil]
 BalanceLoadMatch = Struct.new(
-  :created_at,
-  :credit,
+  :createdAt,
+  :credits,
   keyword_init: true
 )
 
@@ -109,7 +109,7 @@ MetaLoadMatch = Struct.new(
 # @!attribute [rw] token
 #   @return [String, nil]
 #
-# @!attribute [rw] total_credit
+# @!attribute [rw] total_credits
 #   @return [Integer, nil]
 #
 # @!attribute [rw] tx_hash
@@ -125,7 +125,7 @@ Payment = Struct.new(
   :ok,
   :rate,
   :token,
-  :total_credit,
+  :total_credits,
   :tx_hash,
   :usdc,
   keyword_init: true
@@ -154,7 +154,7 @@ Payment = Struct.new(
 # @!attribute [rw] token
 #   @return [String, nil]
 #
-# @!attribute [rw] total_credit
+# @!attribute [rw] total_credits
 #   @return [Integer, nil]
 #
 # @!attribute [rw] tx_hash
@@ -170,7 +170,7 @@ PaymentLoadMatch = Struct.new(
   :ok,
   :rate,
   :token,
-  :total_credit,
+  :total_credits,
   :tx_hash,
   :usdc,
   keyword_init: true
@@ -199,7 +199,7 @@ PaymentLoadMatch = Struct.new(
 # @!attribute [rw] token
 #   @return [String, nil]
 #
-# @!attribute [rw] total_credit
+# @!attribute [rw] total_credits
 #   @return [Integer, nil]
 #
 # @!attribute [rw] tx_hash
@@ -215,7 +215,7 @@ PaymentCreateData = Struct.new(
   :ok,
   :rate,
   :token,
-  :total_credit,
+  :total_credits,
   :tx_hash,
   :usdc,
   keyword_init: true
@@ -223,7 +223,7 @@ PaymentCreateData = Struct.new(
 
 # Service entity data model.
 #
-# @!attribute [rw] api_url
+# @!attribute [rw] apiUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] category
@@ -232,7 +232,7 @@ PaymentCreateData = Struct.new(
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] endpoint
+# @!attribute [rw] endpoints
 #   @return [Array, nil]
 #
 # @!attribute [rw] icon
@@ -250,10 +250,10 @@ PaymentCreateData = Struct.new(
 # @!attribute [rw] status
 #   @return [String, nil]
 Service = Struct.new(
-  :api_url,
+  :apiUrl,
   :category,
   :description,
-  :endpoint,
+  :endpoints,
   :icon,
   :id,
   :latency,
@@ -273,7 +273,7 @@ ServiceLoadMatch = Struct.new(
 
 # Request payload for Service#list.
 #
-# @!attribute [rw] api_url
+# @!attribute [rw] apiUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] category
@@ -282,7 +282,7 @@ ServiceLoadMatch = Struct.new(
 # @!attribute [rw] description
 #   @return [String, nil]
 #
-# @!attribute [rw] endpoint
+# @!attribute [rw] endpoints
 #   @return [Array, nil]
 #
 # @!attribute [rw] icon
@@ -300,10 +300,10 @@ ServiceLoadMatch = Struct.new(
 # @!attribute [rw] status
 #   @return [String, nil]
 ServiceListMatch = Struct.new(
-  :api_url,
+  :apiUrl,
   :category,
   :description,
-  :endpoint,
+  :endpoints,
   :icon,
   :id,
   :latency,

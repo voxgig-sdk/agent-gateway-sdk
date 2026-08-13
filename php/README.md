@@ -37,7 +37,7 @@ $client = new AgentGatewaySDK([
 
 ```php
 try {
-    // load() returns the bare Analytics record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Analytics record (throws on error).
     $analytics = $client->Analytics()->load();
     print_r($analytics);
 } catch (\Throwable $err) {
@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $analytics = $client->Analytics()->load();
+    $balance = $client->Balance()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = AgentGatewaySDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$analytics = $client->Analytics()->load();
-print_r($analytics);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$balance = $client->Balance()->load();
+print_r($balance);
 ```
 
 ### Use a custom fetch function
@@ -233,7 +234,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -264,7 +265,7 @@ API path: `/api/stats`
 
 | Field | Description |
 | --- | --- |
-| `credit` |  |
+| `credits` |  |
 | `key` |  |
 
 Operations: Create.
@@ -275,8 +276,8 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `credit` |  |
+| `createdAt` |  |
+| `credits` |  |
 
 Operations: Load.
 
@@ -303,7 +304,7 @@ API path: `/health`
 | `ok` |  |
 | `rate` |  |
 | `token` |  |
-| `total_credit` |  |
+| `total_credits` |  |
 | `tx_hash` |  |
 | `usdc` |  |
 
@@ -315,10 +316,10 @@ API path: `/api/credits/topup`
 
 | Field | Description |
 | --- | --- |
-| `api_url` |  |
+| `apiUrl` |  |
 | `category` |  |
 | `description` |  |
-| `endpoint` |  |
+| `endpoints` |  |
 | `icon` |  |
 | `id` |  |
 | `latency` |  |
@@ -347,7 +348,7 @@ Create an instance: `$analytics = $client->Analytics();`
 #### Example: Load
 
 ```php
-// load() returns the bare Analytics record (throws on error).
+// load() returns the ENTITY — call data_get() for the Analytics record (throws on error).
 $analytics = $client->Analytics()->load();
 ```
 
@@ -366,7 +367,7 @@ Create an instance: `$api_key = $client->ApiKey();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | `int` |  |
+| `credits` | `int` |  |
 | `key` | `string` |  |
 
 #### Example: Create
@@ -391,13 +392,13 @@ Create an instance: `$balance = $client->Balance();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `int` |  |
-| `credit` | `int` |  |
+| `createdAt` | `int` |  |
+| `credits` | `int` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Balance record (throws on error).
+// load() returns the ENTITY — call data_get() for the Balance record (throws on error).
 $balance = $client->Balance()->load();
 ```
 
@@ -421,7 +422,7 @@ Create an instance: `$meta = $client->Meta();`
 #### Example: Load
 
 ```php
-// load() returns the bare Meta record (throws on error).
+// load() returns the ENTITY — call data_get() for the Meta record (throws on error).
 $meta = $client->Meta()->load();
 ```
 
@@ -448,14 +449,14 @@ Create an instance: `$payment = $client->Payment();`
 | `ok` | `bool` |  |
 | `rate` | `string` |  |
 | `token` | `string` |  |
-| `total_credit` | `int` |  |
+| `total_credits` | `int` |  |
 | `tx_hash` | `string` |  |
 | `usdc` | `float` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Payment record (throws on error).
+// load() returns the ENTITY — call data_get() for the Payment record (throws on error).
 $payment = $client->Payment()->load();
 ```
 
@@ -484,10 +485,10 @@ Create an instance: `$service = $client->Service();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | `string` |  |
+| `apiUrl` | `string` |  |
 | `category` | `string` |  |
 | `description` | `string` |  |
-| `endpoint` | `array` |  |
+| `endpoints` | `array` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
 | `latency` | `float` |  |
@@ -497,7 +498,7 @@ Create an instance: `$service = $client->Service();`
 #### Example: Load
 
 ```php
-// load() returns the bare Service record (throws on error).
+// load() returns the ENTITY — call data_get() for the Service record (throws on error).
 $service = $client->Service()->load(["id" => "service_id"]);
 ```
 
@@ -585,11 +586,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$analytics = $client->Analytics();
-$analytics->load();
+$balance = $client->Balance();
+$balance->load();
 
-// $analytics->data_get() now returns the analytics data from the last load
-// $analytics->match_get() returns the last match criteria
+// $balance->data_get() now returns the balance data from the last load
+// $balance->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

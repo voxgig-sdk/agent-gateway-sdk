@@ -60,16 +60,16 @@ function balance_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["AGENTGATEWAY_TEST_BALANCE_ENTID"] = {},
-    ["AGENTGATEWAY_TEST_LIVE"] = "FALSE",
-    ["AGENTGATEWAY_APIKEY"] = "NONE",
+    ["AGENT_GATEWAY_TEST_BALANCE_ENTID"] = {},
+    ["AGENT_GATEWAY_TEST_LIVE"] = "FALSE",
+    ["AGENT_GATEWAY_APIKEY"] = "NONE",
   })
 
-  local live = env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
+  local live = env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["AGENTGATEWAY_APIKEY"],
+      apikey = env["AGENT_GATEWAY_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

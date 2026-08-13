@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ AgentGatewayUtility.registrar = ->(u) {
   u.prepare_params = AgentGatewayUtilities::PrepareParams
   u.prepare_path = AgentGatewayUtilities::PreparePath
   u.prepare_query = AgentGatewayUtilities::PrepareQuery
+  u.graphql_body = AgentGatewayUtilities::GraphqlBody
+  u.graphql_errors = AgentGatewayUtilities::GraphqlErrors
   u.result_basic = AgentGatewayUtilities::ResultBasic
   u.result_body = AgentGatewayUtilities::ResultBody
   u.result_headers = AgentGatewayUtilities::ResultHeaders

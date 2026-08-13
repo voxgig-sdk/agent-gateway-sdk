@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from agentgateway_sdk.utility.voxgig_struct import voxgig_struct as vs
 from agentgateway_sdk import AgentGatewaySDK
-from core import helpers
+from agentgateway_sdk.core import helpers
 from test import runner
 
 
@@ -56,16 +56,16 @@ def _analytics_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "AGENTGATEWAY_TEST_ANALYTICS_ENTID": {},
-        "AGENTGATEWAY_TEST_LIVE": "FALSE",
-        "AGENTGATEWAY_APIKEY": "NONE",
+        "AGENT_GATEWAY_TEST_ANALYTICS_ENTID": {},
+        "AGENT_GATEWAY_TEST_LIVE": "FALSE",
+        "AGENT_GATEWAY_APIKEY": "NONE",
     })
 
-    live = env.get("AGENTGATEWAY_TEST_LIVE") == "TRUE"
+    live = env.get("AGENT_GATEWAY_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("AGENTGATEWAY_APIKEY"),
+            "apikey": env.get("AGENT_GATEWAY_APIKEY"),
         }
         client = AgentGatewaySDK(merged_opts)
         return {

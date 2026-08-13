@@ -43,8 +43,8 @@ class AgentGatewayTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('AGENTGATEWAY_TEST_LIVE');
-        $override = self::getenv('AGENTGATEWAY_TEST_OVERRIDE');
+        $live = self::getenv('AGENT_GATEWAY_TEST_LIVE');
+        $override = self::getenv('AGENT_GATEWAY_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class AgentGatewayTestRunner
             }
         }
 
-        $explain = self::getenv('AGENTGATEWAY_TEST_EXPLAIN');
+        $explain = self::getenv('AGENT_GATEWAY_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['AGENTGATEWAY_TEST_EXPLAIN'] = $explain;
+            $m['AGENT_GATEWAY_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -36,7 +36,7 @@ client = AgentGatewaySDK.new({
 
 ```ruby
 begin
-  # load returns the bare Analytics record (raises on error).
+  # load returns the ENTITY — call data_get for the Analytics record (raises on error).
   analytics = client.Analytics.load()
   puts analytics
 rescue => err
@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  analytics = client.Analytics.load()
+  balance = client.Balance.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -119,9 +119,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = AgentGatewaySDK.test
 
-# Entity ops return the bare mock record (raises on error).
-analytics = client.Analytics.load()
-puts analytics
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+balance = client.Balance.load()
+puts balance
 ```
 
 ### Use a custom fetch function
@@ -254,7 +255,7 @@ API path: `/api/stats`
 
 | Field | Description |
 | --- | --- |
-| `credit` |  |
+| `credits` |  |
 | `key` |  |
 
 Operations: Create.
@@ -265,8 +266,8 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `credit` |  |
+| `createdAt` |  |
+| `credits` |  |
 
 Operations: Load.
 
@@ -293,7 +294,7 @@ API path: `/health`
 | `ok` |  |
 | `rate` |  |
 | `token` |  |
-| `total_credit` |  |
+| `total_credits` |  |
 | `tx_hash` |  |
 | `usdc` |  |
 
@@ -305,10 +306,10 @@ API path: `/api/credits/topup`
 
 | Field | Description |
 | --- | --- |
-| `api_url` |  |
+| `apiUrl` |  |
 | `category` |  |
 | `description` |  |
-| `endpoint` |  |
+| `endpoints` |  |
 | `icon` |  |
 | `id` |  |
 | `latency` |  |
@@ -337,7 +338,7 @@ Create an instance: `analytics = client.Analytics`
 #### Example: Load
 
 ```ruby
-# load returns the bare Analytics record (raises on error).
+# load returns the ENTITY — call data_get for the Analytics record (raises on error).
 analytics = client.Analytics.load()
 ```
 
@@ -356,7 +357,7 @@ Create an instance: `api_key = client.ApiKey`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | `Integer` |  |
+| `credits` | `Integer` |  |
 | `key` | `String` |  |
 
 #### Example: Create
@@ -381,13 +382,13 @@ Create an instance: `balance = client.Balance`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `Integer` |  |
-| `credit` | `Integer` |  |
+| `createdAt` | `Integer` |  |
+| `credits` | `Integer` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Balance record (raises on error).
+# load returns the ENTITY — call data_get for the Balance record (raises on error).
 balance = client.Balance.load()
 ```
 
@@ -411,7 +412,7 @@ Create an instance: `meta = client.Meta`
 #### Example: Load
 
 ```ruby
-# load returns the bare Meta record (raises on error).
+# load returns the ENTITY — call data_get for the Meta record (raises on error).
 meta = client.Meta.load()
 ```
 
@@ -438,14 +439,14 @@ Create an instance: `payment = client.Payment`
 | `ok` | `Boolean` |  |
 | `rate` | `String` |  |
 | `token` | `String` |  |
-| `total_credit` | `Integer` |  |
+| `total_credits` | `Integer` |  |
 | `tx_hash` | `String` |  |
 | `usdc` | `Float` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Payment record (raises on error).
+# load returns the ENTITY — call data_get for the Payment record (raises on error).
 payment = client.Payment.load()
 ```
 
@@ -474,10 +475,10 @@ Create an instance: `service = client.Service`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | `String` |  |
+| `apiUrl` | `String` |  |
 | `category` | `String` |  |
 | `description` | `String` |  |
-| `endpoint` | `Array` |  |
+| `endpoints` | `Array` |  |
 | `icon` | `String` |  |
 | `id` | `String` |  |
 | `latency` | `Float` |  |
@@ -487,7 +488,7 @@ Create an instance: `service = client.Service`
 #### Example: Load
 
 ```ruby
-# load returns the bare Service record (raises on error).
+# load returns the ENTITY — call data_get for the Service record (raises on error).
 service = client.Service.load({ "id" => "service_id" })
 ```
 
@@ -575,11 +576,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-analytics = client.Analytics
-analytics.load()
+balance = client.Balance
+balance.load()
 
-# analytics.data_get now returns the analytics data from the last load
-# analytics.match_get returns the last match criteria
+# balance.data_get now returns the balance data from the last load
+# balance.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

@@ -41,7 +41,7 @@ client = AgentGatewaySDK({
 
 ### 3. Load an analytics
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -58,8 +58,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    analytics = client.Analytics().load()
-    print(analytics)
+    balance = client.Balance().load()
+    print(balance)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = AgentGatewaySDK.test()
 
-# Entity ops return the bare record and raise on error.
-analytics = client.Analytics().load()
-# analytics contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+balance = client.Balance().load()
+# balance contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -230,7 +231,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -261,7 +262,7 @@ API path: `/api/stats`
 
 | Field | Description |
 | --- | --- |
-| `credit` |  |
+| `credits` |  |
 | `key` |  |
 
 Operations: Create.
@@ -272,8 +273,8 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `credit` |  |
+| `createdAt` |  |
+| `credits` |  |
 
 Operations: Load.
 
@@ -300,7 +301,7 @@ API path: `/health`
 | `ok` |  |
 | `rate` |  |
 | `token` |  |
-| `total_credit` |  |
+| `total_credits` |  |
 | `tx_hash` |  |
 | `usdc` |  |
 
@@ -312,10 +313,10 @@ API path: `/api/credits/topup`
 
 | Field | Description |
 | --- | --- |
-| `api_url` |  |
+| `apiUrl` |  |
 | `category` |  |
 | `description` |  |
-| `endpoint` |  |
+| `endpoints` |  |
 | `icon` |  |
 | `id` |  |
 | `latency` |  |
@@ -362,7 +363,7 @@ Create an instance: `api_key = client.ApiKey()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | `int` |  |
+| `credits` | `int` |  |
 | `key` | `str` |  |
 
 #### Example: Create
@@ -387,8 +388,8 @@ Create an instance: `balance = client.Balance()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `int` |  |
-| `credit` | `int` |  |
+| `createdAt` | `int` |  |
+| `credits` | `int` |  |
 
 #### Example: Load
 
@@ -442,7 +443,7 @@ Create an instance: `payment = client.Payment()`
 | `ok` | `bool` |  |
 | `rate` | `str` |  |
 | `token` | `str` |  |
-| `total_credit` | `int` |  |
+| `total_credits` | `int` |  |
 | `tx_hash` | `str` |  |
 | `usdc` | `float` |  |
 
@@ -477,10 +478,10 @@ Create an instance: `service = client.Service()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | `str` |  |
+| `apiUrl` | `str` |  |
 | `category` | `str` |  |
 | `description` | `str` |  |
-| `endpoint` | `list` |  |
+| `endpoints` | `list` |  |
 | `icon` | `str` |  |
 | `id` | `str` |  |
 | `latency` | `float` |  |
@@ -575,11 +576,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-analytics = client.Analytics()
-analytics.load()
+balance = client.Balance()
+balance.load()
 
-# analytics.data_get() now returns the analytics data from the last load
-# analytics.match_get() returns the last match criteria
+# balance.data_get() now returns the balance data from the last load
+# balance.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

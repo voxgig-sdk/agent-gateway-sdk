@@ -50,7 +50,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local analytics, err = client:Analytics():load()
+local balance, err = client:Balance():load()
 if err then error(err) end
 ```
 
@@ -108,7 +108,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Analytics():load()
+local result, err = client:Balance():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -246,7 +246,7 @@ API path: `/api/stats`
 
 | Field | Description |
 | --- | --- |
-| `credit` |  |
+| `credits` |  |
 | `key` |  |
 
 Operations: Create.
@@ -257,8 +257,8 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `credit` |  |
+| `createdAt` |  |
+| `credits` |  |
 
 Operations: Load.
 
@@ -285,7 +285,7 @@ API path: `/health`
 | `ok` |  |
 | `rate` |  |
 | `token` |  |
-| `total_credit` |  |
+| `total_credits` |  |
 | `tx_hash` |  |
 | `usdc` |  |
 
@@ -297,10 +297,10 @@ API path: `/api/credits/topup`
 
 | Field | Description |
 | --- | --- |
-| `api_url` |  |
+| `apiUrl` |  |
 | `category` |  |
 | `description` |  |
-| `endpoint` |  |
+| `endpoints` |  |
 | `icon` |  |
 | `id` |  |
 | `latency` |  |
@@ -347,7 +347,7 @@ Create an instance: `local api_key = client:ApiKey(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | `number` |  |
+| `credits` | `number` |  |
 | `key` | `string` |  |
 
 #### Example: Create
@@ -372,8 +372,8 @@ Create an instance: `local balance = client:Balance(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `number` |  |
-| `credit` | `number` |  |
+| `createdAt` | `number` |  |
+| `credits` | `number` |  |
 
 #### Example: Load
 
@@ -427,7 +427,7 @@ Create an instance: `local payment = client:Payment(nil)`
 | `ok` | `boolean` |  |
 | `rate` | `string` |  |
 | `token` | `string` |  |
-| `total_credit` | `number` |  |
+| `total_credits` | `number` |  |
 | `tx_hash` | `string` |  |
 | `usdc` | `number` |  |
 
@@ -462,10 +462,10 @@ Create an instance: `local service = client:Service(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | `string` |  |
+| `apiUrl` | `string` |  |
 | `category` | `string` |  |
 | `description` | `string` |  |
-| `endpoint` | `table` |  |
+| `endpoints` | `table` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
 | `latency` | `number` |  |
@@ -561,11 +561,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local analytics = client:Analytics()
-analytics:load()
+local balance = client:Balance()
+balance:load()
 
--- analytics:data_get() now returns the analytics data from the last load
--- analytics:match_get() returns the last match criteria
+-- balance:data_get() now returns the balance data from the last load
+-- balance:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

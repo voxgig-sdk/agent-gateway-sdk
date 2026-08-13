@@ -33,7 +33,7 @@ class PaymentEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set AGENTGATEWAY_TEST_PAYMENT_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set AGENT_GATEWAY_TEST_PAYMENT_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -44,7 +44,7 @@ class PaymentEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.payment"), "payment_ref01"));
 
         $payment_ref01_data_result = $payment_ref01_ent->create($payment_ref01_data, null);
-        $payment_ref01_data = Helpers::to_map($payment_ref01_data_result);
+        $payment_ref01_data = Helpers::to_map(is_object($payment_ref01_data_result) && method_exists($payment_ref01_data_result, 'data_get') ? $payment_ref01_data_result->data_get() : $payment_ref01_data_result);
         $this->assertNotNull($payment_ref01_data);
 
         // LOAD
@@ -77,39 +77,39 @@ function payment_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("AGENTGATEWAY_TEST_PAYMENT_ENTID");
+    $entid_env_raw = getenv("AGENT_GATEWAY_TEST_PAYMENT_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "AGENTGATEWAY_TEST_PAYMENT_ENTID" => $idmap,
-        "AGENTGATEWAY_TEST_LIVE" => "FALSE",
-        "AGENTGATEWAY_TEST_EXPLAIN" => "FALSE",
-        "AGENTGATEWAY_APIKEY" => "NONE",
+        "AGENT_GATEWAY_TEST_PAYMENT_ENTID" => $idmap,
+        "AGENT_GATEWAY_TEST_LIVE" => "FALSE",
+        "AGENT_GATEWAY_TEST_EXPLAIN" => "FALSE",
+        "AGENT_GATEWAY_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["AGENTGATEWAY_TEST_PAYMENT_ENTID"]);
+        $env["AGENT_GATEWAY_TEST_PAYMENT_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["AGENTGATEWAY_TEST_LIVE"] === "TRUE") {
+    if ($env["AGENT_GATEWAY_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["AGENTGATEWAY_APIKEY"],
+                "apikey" => $env["AGENT_GATEWAY_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new AgentGatewaySDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["AGENTGATEWAY_TEST_LIVE"] === "TRUE";
+    $live = $env["AGENT_GATEWAY_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["AGENTGATEWAY_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["AGENT_GATEWAY_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

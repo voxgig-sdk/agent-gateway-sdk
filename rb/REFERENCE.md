@@ -160,7 +160,7 @@ api_key = client.ApiKey
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | `Integer` | No |  |
+| `credits` | `Integer` | No |  |
 | `key` | `String` | No |  |
 
 ### Operations
@@ -214,8 +214,8 @@ balance = client.Balance
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `Integer` | No |  |
-| `credit` | `Integer` | No |  |
+| `createdAt` | `Integer` | No |  |
+| `credits` | `Integer` | No |  |
 
 ### Operations
 
@@ -326,7 +326,7 @@ payment = client.Payment
 | `ok` | `Boolean` | No |  |
 | `rate` | `String` | No |  |
 | `token` | `String` | No |  |
-| `total_credit` | `Integer` | No |  |
+| `total_credits` | `Integer` | No |  |
 | `tx_hash` | `String` | Yes |  |
 | `usdc` | `Float` | No |  |
 
@@ -391,10 +391,10 @@ service = client.Service
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | `String` | No |  |
+| `apiUrl` | `String` | No |  |
 | `category` | `String` | No |  |
 | `description` | `String` | No |  |
-| `endpoint` | `Array` | No |  |
+| `endpoints` | `Array` | No |  |
 | `icon` | `String` | No |  |
 | `id` | `String` | No |  |
 | `latency` | `Float` | No |  |

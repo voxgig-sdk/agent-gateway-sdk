@@ -153,7 +153,7 @@ api_key = client.ApiKey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | `int` | No |  |
+| `credits` | `int` | No |  |
 | `key` | `str` | No |  |
 
 ### Operations
@@ -206,8 +206,8 @@ balance = client.Balance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `int` | No |  |
-| `credit` | `int` | No |  |
+| `createdAt` | `int` | No |  |
+| `credits` | `int` | No |  |
 
 ### Operations
 
@@ -316,7 +316,7 @@ payment = client.Payment()
 | `ok` | `bool` | No |  |
 | `rate` | `str` | No |  |
 | `token` | `str` | No |  |
-| `total_credit` | `int` | No |  |
+| `total_credits` | `int` | No |  |
 | `tx_hash` | `str` | Yes |  |
 | `usdc` | `float` | No |  |
 
@@ -380,10 +380,10 @@ service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | `str` | No |  |
+| `apiUrl` | `str` | No |  |
 | `category` | `str` | No |  |
 | `description` | `str` | No |  |
-| `endpoint` | `list` | No |  |
+| `endpoints` | `list` | No |  |
 | `icon` | `str` | No |  |
 | `id` | `str` | No |  |
 | `latency` | `float` | No |  |

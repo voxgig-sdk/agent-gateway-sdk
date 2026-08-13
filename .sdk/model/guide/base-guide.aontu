@@ -42,10 +42,12 @@ guide: {
   entity: service: {
     path: "/api/services": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.services`")|top
     }
     path: "/api/services/health": {
       action: "health": {}
       op: list: method: *GET
+      op: list: transform: res: *("`body.services`")|top
     }
     path: "/api/services/{id}": {
       op: load: method: *GET

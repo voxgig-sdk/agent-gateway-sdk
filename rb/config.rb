@@ -42,6 +42,7 @@ module AgentGatewayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/stats",
                   "parts" => [
@@ -67,7 +68,7 @@ module AgentGatewayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "credit",
+              "name" => "credits",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 0,
@@ -89,6 +90,7 @@ module AgentGatewayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/keys/create",
                   "parts" => [
@@ -115,14 +117,14 @@ module AgentGatewayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "created_at",
+              "name" => "createdAt",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "credit",
+              "name" => "credits",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 1,
@@ -137,6 +139,7 @@ module AgentGatewayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/keys/balance",
                   "parts" => [
@@ -178,6 +181,7 @@ module AgentGatewayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/health",
                   "parts" => [
@@ -251,7 +255,7 @@ module AgentGatewayConfig
             },
             {
               "active" => true,
-              "name" => "total_credit",
+              "name" => "total_credits",
               "req" => false,
               "type" => "`$INTEGER`",
               "index$" => 7,
@@ -280,6 +284,7 @@ module AgentGatewayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/credits/topup",
                   "parts" => [
@@ -304,6 +309,7 @@ module AgentGatewayConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/payments/info",
                   "parts" => [
@@ -332,7 +338,7 @@ module AgentGatewayConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "api_url",
+              "name" => "apiUrl",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 0,
@@ -353,7 +359,7 @@ module AgentGatewayConfig
             },
             {
               "active" => true,
-              "name" => "endpoint",
+              "name" => "endpoints",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 3,
@@ -422,6 +428,7 @@ module AgentGatewayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/services",
                   "parts" => [
@@ -436,13 +443,14 @@ module AgentGatewayConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.services`",
                   },
                   "index$" => 0,
                 },
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/services/health",
                   "parts" => [
@@ -455,7 +463,7 @@ module AgentGatewayConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.services`",
                   },
                   "index$" => 1,
                 },
@@ -482,6 +490,7 @@ module AgentGatewayConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/services/{id}",
                   "parts" => [

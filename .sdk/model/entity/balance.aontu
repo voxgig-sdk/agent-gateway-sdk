@@ -6,12 +6,12 @@ main: kit: entity: balance: {
 
   fields: [
     {
-      name: "created_at"
+      name: "createdAt"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "credit"
+      name: "credits"
       req: false
       type: "`$INTEGER`"
     }

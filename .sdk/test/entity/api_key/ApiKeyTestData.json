@@ -2,17 +2,17 @@
   "existing": {
     "api_key": {
       "API_KEY00": {
-        "credit": "s14",
+        "credits": "s14",
         "key": "s15",
         "id": "API_KEY00"
       },
       "API_KEY01": {
-        "credit": "s28",
+        "credits": "s28",
         "key": "s29",
         "id": "API_KEY01"
       },
       "API_KEY02": {
-        "credit": "s3c",
+        "credits": "s3c",
         "key": "s3d",
         "id": "API_KEY02"
       }
@@ -21,7 +21,7 @@
   "new": {
     "api_key": {
       "api_key_ref01": {
-        "credit": "s50",
+        "credits": "s50",
         "key": "s51"
       }
     }

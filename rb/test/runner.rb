@@ -23,8 +23,8 @@ module AgentGatewayTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("AGENTGATEWAY_TEST_LIVE")
-    override = getenv("AGENTGATEWAY_TEST_OVERRIDE")
+    live = getenv("AGENT_GATEWAY_TEST_LIVE")
+    override = getenv("AGENT_GATEWAY_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module AgentGatewayTestRunner
       end
     end
 
-    explain = getenv("AGENTGATEWAY_TEST_EXPLAIN")
-    m["AGENTGATEWAY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("AGENT_GATEWAY_TEST_EXPLAIN")
+    m["AGENT_GATEWAY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

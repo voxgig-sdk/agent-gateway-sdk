@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = AgentGatewaySDK.test()
-const analytics = await client.Analytics().load()
-// analytics is a bare Analytics populated with mock data
-console.log(analytics)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = AgentGatewaySDK.test({
+  entity: {
+    balance: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const balance = await client.Balance().load()
+// balance is the Balance entity, populated with mock data
+// — call balance.data() for the record itself
+console.log(balance)
 ```
 
 ### Python
 
 ```python
 client = AgentGatewaySDK.test()
-analytics = client.Analytics().load()
-print(analytics)
+balance = client.Balance().load()
+print(balance)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(analytics)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = AgentGatewaySDK::test([
-    "entity" => ["analytics" => ["test01" => []]],
+    "entity" => ["balance" => ["test01" => []]],
 ]);
-$analytics = $client->Analytics()->load();
+$balance = $client->Balance()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Analytics(nil).Load(
+result, err := client.Balance(nil).Load(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Analytics(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = AgentGatewaySDK.test({
-  "entity" => { "analytics" => { "test01" => {} } },
+  "entity" => { "balance" => { "test01" => {} } },
 })
-analytics = client.Analytics.load()
+balance = client.Balance.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Analytics():load()
+local result, err = client:Balance():load()
 ```
 
 ## Packages
@@ -159,7 +168,7 @@ The API exposes 6 entities:
 | **ApiKey** | The ApiKey entity (create). | `/api/keys/create` |
 | **Balance** | The Balance entity (load). | `/api/keys/balance` |
 | **Meta** | The Meta entity (load). | `/health` |
-| **Payment** | The Payment entity (create, load). | `/api/credits/topup` |
+| **Payment** | The Payment entity (create, load). | `/api/payments/info` |
 | **Service** | The Service entity (list, load). | `/api/services` |
 
 The operations available across these entities are **load**, **list**, **create** — see each entity's
@@ -194,7 +203,7 @@ $client = new AgentGatewaySDK([
 ]);
 
 
-// Load a specific analytics (returns the bare record; throws on error)
+// Load a specific analytics (returns the ENTITY; call data_get() for the record; throws on error)
 $analytics = $client->Analytics()->load();
 print_r($analytics);
 ```
@@ -226,7 +235,7 @@ client = AgentGatewaySDK.new({
 })
 
 
-# Load a specific analytics (returns the bare record; raises on error)
+# Load a specific analytics (returns the ENTITY; call data_get for the record)
 analytics = client.Analytics.load()
 puts analytics
 ```
@@ -362,6 +371,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://agent-gateway-kappa.vercel.app](https://agent-gateway-kappa.vercel.app)
 

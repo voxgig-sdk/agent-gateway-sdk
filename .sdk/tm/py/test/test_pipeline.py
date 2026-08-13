@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import AgentGatewaySDK
-from core.error import AgentGatewayError
-from core.result import AgentGatewayResult
-from core.response import AgentGatewayResponse
-from core.spec import AgentGatewaySpec
-from feature.base_feature import AgentGatewayBaseFeature
+from projectname_sdk.core.error import AgentGatewayError
+from projectname_sdk.core.result import AgentGatewayResult
+from projectname_sdk.core.response import AgentGatewayResponse
+from projectname_sdk.core.spec import AgentGatewaySpec
+from projectname_sdk.feature.base_feature import AgentGatewayBaseFeature
 
 
 def _client():

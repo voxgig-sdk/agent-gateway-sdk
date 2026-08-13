@@ -41,7 +41,7 @@ main: kit: entity: payment: {
       type: "`$STRING`"
     }
     {
-      name: "total_credit"
+      name: "total_credits"
       req: false
       type: "`$INTEGER`"
     }

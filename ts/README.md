@@ -55,8 +55,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const analytics = await client.Analytics().load()
-  console.log(analytics)
+  const balance = await client.Balance().load()
+  console.log(balance)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = AgentGatewaySDK.test()
 
-const analytics = await client.Analytics().load()
-// analytics is a bare entity populated with mock response data
-console.log(analytics)
+const balance = await client.Balance().load()
+// balance is the entity, populated with mock response data
+// — call balance.data() for the record itself
+console.log(balance)
 ```
 
 You can also use the instance method:
@@ -139,7 +140,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Analytics()
+const entity = client.Balance()
 
 // First call runs the operation and stores its result
 await entity.load()
@@ -308,7 +309,7 @@ API path: `/api/stats`
 
 | Field | Description |
 | --- | --- |
-| `credit` |  |
+| `credits` |  |
 | `key` |  |
 
 Operations: create.
@@ -319,8 +320,8 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `created_at` |  |
-| `credit` |  |
+| `createdAt` |  |
+| `credits` |  |
 
 Operations: load.
 
@@ -347,7 +348,7 @@ API path: `/health`
 | `ok` |  |
 | `rate` |  |
 | `token` |  |
-| `total_credit` |  |
+| `total_credits` |  |
 | `tx_hash` |  |
 | `usdc` |  |
 
@@ -359,10 +360,10 @@ API path: `/api/credits/topup`
 
 | Field | Description |
 | --- | --- |
-| `api_url` |  |
+| `apiUrl` |  |
 | `category` |  |
 | `description` |  |
-| `endpoint` |  |
+| `endpoints` |  |
 | `icon` |  |
 | `id` |  |
 | `latency` |  |
@@ -409,7 +410,7 @@ Create an instance: `const api_key = client.ApiKey()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `credit` | `number` |  |
+| `credits` | `number` |  |
 | `key` | `string` |  |
 
 #### Example: Create
@@ -434,8 +435,8 @@ Create an instance: `const balance = client.Balance()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created_at` | `number` |  |
-| `credit` | `number` |  |
+| `createdAt` | `number` |  |
+| `credits` | `number` |  |
 
 #### Example: Load
 
@@ -489,7 +490,7 @@ Create an instance: `const payment = client.Payment()`
 | `ok` | `boolean` |  |
 | `rate` | `string` |  |
 | `token` | `string` |  |
-| `total_credit` | `number` |  |
+| `total_credits` | `number` |  |
 | `tx_hash` | `string` |  |
 | `usdc` | `number` |  |
 
@@ -524,10 +525,10 @@ Create an instance: `const service = client.Service()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `api_url` | `string` |  |
+| `apiUrl` | `string` |  |
 | `category` | `string` |  |
 | `description` | `string` |  |
-| `endpoint` | `any[]` |  |
+| `endpoints` | `any[]` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
 | `latency` | `number` |  |
@@ -616,11 +617,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const analytics = client.Analytics()
-await analytics.load()
+const balance = client.Balance()
+await balance.load()
 
-// analytics.data() now returns the analytics data from the last `load`
-// analytics.match() returns the last match criteria
+// balance.data() now returns the balance data from the last `load`
+// balance.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

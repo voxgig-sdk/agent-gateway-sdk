@@ -2,18 +2,18 @@
   "existing": {
     "balance": {
       "BALANCE00": {
-        "created_at": "s14",
-        "credit": "s15",
+        "createdAt": "s14",
+        "credits": "s15",
         "id": "BALANCE00"
       },
       "BALANCE01": {
-        "created_at": "s28",
-        "credit": "s29",
+        "createdAt": "s28",
+        "credits": "s29",
         "id": "BALANCE01"
       },
       "BALANCE02": {
-        "created_at": "s3c",
-        "credit": "s3d",
+        "createdAt": "s3c",
+        "credits": "s3d",
         "id": "BALANCE02"
       }
     }
@@ -21,8 +21,8 @@
   "new": {
     "balance": {
       "balance_ref01": {
-        "created_at": "s50",
-        "credit": "s51"
+        "createdAt": "s50",
+        "credits": "s51"
       }
     }
   }

@@ -26,8 +26,8 @@ import {
 describe('ServiceEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AGENTGATEWAY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AGENTGATEWAY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AGENT_GATEWAY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AGENT_GATEWAY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AgentGatewaySDK.test()
@@ -63,13 +63,13 @@ describe('ServiceEntity', async () => {
     const service_ref01_ent = client.Service()
     const service_ref01_match: any = {}
 
-    const service_ref01_list = await service_ref01_ent.list(service_ref01_match)
+    const service_ref01_list = (await service_ref01_ent.list(service_ref01_match)).map((e: any) => e.data())
 
 
     // LOAD
     const service_ref01_match_dt0: any = {}
     service_ref01_match_dt0.id = service_ref01_data.id
-    const service_ref01_data_dt0 = await service_ref01_ent.load(service_ref01_match_dt0)
+    const service_ref01_data_dt0 = (await service_ref01_ent.load(service_ref01_match_dt0)).data()
     assert(service_ref01_data_dt0.id === service_ref01_data.id)
 
 

@@ -26,7 +26,7 @@ class PaymentEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set AGENTGATEWAY_TEST_PAYMENT_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set AGENT_GATEWAY_TEST_PAYMENT_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -37,7 +37,7 @@ class PaymentEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.payment"), "payment_ref01"))
 
     payment_ref01_data_result = payment_ref01_ent.create(payment_ref01_data, nil)
-    payment_ref01_data = Helpers.to_map(payment_ref01_data_result)
+    payment_ref01_data = Helpers.to_map(payment_ref01_data_result.respond_to?(:data_get) ? payment_ref01_data_result.data_get : payment_ref01_data_result)
     assert !payment_ref01_data.nil?
 
     # LOAD
@@ -74,39 +74,39 @@ def payment_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["AGENTGATEWAY_TEST_PAYMENT_ENTID"]
+  entid_env_raw = ENV["AGENT_GATEWAY_TEST_PAYMENT_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "AGENTGATEWAY_TEST_PAYMENT_ENTID" => idmap,
-    "AGENTGATEWAY_TEST_LIVE" => "FALSE",
-    "AGENTGATEWAY_TEST_EXPLAIN" => "FALSE",
-    "AGENTGATEWAY_APIKEY" => "NONE",
+    "AGENT_GATEWAY_TEST_PAYMENT_ENTID" => idmap,
+    "AGENT_GATEWAY_TEST_LIVE" => "FALSE",
+    "AGENT_GATEWAY_TEST_EXPLAIN" => "FALSE",
+    "AGENT_GATEWAY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["AGENTGATEWAY_TEST_PAYMENT_ENTID"])
+    env["AGENT_GATEWAY_TEST_PAYMENT_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
+  if env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["AGENTGATEWAY_APIKEY"],
+        "apikey" => env["AGENT_GATEWAY_APIKEY"],
       },
       extra || {},
     ])
     client = AgentGatewaySDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
+  live = env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["AGENTGATEWAY_TEST_EXPLAIN"] == "TRUE",
+    explain: env["AGENT_GATEWAY_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

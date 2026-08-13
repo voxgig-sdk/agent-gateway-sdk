@@ -164,7 +164,7 @@ fmt.Println(apiKey.GetName()) // "api_key"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | `int` | No |  |
+| `credits` | `int` | No |  |
 | `key` | `string` | No |  |
 
 ### Operations
@@ -217,8 +217,8 @@ fmt.Println(balance.GetName()) // "balance"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `int` | No |  |
-| `credit` | `int` | No |  |
+| `createdAt` | `int` | No |  |
+| `credits` | `int` | No |  |
 
 ### Operations
 
@@ -327,7 +327,7 @@ fmt.Println(payment.GetName()) // "payment"
 | `ok` | `bool` | No |  |
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
-| `total_credit` | `int` | No |  |
+| `total_credits` | `int` | No |  |
 | `tx_hash` | `string` | Yes |  |
 | `usdc` | `float64` | No |  |
 
@@ -395,10 +395,10 @@ fmt.Println(service.GetName()) // "service"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | `string` | No |  |
+| `apiUrl` | `string` | No |  |
 | `category` | `string` | No |  |
 | `description` | `string` | No |  |
-| `endpoint` | `[]any` | No |  |
+| `endpoints` | `[]any` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
 | `latency` | `float64` | No |  |

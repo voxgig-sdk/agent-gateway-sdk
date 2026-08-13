@@ -6,7 +6,7 @@ main: kit: entity: service: {
 
   fields: [
     {
-      name: "api_url"
+      name: "apiUrl"
       req: false
       type: "`$STRING`"
     }
@@ -21,7 +21,7 @@ main: kit: entity: service: {
       type: "`$STRING`"
     }
     {
-      name: "endpoint"
+      name: "endpoints"
       req: false
       type: "`$ARRAY`"
     }
@@ -95,7 +95,7 @@ main: kit: entity: service: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.services`"
           }
         }
         {
@@ -111,7 +111,7 @@ main: kit: entity: service: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.services`"
           }
         }
       ]

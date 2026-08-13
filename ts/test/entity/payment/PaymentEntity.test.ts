@@ -26,8 +26,8 @@ import {
 describe('PaymentEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when AGENTGATEWAY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('AGENTGATEWAY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when AGENT_GATEWAY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('AGENT_GATEWAY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = AgentGatewaySDK.test()
@@ -62,13 +62,13 @@ describe('PaymentEntity', async () => {
     const payment_ref01_ent = client.Payment()
     let payment_ref01_data = setup.data.new.payment['payment_ref01']
 
-    payment_ref01_data = await payment_ref01_ent.create(payment_ref01_data)
+    payment_ref01_data = (await payment_ref01_ent.create(payment_ref01_data)).data()
     assert(null != payment_ref01_data)
 
 
     // LOAD
     const payment_ref01_match_dt0: any = {}
-    const payment_ref01_data_dt0 = await payment_ref01_ent.load(payment_ref01_match_dt0)
+    const payment_ref01_data_dt0 = (await payment_ref01_ent.load(payment_ref01_match_dt0)).data()
     assert(null != payment_ref01_data_dt0)
 
 

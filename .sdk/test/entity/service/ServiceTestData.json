@@ -2,10 +2,10 @@
   "existing": {
     "service": {
       "SERVICE00": {
-        "api_url": "s5a",
+        "apiUrl": "s5a",
         "category": "s5b",
         "description": "s5c",
-        "endpoint": [],
+        "endpoints": [],
         "icon": "s5e",
         "id": "SERVICE00",
         "latency": 96,
@@ -13,10 +13,10 @@
         "status": "s62"
       },
       "SERVICE01": {
-        "api_url": "sb4",
+        "apiUrl": "sb4",
         "category": "sb5",
         "description": "sb6",
-        "endpoint": [],
+        "endpoints": [],
         "icon": "sb8",
         "id": "SERVICE01",
         "latency": 186,
@@ -24,10 +24,10 @@
         "status": "sbc"
       },
       "SERVICE02": {
-        "api_url": "s10e",
+        "apiUrl": "s10e",
         "category": "s10f",
         "description": "s110",
-        "endpoint": [],
+        "endpoints": [],
         "icon": "s112",
         "id": "SERVICE02",
         "latency": 276,
@@ -39,10 +39,10 @@
   "new": {
     "service": {
       "service_ref01": {
-        "api_url": "s168",
+        "apiUrl": "s168",
         "category": "s169",
         "description": "s16a",
-        "endpoint": [],
+        "endpoints": [],
         "icon": "s16c",
         "latency": 366,
         "name": "s16f",

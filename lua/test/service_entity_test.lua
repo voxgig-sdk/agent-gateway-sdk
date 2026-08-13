@@ -70,7 +70,7 @@ describe("ServiceEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set AGENTGATEWAY_TEST_SERVICE_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set AGENT_GATEWAY_TEST_SERVICE_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -97,7 +97,7 @@ describe("ServiceEntity", function()
     }
     local service_ref01_data_dt0_loaded, err = service_ref01_ent:load(service_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local service_ref01_data_dt0_load_result = helpers.to_map(service_ref01_data_dt0_loaded)
+    local service_ref01_data_dt0_load_result = helpers.to_map(type(service_ref01_data_dt0_loaded) == 'table' and service_ref01_data_dt0_loaded.data_get and service_ref01_data_dt0_loaded:data_get() or service_ref01_data_dt0_loaded)
     assert.is_not_nil(service_ref01_data_dt0_load_result)
     assert.are.equal(service_ref01_data_dt0_load_result["id"], service_ref01_data["id"])
 
@@ -136,39 +136,39 @@ function service_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("AGENTGATEWAY_TEST_SERVICE_ENTID")
+  local entid_env_raw = os.getenv("AGENT_GATEWAY_TEST_SERVICE_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["AGENTGATEWAY_TEST_SERVICE_ENTID"] = idmap,
-    ["AGENTGATEWAY_TEST_LIVE"] = "FALSE",
-    ["AGENTGATEWAY_TEST_EXPLAIN"] = "FALSE",
-    ["AGENTGATEWAY_APIKEY"] = "NONE",
+    ["AGENT_GATEWAY_TEST_SERVICE_ENTID"] = idmap,
+    ["AGENT_GATEWAY_TEST_LIVE"] = "FALSE",
+    ["AGENT_GATEWAY_TEST_EXPLAIN"] = "FALSE",
+    ["AGENT_GATEWAY_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["AGENTGATEWAY_TEST_SERVICE_ENTID"])
+    env["AGENT_GATEWAY_TEST_SERVICE_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["AGENTGATEWAY_TEST_LIVE"] == "TRUE" then
+  if env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["AGENTGATEWAY_APIKEY"],
+        apikey = env["AGENT_GATEWAY_APIKEY"],
       },
       extra or {},
     })
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["AGENTGATEWAY_TEST_LIVE"] == "TRUE"
+  local live = env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["AGENTGATEWAY_TEST_EXPLAIN"] == "TRUE",
+    explain = env["AGENT_GATEWAY_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

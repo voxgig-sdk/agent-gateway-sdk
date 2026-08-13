@@ -221,7 +221,7 @@ const api_key = client.ApiKey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `credit` | `number` | No |  |
+| `credits` | `number` | No |  |
 | `key` | `string` | No |  |
 
 ### Operations
@@ -273,8 +273,8 @@ const balance = client.Balance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `created_at` | `number` | No |  |
-| `credit` | `number` | No |  |
+| `createdAt` | `number` | No |  |
+| `credits` | `number` | No |  |
 
 ### Operations
 
@@ -381,9 +381,29 @@ const payment = client.Payment()
 | `ok` | `boolean` | No |  |
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
-| `total_credit` | `number` | No |  |
+| `total_credits` | `number` | No |  |
 | `tx_hash` | `string` | Yes |  |
 | `usdc` | `number` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `info` | `/api/payments/info` | `client.Payment().load({ $action: 'info', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Payment record — check the API definition for its shape.
+
+```ts
+const result = await client.Payment().load({
+  $action: 'info',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 
@@ -444,15 +464,35 @@ const service = client.Service()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `api_url` | `string` | No |  |
+| `apiUrl` | `string` | No |  |
 | `category` | `string` | No |  |
 | `description` | `string` | No |  |
-| `endpoint` | `any[]` | No |  |
+| `endpoints` | `any[]` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
 | `latency` | `number` | No |  |
 | `name` | `string` | No |  |
 | `status` | `string` | No |  |
+
+### Actions
+
+This entity exposes custom API actions in addition to the standard
+operations. Select one with `$action` in the call's argument; the
+remaining keys are sent as that action's payload.
+
+| Action | Route | Call |
+| --- | --- | --- |
+| `health` | `/api/services/health` | `client.Service().list({ $action: 'health', ... })` |
+
+An action returns that action's OWN response, which is not necessarily a
+Service record — check the API definition for its shape.
+
+```ts
+const result = await client.Service().list({
+  $action: 'health',
+  /* ...the action's own arguments */
+})
+```
 
 ### Operations
 

@@ -11,20 +11,20 @@
 ---@class AnalyticsLoadMatch
 
 ---@class ApiKey
----@field credit? number
+---@field credits? number
 ---@field key? string
 
 ---@class ApiKeyCreateData
----@field credit? number
+---@field credits? number
 ---@field key? string
 
 ---@class Balance
----@field created_at? number
----@field credit? number
+---@field createdAt? number
+---@field credits? number
 
 ---@class BalanceLoadMatch
----@field created_at? number
----@field credit? number
+---@field createdAt? number
+---@field credits? number
 
 ---@class Meta
 ---@field status? string
@@ -40,7 +40,7 @@
 ---@field ok? boolean
 ---@field rate? string
 ---@field token? string
----@field total_credit? number
+---@field total_credits? number
 ---@field tx_hash string
 ---@field usdc? number
 
@@ -52,7 +52,7 @@
 ---@field ok? boolean
 ---@field rate? string
 ---@field token? string
----@field total_credit? number
+---@field total_credits? number
 ---@field tx_hash? string
 ---@field usdc? number
 
@@ -64,15 +64,15 @@
 ---@field ok? boolean
 ---@field rate? string
 ---@field token? string
----@field total_credit? number
+---@field total_credits? number
 ---@field tx_hash string
 ---@field usdc? number
 
 ---@class Service
----@field api_url? string
+---@field apiUrl? string
 ---@field category? string
 ---@field description? string
----@field endpoint? table
+---@field endpoints? table
 ---@field icon? string
 ---@field id? string
 ---@field latency? number
@@ -83,10 +83,10 @@
 ---@field id string
 
 ---@class ServiceListMatch
----@field api_url? string
+---@field apiUrl? string
 ---@field category? string
 ---@field description? string
----@field endpoint? table
+---@field endpoints? table
 ---@field icon? string
 ---@field id? string
 ---@field latency? number
