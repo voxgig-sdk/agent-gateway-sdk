@@ -40,7 +40,7 @@ class AgentGatewaySDK
         $utility = new AgentGatewayUtility();
         $this->_utility = $utility;
 
-        $config = AgentGatewayConfig::make_config();
+        $config = AgentGatewayConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

@@ -28,7 +28,7 @@ class AgentGatewaySDK
     utility = AgentGatewayUtility.new
     @_utility = utility
 
-    config = AgentGatewayConfig.make_config
+    config = AgentGatewayConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

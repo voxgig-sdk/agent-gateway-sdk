@@ -40,7 +40,7 @@ class ServiceEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = AgentGatewayConfig::make_config();
+        $cfg = AgentGatewayConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = AgentGatewaySDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];
