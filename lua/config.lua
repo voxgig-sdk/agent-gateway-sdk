@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "AgentGateway",
+      slug = "agent-gateway",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -107,6 +110,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "createdAt",
+            ["short"] = "Unix timestamp ms",
             ["type"] = "`$INTEGER`",
           },
           {
@@ -215,6 +219,7 @@ local function make_config()
           {
             ["name"] = "tx_hash",
             ["req"] = true,
+            ["short"] = "Transaction hash of USDC transfer on Base",
             ["type"] = "`$STRING`",
           },
           {

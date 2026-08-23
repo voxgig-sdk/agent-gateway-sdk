@@ -257,7 +257,7 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
+| `createdAt` | Unix timestamp ms |
 | `credits` |  |
 
 Operations: Load.
@@ -286,7 +286,7 @@ API path: `/health`
 | `rate` |  |
 | `token` |  |
 | `total_credits` |  |
-| `tx_hash` |  |
+| `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
 
 Operations: Create, Load.
@@ -372,7 +372,7 @@ Create an instance: `local balance = client:Balance(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `number` |  |
+| `createdAt` | `number` | Unix timestamp ms |
 | `credits` | `number` |  |
 
 #### Example: Load
@@ -428,7 +428,7 @@ Create an instance: `local payment = client:Payment(nil)`
 | `rate` | `string` |  |
 | `token` | `string` |  |
 | `total_credits` | `number` |  |
-| `tx_hash` | `string` |  |
+| `tx_hash` | `string` | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` |  |
 
 #### Example: Load

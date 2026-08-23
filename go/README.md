@@ -6,7 +6,7 @@ The Golang SDK for the AgentGateway API — an entity-oriented client using stan
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Analytics(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -291,7 +291,7 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `"createdAt"` |  |
+| `"createdAt"` | Unix timestamp ms |
 | `"credits"` |  |
 
 Operations: Load.
@@ -320,7 +320,7 @@ API path: `/health`
 | `"rate"` |  |
 | `"token"` |  |
 | `"total_credits"` |  |
-| `"tx_hash"` |  |
+| `"tx_hash"` | Transaction hash of USDC transfer on Base |
 | `"usdc"` |  |
 
 Operations: Create, Load.
@@ -414,7 +414,7 @@ Create an instance: `balance := client.Balance(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `int` |  |
+| `createdAt` | `int` | Unix timestamp ms |
 | `credits` | `int` |  |
 
 #### Example: Load
@@ -478,7 +478,7 @@ Create an instance: `payment := client.Payment(nil)`
 | `rate` | `string` |  |
 | `token` | `string` |  |
 | `total_credits` | `int` |  |
-| `tx_hash` | `string` |  |
+| `tx_hash` | `string` | Transaction hash of USDC transfer on Base |
 | `usdc` | `float64` |  |
 
 #### Example: Load

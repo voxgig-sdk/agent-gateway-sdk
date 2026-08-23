@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "AgentGateway",
+            "slug": "agent-gateway",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -128,6 +131,7 @@ def make_config():
         "fields": [
           {
             "name": "createdAt",
+            "short": "Unix timestamp ms",
             "type": "`$INTEGER`",
           },
           {
@@ -236,6 +240,7 @@ def make_config():
           {
             "name": "tx_hash",
             "req": True,
+            "short": "Transaction hash of USDC transfer on Base",
             "type": "`$STRING`",
           },
           {

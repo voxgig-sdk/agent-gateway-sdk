@@ -1,8 +1,0 @@
-# Entity Models
-
-@"analytics.aontu"
-@"api_key.aontu"
-@"balance.aontu"
-@"meta.aontu"
-@"payment.aontu"
-@"service.aontu"

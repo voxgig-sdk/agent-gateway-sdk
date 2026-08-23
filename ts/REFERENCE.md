@@ -273,7 +273,7 @@ const balance = client.Balance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `number` | No |  |
+| `createdAt` | `number` | No | Unix timestamp ms |
 | `credits` | `number` | No |  |
 
 ### Operations
@@ -382,7 +382,7 @@ const payment = client.Payment()
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
 | `total_credits` | `number` | No |  |
-| `tx_hash` | `string` | Yes |  |
+| `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` | No |  |
 
 ### Actions

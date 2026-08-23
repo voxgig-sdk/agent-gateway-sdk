@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -320,7 +320,7 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
+| `createdAt` | Unix timestamp ms |
 | `credits` |  |
 
 Operations: load.
@@ -349,7 +349,7 @@ API path: `/health`
 | `rate` |  |
 | `token` |  |
 | `total_credits` |  |
-| `tx_hash` |  |
+| `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
 
 Operations: create, load.
@@ -435,7 +435,7 @@ Create an instance: `const balance = client.Balance()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `number` |  |
+| `createdAt` | `number` | Unix timestamp ms |
 | `credits` | `number` |  |
 
 #### Example: Load
@@ -491,7 +491,7 @@ Create an instance: `const payment = client.Payment()`
 | `rate` | `string` |  |
 | `token` | `string` |  |
 | `total_credits` | `number` |  |
-| `tx_hash` | `string` |  |
+| `tx_hash` | `string` | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` |  |
 
 #### Example: Load

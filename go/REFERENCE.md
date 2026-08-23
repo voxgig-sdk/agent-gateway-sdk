@@ -217,7 +217,7 @@ fmt.Println(balance.GetName()) // "balance"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `int` | No |  |
+| `createdAt` | `int` | No | Unix timestamp ms |
 | `credits` | `int` | No |  |
 
 ### Operations
@@ -328,7 +328,7 @@ fmt.Println(payment.GetName()) // "payment"
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
 | `total_credits` | `int` | No |  |
-| `tx_hash` | `string` | Yes |  |
+| `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `float64` | No |  |
 
 ### Operations

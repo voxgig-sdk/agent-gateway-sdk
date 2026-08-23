@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "AgentGateway",
+			"slug": "agent-gateway",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -111,6 +114,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "createdAt",
+						"short": "Unix timestamp ms",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
@@ -219,6 +223,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "tx_hash",
 						"req": true,
+						"short": "Transaction hash of USDC transfer on Base",
 						"type": "`$STRING`",
 					},
 					map[string]any{

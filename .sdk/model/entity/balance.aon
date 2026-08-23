@@ -8,6 +8,7 @@ main: kit: entity: balance: {
     {
       name: "createdAt"
       req: false
+      short: "Unix timestamp ms"
       type: "`$INTEGER`"
     }
     {

@@ -33,6 +33,9 @@ class AgentGatewayConfig
         return [
             "main" => [
                 "name" => "AgentGateway",
+                "slug" => "agent-gateway",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -133,6 +136,7 @@ class AgentGatewayConfig
           'fields' => [
             [
               'name' => 'createdAt',
+              'short' => 'Unix timestamp ms',
               'type' => '`$INTEGER`',
             ],
             [
@@ -241,6 +245,7 @@ class AgentGatewayConfig
             [
               'name' => 'tx_hash',
               'req' => true,
+              'short' => 'Transaction hash of USDC transfer on Base',
               'type' => '`$STRING`',
             ],
             [

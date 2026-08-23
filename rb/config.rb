@@ -19,6 +19,9 @@ module AgentGatewayConfig
     {
       "main" => {
         "name" => "AgentGateway",
+        "slug" => "agent-gateway",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -119,6 +122,7 @@ module AgentGatewayConfig
           "fields" => [
             {
               "name" => "createdAt",
+              "short" => "Unix timestamp ms",
               "type" => "`$INTEGER`",
             },
             {
@@ -227,6 +231,7 @@ module AgentGatewayConfig
             {
               "name" => "tx_hash",
               "req" => true,
+              "short" => "Transaction hash of USDC transfer on Base",
               "type" => "`$STRING`",
             },
             {

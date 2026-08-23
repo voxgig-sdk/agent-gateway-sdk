@@ -48,6 +48,7 @@ main: kit: entity: payment: {
     {
       name: "tx_hash"
       req: true
+      short: "Transaction hash of USDC transfer on Base"
       type: "`$STRING`"
     }
     {

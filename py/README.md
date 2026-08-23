@@ -273,7 +273,7 @@ API path: `/api/keys/create`
 
 | Field | Description |
 | --- | --- |
-| `createdAt` |  |
+| `createdAt` | Unix timestamp ms |
 | `credits` |  |
 
 Operations: Load.
@@ -302,7 +302,7 @@ API path: `/health`
 | `rate` |  |
 | `token` |  |
 | `total_credits` |  |
-| `tx_hash` |  |
+| `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
 
 Operations: Create, Load.
@@ -388,7 +388,7 @@ Create an instance: `balance = client.Balance()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `createdAt` | `int` |  |
+| `createdAt` | `int` | Unix timestamp ms |
 | `credits` | `int` |  |
 
 #### Example: Load
@@ -444,7 +444,7 @@ Create an instance: `payment = client.Payment()`
 | `rate` | `str` |  |
 | `token` | `str` |  |
 | `total_credits` | `int` |  |
-| `tx_hash` | `str` |  |
+| `tx_hash` | `str` | Transaction hash of USDC transfer on Base |
 | `usdc` | `float` |  |
 
 #### Example: Load

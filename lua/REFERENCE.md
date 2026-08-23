@@ -211,7 +211,7 @@ local balance = client:Balance(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `number` | No |  |
+| `createdAt` | `number` | No | Unix timestamp ms |
 | `credits` | `number` | No |  |
 
 ### Operations
@@ -324,7 +324,7 @@ local payment = client:Payment(nil)
 | `rate` | `string` | No |  |
 | `token` | `string` | No |  |
 | `total_credits` | `number` | No |  |
-| `tx_hash` | `string` | Yes |  |
+| `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` | No |  |
 
 ### Operations

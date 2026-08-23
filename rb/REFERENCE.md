@@ -214,7 +214,7 @@ balance = client.Balance
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `createdAt` | `Integer` | No |  |
+| `createdAt` | `Integer` | No | Unix timestamp ms |
 | `credits` | `Integer` | No |  |
 
 ### Operations
@@ -327,7 +327,7 @@ payment = client.Payment
 | `rate` | `String` | No |  |
 | `token` | `String` | No |  |
 | `total_credits` | `Integer` | No |  |
-| `tx_hash` | `String` | Yes |  |
+| `tx_hash` | `String` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `Float` | No |  |
 
 ### Operations

@@ -120,6 +120,7 @@
               "active": true,
               "name": "createdAt",
               "req": false,
+              "short": "Unix timestamp ms",
               "type": "`$INTEGER`"
             },
             {
@@ -258,6 +259,7 @@
               "active": true,
               "name": "tx_hash",
               "req": true,
+              "short": "Transaction hash of USDC transfer on Base",
               "type": "`$STRING`"
             },
             {
