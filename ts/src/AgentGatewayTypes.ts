@@ -101,15 +101,8 @@ export interface ServiceLoadMatch {
 }
 
 export interface ServiceListMatch {
-  apiUrl?: string
   category?: string
-  description?: string
-  endpoints?: any[]
-  icon?: string
-  id?: string
-  latency?: number
-  name?: string
-  status?: string
+  search?: string
 
   // Selects a custom action instead of the plain list:
   //   'health'

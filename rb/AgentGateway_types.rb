@@ -273,42 +273,14 @@ ServiceLoadMatch = Struct.new(
 
 # Request payload for Service#list.
 #
-# @!attribute [rw] apiUrl
-#   @return [String, nil]
-#
 # @!attribute [rw] category
 #   @return [String, nil]
 #
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] endpoints
-#   @return [Array, nil]
-#
-# @!attribute [rw] icon
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] latency
-#   @return [Float, nil]
-#
-# @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] status
+# @!attribute [rw] search
 #   @return [String, nil]
 ServiceListMatch = Struct.new(
-  :apiUrl,
   :category,
-  :description,
-  :endpoints,
-  :icon,
-  :id,
-  :latency,
-  :name,
-  :status,
+  :search,
   keyword_init: true
 )
 

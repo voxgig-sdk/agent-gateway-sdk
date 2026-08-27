@@ -130,14 +130,7 @@ class ServiceLoadMatch
 /** Request payload for Service#list. */
 class ServiceListMatch
 {
-    public ?string $apiUrl = null;
     public ?string $category = null;
-    public ?string $description = null;
-    public ?array $endpoints = null;
-    public ?string $icon = null;
-    public ?string $id = null;
-    public ?float $latency = null;
-    public ?string $name = null;
-    public ?string $status = null;
+    public ?string $search = null;
 }
 

@@ -83,15 +83,8 @@
 ---@field id string
 
 ---@class ServiceListMatch
----@field apiUrl? string
 ---@field category? string
----@field description? string
----@field endpoints? table
----@field icon? string
----@field id? string
----@field latency? number
----@field name? string
----@field status? string
+---@field search? string
 
 local M = {}
 

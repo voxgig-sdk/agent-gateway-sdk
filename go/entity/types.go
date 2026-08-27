@@ -116,15 +116,8 @@ type ServiceLoadMatch struct {
 
 // ServiceListMatch is the typed request payload for Service.ListTyped.
 type ServiceListMatch struct {
-	ApiUrl *string `json:"apiUrl,omitempty"`
 	Category *string `json:"category,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Endpoints *[]any `json:"endpoints,omitempty"`
-	Icon *string `json:"icon,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Latency *float64 `json:"latency,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Status *string `json:"status,omitempty"`
+	Search *string `json:"search,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

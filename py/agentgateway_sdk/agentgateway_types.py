@@ -114,12 +114,5 @@ class ServiceLoadMatch(TypedDict):
 
 
 class ServiceListMatch(TypedDict, total=False):
-    apiUrl: str
     category: str
-    description: str
-    endpoints: list
-    icon: str
-    id: str
-    latency: float
-    name: str
-    status: str
+    search: str
