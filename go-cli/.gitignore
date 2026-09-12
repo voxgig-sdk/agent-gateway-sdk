@@ -1,3 +1,4 @@
 /dist/
 /agent-gateway-cli
 /go-cli
+.jostraca/

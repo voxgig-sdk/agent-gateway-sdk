@@ -50,7 +50,7 @@ func TestAnalyticsEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		analyticsRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.analytics", setup.data)))
+		analyticsRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.analytics")))
 		var analyticsRef01Data map[string]any
 		if len(analyticsRef01DataRaw) > 0 {
 			analyticsRef01Data = core.ToMapAny(analyticsRef01DataRaw[0][1])
@@ -97,7 +97,7 @@ func analyticsBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"analytics01", "analytics02", "analytics03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -117,7 +117,7 @@ func analyticsBasicSetup(extra map[string]any) *entityTestSetup {
 		"AGENT_GATEWAY_TEST_ANALYTICS_ENTID": idmap,
 		"AGENT_GATEWAY_TEST_LIVE":      "FALSE",
 		"AGENT_GATEWAY_TEST_EXPLAIN":   "FALSE",
-		"AGENT_GATEWAY_APIKEY":         "NONE",
+		"AGENT_GATEWAY_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["AGENT_GATEWAY_TEST_ANALYTICS_ENTID"])
@@ -126,11 +126,23 @@ func analyticsBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["AGENT_GATEWAY_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["AGENT_GATEWAY_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewAgentGatewaySDK(core.ToMapAny(mergedOpts))
 	}

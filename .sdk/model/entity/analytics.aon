@@ -12,9 +12,13 @@ main: kit: entity: analytics: {
         {
           method: "GET"
           orig: "/api/stats"
-          parts: [
-            "api"
-            "stats"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stats"
+            }
           ]
           transform: {
             req: "`reqdata`"

@@ -26,10 +26,16 @@ main: kit: entity: balance: {
         {
           method: "GET"
           orig: "/api/keys/balance"
-          parts: [
-            "api"
-            "keys"
-            "balance"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "keys"
+            }
+            {
+              lit: "balance"
+            }
           ]
           transform: {
             req: "`reqdata`"

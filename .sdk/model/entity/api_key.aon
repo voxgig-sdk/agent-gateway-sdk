@@ -25,10 +25,16 @@ main: kit: entity: api_key: {
         {
           method: "POST"
           orig: "/api/keys/create"
-          parts: [
-            "api"
-            "keys"
-            "create"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "keys"
+            }
+            {
+              lit: "create"
+            }
           ]
           transform: {
             req: "`reqdata`"

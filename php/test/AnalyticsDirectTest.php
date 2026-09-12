@@ -67,15 +67,17 @@ function analytics_direct_setup($mockres)
     $env = Runner::env_override([
         "AGENT_GATEWAY_TEST_ANALYTICS_ENTID" => [],
         "AGENT_GATEWAY_TEST_LIVE" => "FALSE",
-        "AGENT_GATEWAY_APIKEY" => "NONE",
+        "AGENT_GATEWAY_APIKEY" => "",
     ]);
 
     $live = $env["AGENT_GATEWAY_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["AGENT_GATEWAY_APIKEY"],
-        ];
+        ]);
         $client = new AgentGatewaySDK($merged_opts);
         return [
             "client" => $client,

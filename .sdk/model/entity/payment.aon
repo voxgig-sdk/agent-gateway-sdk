@@ -66,10 +66,16 @@ main: kit: entity: payment: {
         {
           method: "POST"
           orig: "/api/credits/topup"
-          parts: [
-            "api"
-            "credits"
-            "topup"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "credits"
+            }
+            {
+              lit: "topup"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -84,10 +90,16 @@ main: kit: entity: payment: {
         {
           method: "GET"
           orig: "/api/payments/info"
-          parts: [
-            "api"
-            "payments"
-            "info"
+          segments: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "payments"
+            }
+            {
+              lit: "info"
+            }
           ]
           select: {
             "$action": "info"

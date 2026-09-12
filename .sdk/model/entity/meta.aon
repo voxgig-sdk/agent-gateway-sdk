@@ -20,8 +20,10 @@ main: kit: entity: meta: {
         {
           method: "GET"
           orig: "/health"
-          parts: [
-            "health"
+          segments: [
+            {
+              lit: "health"
+            }
           ]
           transform: {
             req: "`reqdata`"
