@@ -105,7 +105,7 @@ local result, err = client:Balance():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
+| TypeScript | `@voxgig-sdk/agent-gateway-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
 | Python | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
 | PHP | `voxgig-sdk/agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/agent-gateway-sdk/go` | `go get github.com/voxgig-sdk/agent-gateway-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Balance():load()
 ### TypeScript
 
 ```ts
-import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway'
+import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway-sdk'
 
 const client = new AgentGatewaySDK({
   apikey: process.env.AGENT_GATEWAY_APIKEY,

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway'
+import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway-sdk'
 
 const client = new AgentGatewaySDK({
   apikey: process.env.AGENT_GATEWAY_APIKEY,
@@ -630,7 +630,7 @@ agent-gateway/
 Import the SDK from the package root:
 
 ```ts
-import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway'
+import { AgentGatewaySDK } from '@voxgig-sdk/agent-gateway-sdk'
 ```
 
 ### Entity state
