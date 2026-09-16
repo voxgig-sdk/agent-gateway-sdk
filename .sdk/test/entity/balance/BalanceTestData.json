@@ -2,18 +2,18 @@
   "existing": {
     "balance": {
       "BALANCE00": {
-        "createdAt": "s14",
-        "credits": "s15",
+        "createdAt": 20,
+        "credits": 21,
         "id": "BALANCE00"
       },
       "BALANCE01": {
-        "createdAt": "s28",
-        "credits": "s29",
+        "createdAt": 40,
+        "credits": 41,
         "id": "BALANCE01"
       },
       "BALANCE02": {
-        "createdAt": "s3c",
-        "credits": "s3d",
+        "createdAt": 60,
+        "credits": 61,
         "id": "BALANCE02"
       }
     }
@@ -21,8 +21,69 @@
   "new": {
     "balance": {
       "balance_ref01": {
-        "createdAt": "s50",
-        "credits": "s51"
+        "createdAt": 80,
+        "credits": 81
+      }
+    }
+  },
+  "requests": {
+    "GET /api/keys/balance": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getBalance",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "createdAt": {
+                      "description": "Unix timestamp ms",
+                      "example": 1709000000000,
+                      "type": "integer"
+                    },
+                    "credits": {
+                      "example": 150,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Balance info"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Invalid key"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "definition"
       }
     }
   }

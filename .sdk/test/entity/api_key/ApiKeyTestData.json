@@ -2,17 +2,17 @@
   "existing": {
     "api_key": {
       "API_KEY00": {
-        "credits": "s14",
+        "credits": 20,
         "key": "s15",
         "id": "API_KEY00"
       },
       "API_KEY01": {
-        "credits": "s28",
+        "credits": 40,
         "key": "s29",
         "id": "API_KEY01"
       },
       "API_KEY02": {
-        "credits": "s3c",
+        "credits": 60,
         "key": "s3d",
         "id": "API_KEY02"
       }
@@ -21,8 +21,53 @@
   "new": {
     "api_key": {
       "api_key_ref01": {
-        "credits": "s50",
+        "credits": 80,
         "key": "s51"
+      }
+    }
+  },
+  "requests": {
+    "POST /api/keys/create": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "createApiKey",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "credits": 200,
+                  "key": "gw_abc123..."
+                },
+                "schema": {
+                  "properties": {
+                    "credits": {
+                      "example": 200,
+                      "type": "integer"
+                    },
+                    "key": {
+                      "example": "gw_abc123...",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "API key created"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
       }
     }
   }

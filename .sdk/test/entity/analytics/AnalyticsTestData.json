@@ -16,5 +16,29 @@
     "analytics": {
       "analytics_ref01": {}
     }
+  },
+  "requests": {
+    "GET /api/stats": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getStats",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "description": "Usage stats"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
   }
 }

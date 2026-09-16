@@ -10,6 +10,12 @@ main: kit: entity: analytics: {
       name: "load"
       points: [
         {
+          contract: {
+            id: "GET /api/stats"
+            json: "{\"operationId\":\"getStats\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Usage stats\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/api/stats"
           segments: [

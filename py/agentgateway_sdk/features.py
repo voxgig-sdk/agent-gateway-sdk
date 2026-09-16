@@ -1,12 +1,18 @@
 # AgentGateway SDK feature factory
 
 from agentgateway_sdk.feature.base_feature import AgentGatewayBaseFeature
+from agentgateway_sdk.feature.ratelimit_feature import AgentGatewayRatelimitFeature
+from agentgateway_sdk.feature.retry_feature import AgentGatewayRetryFeature
 from agentgateway_sdk.feature.test_feature import AgentGatewayTestFeature
+from agentgateway_sdk.feature.timeout_feature import AgentGatewayTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: AgentGatewayBaseFeature(),
+    "ratelimit": lambda: AgentGatewayRatelimitFeature(),
+    "retry": lambda: AgentGatewayRetryFeature(),
     "test": lambda: AgentGatewayTestFeature(),
+    "timeout": lambda: AgentGatewayTimeoutFeature(),
 }
 
 

@@ -49,5 +49,238 @@
         "status": "s170"
       }
     }
+  },
+  "requests": {
+    "GET /api/services": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "listServices",
+        "parameters": [
+          {
+            "description": "Filter by category",
+            "in": "query",
+            "name": "category",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search by name or description",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "services": {
+                      "items": {
+                        "properties": {
+                          "apiUrl": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "enum": [
+                              "infrastructure",
+                              "defi",
+                              "blockchain",
+                              "data",
+                              "security",
+                              "gaming"
+                            ],
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "endpoints": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
+                          "icon": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service list"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /api/services/health": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getHealth",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "offline": {
+                      "type": "integer"
+                    },
+                    "online": {
+                      "type": "integer"
+                    },
+                    "services": {
+                      "items": {
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "latency": {
+                            "type": "number"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "enum": [
+                              "online",
+                              "offline"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Health status"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    },
+    "GET /api/services/{id}": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getService",
+        "parameters": [
+          {
+            "example": "crypto-feeds",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "apiUrl": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "enum": [
+                        "infrastructure",
+                        "defi",
+                        "blockchain",
+                        "data",
+                        "security",
+                        "gaming"
+                      ],
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "endpoints": {
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "icon": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Service detail"
+          },
+          "404": {
+            "description": "Service not found"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
   }
 }

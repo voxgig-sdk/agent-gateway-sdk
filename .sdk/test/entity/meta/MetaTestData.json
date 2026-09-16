@@ -21,5 +21,42 @@
         "status": "s28"
       }
     }
+  },
+  "requests": {
+    "GET /health": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "healthCheck",
+        "parameters": [],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "status": {
+                      "example": "ok",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          }
+        },
+        "security": [],
+        "securitySchemes": {
+          "bearerAuth": {
+            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
+            "scheme": "bearer",
+            "type": "http"
+          }
+        },
+        "securitySource": "operation"
+      }
+    }
   }
 }
