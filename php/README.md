@@ -300,13 +300,9 @@ API path: `/health`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
 | `api_key` |  |
-| `chain` |  |
 | `credits_added` |  |
 | `ok` |  |
-| `rate` |  |
-| `token` |  |
 | `total_credits` |  |
 | `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
@@ -325,9 +321,7 @@ API path: `/api/credits/topup`
 | `endpoints` |  |
 | `icon` |  |
 | `id` |  |
-| `latency` |  |
 | `name` |  |
-| `status` |  |
 
 Operations: List, Load.
 
@@ -445,13 +439,9 @@ Create an instance: `$payment = $client->Payment();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `string` |  |
 | `api_key` | `string` |  |
-| `chain` | `string` |  |
 | `credits_added` | `int` |  |
 | `ok` | `bool` |  |
-| `rate` | `string` |  |
-| `token` | `string` |  |
 | `total_credits` | `int` |  |
 | `tx_hash` | `string` | Transaction hash of USDC transfer on Base |
 | `usdc` | `float` |  |
@@ -494,9 +484,7 @@ Create an instance: `$service = $client->Service();`
 | `endpoints` | `array` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
-| `latency` | `float` |  |
 | `name` | `string` |  |
-| `status` | `string` |  |
 
 #### Example: Load
 
@@ -655,6 +643,7 @@ Use `Helpers::to_map()` to safely validate that a value is an array.
 php/
 ├── agentgateway_sdk.php          -- Main SDK class
 ├── config.php                     -- Configuration
+├── schema.php                     -- Generated option + entity specs
 ├── features.php                   -- Feature factory
 ├── core/                          -- Core types and context
 ├── entity/                        -- Entity implementations

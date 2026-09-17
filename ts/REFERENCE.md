@@ -374,13 +374,9 @@ const payment = client.Payment()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
 | `api_key` | `string` | Yes |  |
-| `chain` | `string` | No |  |
 | `credits_added` | `number` | No |  |
 | `ok` | `boolean` | No |  |
-| `rate` | `string` | No |  |
-| `token` | `string` | No |  |
 | `total_credits` | `number` | No |  |
 | `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` | No |  |
@@ -470,9 +466,7 @@ const service = client.Service()
 | `endpoints` | `any[]` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
-| `latency` | `number` | No |  |
 | `name` | `string` | No |  |
-| `status` | `string` | No |  |
 
 ### Actions
 

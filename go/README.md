@@ -312,13 +312,9 @@ API path: `/health`
 
 | Field | Description |
 | --- | --- |
-| `"address"` |  |
 | `"api_key"` |  |
-| `"chain"` |  |
 | `"credits_added"` |  |
 | `"ok"` |  |
-| `"rate"` |  |
-| `"token"` |  |
 | `"total_credits"` |  |
 | `"tx_hash"` | Transaction hash of USDC transfer on Base |
 | `"usdc"` |  |
@@ -337,9 +333,7 @@ API path: `/api/credits/topup`
 | `"endpoints"` |  |
 | `"icon"` |  |
 | `"id"` |  |
-| `"latency"` |  |
 | `"name"` |  |
-| `"status"` |  |
 
 Operations: List, Load.
 
@@ -470,13 +464,9 @@ Create an instance: `payment := client.Payment(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `string` |  |
 | `api_key` | `string` |  |
-| `chain` | `string` |  |
 | `credits_added` | `int` |  |
 | `ok` | `bool` |  |
-| `rate` | `string` |  |
-| `token` | `string` |  |
 | `total_credits` | `int` |  |
 | `tx_hash` | `string` | Transaction hash of USDC transfer on Base |
 | `usdc` | `float64` |  |
@@ -526,9 +516,7 @@ Create an instance: `service := client.Service(nil)`
 | `endpoints` | `[]any` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
-| `latency` | `float64` |  |
 | `name` | `string` |  |
-| `status` | `string` |  |
 
 #### Example: Load
 

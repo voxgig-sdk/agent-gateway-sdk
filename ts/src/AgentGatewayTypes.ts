@@ -40,26 +40,18 @@ export interface MetaLoadMatch {
 }
 
 export interface Payment {
-  address?: string
   api_key: string
-  chain?: string
   credits_added?: number
   ok?: boolean
-  rate?: string
-  token?: string
   total_credits?: number
   tx_hash: string
   usdc?: number
 }
 
 export interface PaymentLoadMatch {
-  address?: string
   api_key?: string
-  chain?: string
   credits_added?: number
   ok?: boolean
-  rate?: string
-  token?: string
   total_credits?: number
   tx_hash?: string
   usdc?: number
@@ -72,13 +64,9 @@ export interface PaymentLoadMatch {
 }
 
 export interface PaymentCreateData {
-  address?: string
   api_key: string
-  chain?: string
   credits_added?: number
   ok?: boolean
-  rate?: string
-  token?: string
   total_credits?: number
   tx_hash: string
   usdc?: number
@@ -91,9 +79,7 @@ export interface Service {
   endpoints?: any[]
   icon?: string
   id?: string
-  latency?: number
   name?: string
-  status?: string
 }
 
 export interface ServiceLoadMatch {

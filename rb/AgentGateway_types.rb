@@ -88,26 +88,14 @@ MetaLoadMatch = Struct.new(
 
 # Payment entity data model.
 #
-# @!attribute [rw] address
-#   @return [String, nil]
-#
 # @!attribute [rw] api_key
 #   @return [String]
-#
-# @!attribute [rw] chain
-#   @return [String, nil]
 #
 # @!attribute [rw] credits_added
 #   @return [Integer, nil]
 #
 # @!attribute [rw] ok
 #   @return [Boolean, nil]
-#
-# @!attribute [rw] rate
-#   @return [String, nil]
-#
-# @!attribute [rw] token
-#   @return [String, nil]
 #
 # @!attribute [rw] total_credits
 #   @return [Integer, nil]
@@ -118,13 +106,9 @@ MetaLoadMatch = Struct.new(
 # @!attribute [rw] usdc
 #   @return [Float, nil]
 Payment = Struct.new(
-  :address,
   :api_key,
-  :chain,
   :credits_added,
   :ok,
-  :rate,
-  :token,
   :total_credits,
   :tx_hash,
   :usdc,
@@ -133,13 +117,7 @@ Payment = Struct.new(
 
 # Request payload for Payment#load.
 #
-# @!attribute [rw] address
-#   @return [String, nil]
-#
 # @!attribute [rw] api_key
-#   @return [String, nil]
-#
-# @!attribute [rw] chain
 #   @return [String, nil]
 #
 # @!attribute [rw] credits_added
@@ -147,12 +125,6 @@ Payment = Struct.new(
 #
 # @!attribute [rw] ok
 #   @return [Boolean, nil]
-#
-# @!attribute [rw] rate
-#   @return [String, nil]
-#
-# @!attribute [rw] token
-#   @return [String, nil]
 #
 # @!attribute [rw] total_credits
 #   @return [Integer, nil]
@@ -163,13 +135,9 @@ Payment = Struct.new(
 # @!attribute [rw] usdc
 #   @return [Float, nil]
 PaymentLoadMatch = Struct.new(
-  :address,
   :api_key,
-  :chain,
   :credits_added,
   :ok,
-  :rate,
-  :token,
   :total_credits,
   :tx_hash,
   :usdc,
@@ -178,26 +146,14 @@ PaymentLoadMatch = Struct.new(
 
 # Request payload for Payment#create.
 #
-# @!attribute [rw] address
-#   @return [String, nil]
-#
 # @!attribute [rw] api_key
 #   @return [String]
-#
-# @!attribute [rw] chain
-#   @return [String, nil]
 #
 # @!attribute [rw] credits_added
 #   @return [Integer, nil]
 #
 # @!attribute [rw] ok
 #   @return [Boolean, nil]
-#
-# @!attribute [rw] rate
-#   @return [String, nil]
-#
-# @!attribute [rw] token
-#   @return [String, nil]
 #
 # @!attribute [rw] total_credits
 #   @return [Integer, nil]
@@ -208,13 +164,9 @@ PaymentLoadMatch = Struct.new(
 # @!attribute [rw] usdc
 #   @return [Float, nil]
 PaymentCreateData = Struct.new(
-  :address,
   :api_key,
-  :chain,
   :credits_added,
   :ok,
-  :rate,
-  :token,
   :total_credits,
   :tx_hash,
   :usdc,
@@ -241,13 +193,7 @@ PaymentCreateData = Struct.new(
 # @!attribute [rw] id
 #   @return [String, nil]
 #
-# @!attribute [rw] latency
-#   @return [Float, nil]
-#
 # @!attribute [rw] name
-#   @return [String, nil]
-#
-# @!attribute [rw] status
 #   @return [String, nil]
 Service = Struct.new(
   :apiUrl,
@@ -256,9 +202,7 @@ Service = Struct.new(
   :endpoints,
   :icon,
   :id,
-  :latency,
   :name,
-  :status,
   keyword_init: true
 )
 

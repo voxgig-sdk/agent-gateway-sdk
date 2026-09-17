@@ -56,13 +56,9 @@ type MetaLoadMatch struct {
 
 // Payment is the typed data model for the payment entity.
 type Payment struct {
-	Address *string `json:"address,omitempty"`
 	ApiKey string `json:"api_key"`
-	Chain *string `json:"chain,omitempty"`
 	CreditsAdded *int `json:"credits_added,omitempty"`
 	Ok *bool `json:"ok,omitempty"`
-	Rate *string `json:"rate,omitempty"`
-	Token *string `json:"token,omitempty"`
 	TotalCredits *int `json:"total_credits,omitempty"`
 	TxHash string `json:"tx_hash"`
 	Usdc *float64 `json:"usdc,omitempty"`
@@ -70,13 +66,9 @@ type Payment struct {
 
 // PaymentLoadMatch is the typed request payload for Payment.LoadTyped.
 type PaymentLoadMatch struct {
-	Address *string `json:"address,omitempty"`
 	ApiKey *string `json:"api_key,omitempty"`
-	Chain *string `json:"chain,omitempty"`
 	CreditsAdded *int `json:"credits_added,omitempty"`
 	Ok *bool `json:"ok,omitempty"`
-	Rate *string `json:"rate,omitempty"`
-	Token *string `json:"token,omitempty"`
 	TotalCredits *int `json:"total_credits,omitempty"`
 	TxHash *string `json:"tx_hash,omitempty"`
 	Usdc *float64 `json:"usdc,omitempty"`
@@ -84,13 +76,9 @@ type PaymentLoadMatch struct {
 
 // PaymentCreateData is the typed request payload for Payment.CreateTyped.
 type PaymentCreateData struct {
-	Address *string `json:"address,omitempty"`
 	ApiKey string `json:"api_key"`
-	Chain *string `json:"chain,omitempty"`
 	CreditsAdded *int `json:"credits_added,omitempty"`
 	Ok *bool `json:"ok,omitempty"`
-	Rate *string `json:"rate,omitempty"`
-	Token *string `json:"token,omitempty"`
 	TotalCredits *int `json:"total_credits,omitempty"`
 	TxHash string `json:"tx_hash"`
 	Usdc *float64 `json:"usdc,omitempty"`
@@ -104,9 +92,7 @@ type Service struct {
 	Endpoints *[]any `json:"endpoints,omitempty"`
 	Icon *string `json:"icon,omitempty"`
 	Id *string `json:"id,omitempty"`
-	Latency *float64 `json:"latency,omitempty"`
 	Name *string `json:"name,omitempty"`
-	Status *string `json:"status,omitempty"`
 }
 
 // ServiceLoadMatch is the typed request payload for Service.LoadTyped.

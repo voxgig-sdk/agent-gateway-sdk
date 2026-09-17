@@ -294,13 +294,9 @@ API path: `/health`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
 | `api_key` |  |
-| `chain` |  |
 | `credits_added` |  |
 | `ok` |  |
-| `rate` |  |
-| `token` |  |
 | `total_credits` |  |
 | `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
@@ -319,9 +315,7 @@ API path: `/api/credits/topup`
 | `endpoints` |  |
 | `icon` |  |
 | `id` |  |
-| `latency` |  |
 | `name` |  |
-| `status` |  |
 
 Operations: List, Load.
 
@@ -436,13 +430,9 @@ Create an instance: `payment = client.Payment()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `str` |  |
 | `api_key` | `str` |  |
-| `chain` | `str` |  |
 | `credits_added` | `int` |  |
 | `ok` | `bool` |  |
-| `rate` | `str` |  |
-| `token` | `str` |  |
 | `total_credits` | `int` |  |
 | `tx_hash` | `str` | Transaction hash of USDC transfer on Base |
 | `usdc` | `float` |  |
@@ -484,9 +474,7 @@ Create an instance: `service = client.Service()`
 | `endpoints` | `list` |  |
 | `icon` | `str` |  |
 | `id` | `str` |  |
-| `latency` | `float` |  |
 | `name` | `str` |  |
-| `status` | `str` |  |
 
 #### Example: Load
 
@@ -643,6 +631,7 @@ Use `helpers.to_map()` to safely validate that a value is a dict.
 py/
 ├── agentgateway_sdk.py         -- Main SDK module
 ├── config.py                    -- Configuration
+├── schema.py                    -- Generated option + entity specs
 ├── features.py                  -- Feature factory
 ├── core/                        -- Core types and context
 ├── entity/                      -- Entity implementations

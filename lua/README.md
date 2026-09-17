@@ -278,13 +278,9 @@ API path: `/health`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
 | `api_key` |  |
-| `chain` |  |
 | `credits_added` |  |
 | `ok` |  |
-| `rate` |  |
-| `token` |  |
 | `total_credits` |  |
 | `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
@@ -303,9 +299,7 @@ API path: `/api/credits/topup`
 | `endpoints` |  |
 | `icon` |  |
 | `id` |  |
-| `latency` |  |
 | `name` |  |
-| `status` |  |
 
 Operations: List, Load.
 
@@ -420,13 +414,9 @@ Create an instance: `local payment = client:Payment(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `string` |  |
 | `api_key` | `string` |  |
-| `chain` | `string` |  |
 | `credits_added` | `number` |  |
 | `ok` | `boolean` |  |
-| `rate` | `string` |  |
-| `token` | `string` |  |
 | `total_credits` | `number` |  |
 | `tx_hash` | `string` | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` |  |
@@ -468,9 +458,7 @@ Create an instance: `local service = client:Service(nil)`
 | `endpoints` | `table` |  |
 | `icon` | `string` |  |
 | `id` | `string` |  |
-| `latency` | `number` |  |
 | `name` | `string` |  |
-| `status` | `string` |  |
 
 #### Example: Load
 
@@ -627,6 +615,7 @@ Use `helpers.to_map()` to safely validate that a value is a table.
 lua/
 ├── agent-gateway_sdk.lua    -- Main SDK module
 ├── config.lua               -- Configuration
+├── schema.lua               -- Generated option + entity specs
 ├── features.lua             -- Feature factory
 ├── core/                    -- Core types and context
 ├── entity/                  -- Entity implementations

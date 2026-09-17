@@ -309,13 +309,9 @@ payment = client.Payment()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `str` | No |  |
 | `api_key` | `str` | Yes |  |
-| `chain` | `str` | No |  |
 | `credits_added` | `int` | No |  |
 | `ok` | `bool` | No |  |
-| `rate` | `str` | No |  |
-| `token` | `str` | No |  |
 | `total_credits` | `int` | No |  |
 | `tx_hash` | `str` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `float` | No |  |
@@ -386,9 +382,7 @@ service = client.Service()
 | `endpoints` | `list` | No |  |
 | `icon` | `str` | No |  |
 | `id` | `str` | No |  |
-| `latency` | `float` | No |  |
 | `name` | `str` | No |  |
-| `status` | `str` | No |  |
 
 ### Operations
 

@@ -36,17 +36,7 @@ main: kit: entity: service: {
       type: "`$STRING`"
     }
     {
-      name: "latency"
-      req: false
-      type: "`$NUMBER`"
-    }
-    {
       name: "name"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "status"
       req: false
       type: "`$STRING`"
     }

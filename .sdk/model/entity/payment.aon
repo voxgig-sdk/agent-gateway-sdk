@@ -6,18 +6,8 @@ main: kit: entity: payment: {
 
   fields: [
     {
-      name: "address"
-      req: false
-      type: "`$STRING`"
-    }
-    {
       name: "api_key"
       req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "chain"
-      req: false
       type: "`$STRING`"
     }
     {
@@ -29,16 +19,6 @@ main: kit: entity: payment: {
       name: "ok"
       req: false
       type: "`$BOOLEAN`"
-    }
-    {
-      name: "rate"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "token"
-      req: false
-      type: "`$STRING`"
     }
     {
       name: "total_credits"

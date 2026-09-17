@@ -1,8 +1,8 @@
 # Flows
 
-@"BasicAnalyticsFlow.aon"
-@"BasicApiKeyFlow.aon"
-@"BasicBalanceFlow.aon"
-@"BasicMetaFlow.aon"
-@"BasicPaymentFlow.aon"
-@"BasicServiceFlow.aon"
+@"./BasicAnalyticsFlow.aon"
+@"./BasicApiKeyFlow.aon"
+@"./BasicBalanceFlow.aon"
+@"./BasicMetaFlow.aon"
+@"./BasicPaymentFlow.aon"
+@"./BasicServiceFlow.aon"

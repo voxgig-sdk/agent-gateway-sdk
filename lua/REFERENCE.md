@@ -316,13 +316,9 @@ local payment = client:Payment(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
 | `api_key` | `string` | Yes |  |
-| `chain` | `string` | No |  |
 | `credits_added` | `number` | No |  |
 | `ok` | `boolean` | No |  |
-| `rate` | `string` | No |  |
-| `token` | `string` | No |  |
 | `total_credits` | `number` | No |  |
 | `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `number` | No |  |
@@ -394,9 +390,7 @@ local service = client:Service(nil)
 | `endpoints` | `table` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
-| `latency` | `number` | No |  |
 | `name` | `string` | No |  |
-| `status` | `string` | No |  |
 
 ### Operations
 

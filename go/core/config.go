@@ -278,16 +278,8 @@ func MakeConfig() map[string]any {
 			"payment": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "address",
-						"type": "`$STRING`",
-					},
-					map[string]any{
 						"name": "api_key",
 						"req": true,
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "chain",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -297,14 +289,6 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "ok",
 						"type": "`$BOOLEAN`",
-					},
-					map[string]any{
-						"name": "rate",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "token",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "total_credits",
@@ -423,15 +407,7 @@ func MakeConfig() map[string]any {
 						"type": "`$STRING`",
 					},
 					map[string]any{
-						"name": "latency",
-						"type": "`$NUMBER`",
-					},
-					map[string]any{
 						"name": "name",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "status",
 						"type": "`$STRING`",
 					},
 				},

@@ -105,12 +105,12 @@ local result, err = client:Balance():load()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/agent-gateway-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
-| Python | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
-| PHP | `voxgig-sdk/agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
+| TypeScript | `@voxgig-sdk/agent-gateway-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/tags) |
+| Python | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/tags) |
+| PHP | `voxgig-sdk/agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/agent-gateway-sdk/go` | `go get github.com/voxgig-sdk/agent-gateway-sdk/go@latest` |
-| Ruby | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
-| Lua | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/releases) |
+| Ruby | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/tags) |
+| Lua | `voxgig-sdk-agent-gateway` | publish pending — [install from git tag](https://github.com/voxgig-sdk/agent-gateway-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/agent-gateway-sdk/go-cli` | `go install github.com/voxgig-sdk/agent-gateway-sdk/go-cli/cmd/agent-gateway@latest` |
 | Go MCP server | `github.com/voxgig-sdk/agent-gateway-sdk/go-mcp` | `go get github.com/voxgig-sdk/agent-gateway-sdk/go-mcp@latest` |
 

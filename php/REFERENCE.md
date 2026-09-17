@@ -318,13 +318,9 @@ $payment = $client->Payment();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
 | `api_key` | `string` | Yes |  |
-| `chain` | `string` | No |  |
 | `credits_added` | `int` | No |  |
 | `ok` | `bool` | No |  |
-| `rate` | `string` | No |  |
-| `token` | `string` | No |  |
 | `total_credits` | `int` | No |  |
 | `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `float` | No |  |
@@ -396,9 +392,7 @@ $service = $client->Service();
 | `endpoints` | `array` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
-| `latency` | `float` | No |  |
 | `name` | `string` | No |  |
-| `status` | `string` | No |  |
 
 ### Operations
 

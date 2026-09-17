@@ -58,24 +58,16 @@ class PaymentRequired(TypedDict):
 
 
 class Payment(PaymentRequired, total=False):
-    address: str
-    chain: str
     credits_added: int
     ok: bool
-    rate: str
-    token: str
     total_credits: int
     usdc: float
 
 
 class PaymentLoadMatch(TypedDict, total=False):
-    address: str
     api_key: str
-    chain: str
     credits_added: int
     ok: bool
-    rate: str
-    token: str
     total_credits: int
     tx_hash: str
     usdc: float
@@ -87,12 +79,8 @@ class PaymentCreateDataRequired(TypedDict):
 
 
 class PaymentCreateData(PaymentCreateDataRequired, total=False):
-    address: str
-    chain: str
     credits_added: int
     ok: bool
-    rate: str
-    token: str
     total_credits: int
     usdc: float
 
@@ -104,9 +92,7 @@ class Service(TypedDict, total=False):
     endpoints: list
     icon: str
     id: str
-    latency: float
     name: str
-    status: str
 
 
 class ServiceLoadMatch(TypedDict):

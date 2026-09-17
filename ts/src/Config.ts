@@ -131,24 +131,24 @@ class Config {
 
     entity: {
       
-      analytics: {
-      },
-
-      api_key: {
-      },
-
-      balance: {
-      },
-
-      meta: {
-      },
-
-      payment: {
-      },
-
-      service: {
-      },
-
+        analytics: {
+        },
+  
+        api_key: {
+        },
+  
+        balance: {
+        },
+  
+        meta: {
+        },
+  
+        payment: {
+        },
+  
+        service: {
+        },
+  
     }
   }
 
@@ -337,16 +337,8 @@ class Config {
     "payment": {
       "fields": [
         {
-          "name": "address",
-          "type": "`$STRING`"
-        },
-        {
           "name": "api_key",
           "req": true,
-          "type": "`$STRING`"
-        },
-        {
-          "name": "chain",
           "type": "`$STRING`"
         },
         {
@@ -356,14 +348,6 @@ class Config {
         {
           "name": "ok",
           "type": "`$BOOLEAN`"
-        },
-        {
-          "name": "rate",
-          "type": "`$STRING`"
-        },
-        {
-          "name": "token",
-          "type": "`$STRING`"
         },
         {
           "name": "total_credits",
@@ -482,15 +466,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
-          "name": "latency",
-          "type": "`$NUMBER`"
-        },
-        {
           "name": "name",
-          "type": "`$STRING`"
-        },
-        {
-          "name": "status",
           "type": "`$STRING`"
         }
       ],

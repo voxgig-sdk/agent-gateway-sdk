@@ -300,16 +300,8 @@ class AgentGatewayConfig
         'payment' => [
           'fields' => [
             [
-              'name' => 'address',
-              'type' => '`$STRING`',
-            ],
-            [
               'name' => 'api_key',
               'req' => true,
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'chain',
               'type' => '`$STRING`',
             ],
             [
@@ -319,14 +311,6 @@ class AgentGatewayConfig
             [
               'name' => 'ok',
               'type' => '`$BOOLEAN`',
-            ],
-            [
-              'name' => 'rate',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'token',
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'total_credits',
@@ -445,15 +429,7 @@ class AgentGatewayConfig
               'type' => '`$STRING`',
             ],
             [
-              'name' => 'latency',
-              'type' => '`$NUMBER`',
-            ],
-            [
               'name' => 'name',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'status',
               'type' => '`$STRING`',
             ],
           ],

@@ -33,37 +33,25 @@
 ---@field status? string
 
 ---@class Payment
----@field address? string
 ---@field api_key string
----@field chain? string
 ---@field credits_added? number
 ---@field ok? boolean
----@field rate? string
----@field token? string
 ---@field total_credits? number
 ---@field tx_hash string
 ---@field usdc? number
 
 ---@class PaymentLoadMatch
----@field address? string
 ---@field api_key? string
----@field chain? string
 ---@field credits_added? number
 ---@field ok? boolean
----@field rate? string
----@field token? string
 ---@field total_credits? number
 ---@field tx_hash? string
 ---@field usdc? number
 
 ---@class PaymentCreateData
----@field address? string
 ---@field api_key string
----@field chain? string
 ---@field credits_added? number
 ---@field ok? boolean
----@field rate? string
----@field token? string
 ---@field total_credits? number
 ---@field tx_hash string
 ---@field usdc? number
@@ -75,9 +63,7 @@
 ---@field endpoints? table
 ---@field icon? string
 ---@field id? string
----@field latency? number
 ---@field name? string
----@field status? string
 
 ---@class ServiceLoadMatch
 ---@field id string

@@ -65,13 +65,9 @@ class MetaLoadMatch
 /** Payment entity data model. */
 class Payment
 {
-    public ?string $address = null;
     public string $api_key;
-    public ?string $chain = null;
     public ?int $credits_added = null;
     public ?bool $ok = null;
-    public ?string $rate = null;
-    public ?string $token = null;
     public ?int $total_credits = null;
     public string $tx_hash;
     public ?float $usdc = null;
@@ -80,13 +76,9 @@ class Payment
 /** Request payload for Payment#load. */
 class PaymentLoadMatch
 {
-    public ?string $address = null;
     public ?string $api_key = null;
-    public ?string $chain = null;
     public ?int $credits_added = null;
     public ?bool $ok = null;
-    public ?string $rate = null;
-    public ?string $token = null;
     public ?int $total_credits = null;
     public ?string $tx_hash = null;
     public ?float $usdc = null;
@@ -95,13 +87,9 @@ class PaymentLoadMatch
 /** Request payload for Payment#create. */
 class PaymentCreateData
 {
-    public ?string $address = null;
     public string $api_key;
-    public ?string $chain = null;
     public ?int $credits_added = null;
     public ?bool $ok = null;
-    public ?string $rate = null;
-    public ?string $token = null;
     public ?int $total_credits = null;
     public string $tx_hash;
     public ?float $usdc = null;
@@ -116,9 +104,7 @@ class Service
     public ?array $endpoints = null;
     public ?string $icon = null;
     public ?string $id = null;
-    public ?float $latency = null;
     public ?string $name = null;
-    public ?string $status = null;
 }
 
 /** Request payload for Service#load. */

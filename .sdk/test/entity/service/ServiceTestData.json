@@ -2,51 +2,43 @@
   "existing": {
     "service": {
       "SERVICE00": {
-        "apiUrl": "s5a",
-        "category": "s5b",
-        "description": "s5c",
+        "apiUrl": "s46",
+        "category": "s47",
+        "description": "s48",
         "endpoints": [],
-        "icon": "s5e",
+        "icon": "s4a",
         "id": "SERVICE00",
-        "latency": 96,
-        "name": "s61",
-        "status": "s62"
+        "name": "s4c"
       },
       "SERVICE01": {
-        "apiUrl": "sb4",
-        "category": "sb5",
-        "description": "sb6",
+        "apiUrl": "s8c",
+        "category": "s8d",
+        "description": "s8e",
         "endpoints": [],
-        "icon": "sb8",
+        "icon": "s90",
         "id": "SERVICE01",
-        "latency": 186,
-        "name": "sbb",
-        "status": "sbc"
+        "name": "s92"
       },
       "SERVICE02": {
-        "apiUrl": "s10e",
-        "category": "s10f",
-        "description": "s110",
+        "apiUrl": "sd2",
+        "category": "sd3",
+        "description": "sd4",
         "endpoints": [],
-        "icon": "s112",
+        "icon": "sd6",
         "id": "SERVICE02",
-        "latency": 276,
-        "name": "s115",
-        "status": "s116"
+        "name": "sd8"
       }
     }
   },
   "new": {
     "service": {
       "service_ref01": {
-        "apiUrl": "s168",
-        "category": "s169",
-        "description": "s16a",
+        "apiUrl": "s118",
+        "category": "s119",
+        "description": "s11a",
         "endpoints": [],
-        "icon": "s16c",
-        "latency": 366,
-        "name": "s16f",
-        "status": "s170"
+        "icon": "s11c",
+        "name": "s11e"
       }
     }
   },

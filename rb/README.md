@@ -287,13 +287,9 @@ API path: `/health`
 
 | Field | Description |
 | --- | --- |
-| `address` |  |
 | `api_key` |  |
-| `chain` |  |
 | `credits_added` |  |
 | `ok` |  |
-| `rate` |  |
-| `token` |  |
 | `total_credits` |  |
 | `tx_hash` | Transaction hash of USDC transfer on Base |
 | `usdc` |  |
@@ -312,9 +308,7 @@ API path: `/api/credits/topup`
 | `endpoints` |  |
 | `icon` |  |
 | `id` |  |
-| `latency` |  |
 | `name` |  |
-| `status` |  |
 
 Operations: List, Load.
 
@@ -432,13 +426,9 @@ Create an instance: `payment = client.Payment`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `address` | `String` |  |
 | `api_key` | `String` |  |
-| `chain` | `String` |  |
 | `credits_added` | `Integer` |  |
 | `ok` | `Boolean` |  |
-| `rate` | `String` |  |
-| `token` | `String` |  |
 | `total_credits` | `Integer` |  |
 | `tx_hash` | `String` | Transaction hash of USDC transfer on Base |
 | `usdc` | `Float` |  |
@@ -481,9 +471,7 @@ Create an instance: `service = client.Service`
 | `endpoints` | `Array` |  |
 | `icon` | `String` |  |
 | `id` | `String` |  |
-| `latency` | `Float` |  |
 | `name` | `String` |  |
-| `status` | `String` |  |
 
 #### Example: Load
 
@@ -642,6 +630,7 @@ Use `Helpers.to_map()` to safely validate that a value is a hash.
 rb/
 ├── AgentGateway_sdk.rb       -- Main SDK module
 ├── config.rb                  -- Configuration
+├── schema.rb                  -- Generated option + entity specs
 ├── features.rb                -- Feature factory
 ├── core/                      -- Core types and context
 ├── entity/                    -- Entity implementations

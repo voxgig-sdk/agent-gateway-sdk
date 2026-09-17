@@ -320,13 +320,9 @@ fmt.Println(payment.GetName()) // "payment"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `address` | `string` | No |  |
 | `api_key` | `string` | Yes |  |
-| `chain` | `string` | No |  |
 | `credits_added` | `int` | No |  |
 | `ok` | `bool` | No |  |
-| `rate` | `string` | No |  |
-| `token` | `string` | No |  |
 | `total_credits` | `int` | No |  |
 | `tx_hash` | `string` | Yes | Transaction hash of USDC transfer on Base |
 | `usdc` | `float64` | No |  |
@@ -401,9 +397,7 @@ fmt.Println(service.GetName()) // "service"
 | `endpoints` | `[]any` | No |  |
 | `icon` | `string` | No |  |
 | `id` | `string` | No |  |
-| `latency` | `float64` | No |  |
 | `name` | `string` | No |  |
-| `status` | `string` | No |  |
 
 ### Operations
 

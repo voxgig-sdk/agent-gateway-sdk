@@ -274,16 +274,8 @@ local function make_config()
       ["payment"] = {
         ["fields"] = {
           {
-            ["name"] = "address",
-            ["type"] = "`$STRING`",
-          },
-          {
             ["name"] = "api_key",
             ["req"] = true,
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "chain",
             ["type"] = "`$STRING`",
           },
           {
@@ -293,14 +285,6 @@ local function make_config()
           {
             ["name"] = "ok",
             ["type"] = "`$BOOLEAN`",
-          },
-          {
-            ["name"] = "rate",
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "token",
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "total_credits",
@@ -419,15 +403,7 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
-            ["name"] = "latency",
-            ["type"] = "`$NUMBER`",
-          },
-          {
             ["name"] = "name",
-            ["type"] = "`$STRING`",
-          },
-          {
-            ["name"] = "status",
             ["type"] = "`$STRING`",
           },
         },

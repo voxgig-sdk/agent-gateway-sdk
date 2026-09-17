@@ -210,13 +210,13 @@ declare class Config {
         payment: {
             fields: ({
                 name: string;
+                req: boolean;
                 type: string;
-                req?: undefined;
                 short?: undefined;
             } | {
                 name: string;
-                req: boolean;
                 type: string;
+                req?: undefined;
                 short?: undefined;
             } | {
                 name: string;
