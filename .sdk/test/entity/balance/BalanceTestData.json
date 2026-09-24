@@ -29,62 +29,8 @@
   "requests": {
     "GET /api/keys/balance": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "getBalance",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "createdAt": {
-                      "description": "Unix timestamp ms",
-                      "example": 1709000000000,
-                      "type": "integer"
-                    },
-                    "credits": {
-                      "example": 150,
-                      "type": "integer"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Balance info"
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Invalid key"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "securitySchemes": {
-          "bearerAuth": {
-            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
-            "scheme": "bearer",
-            "type": "http"
-          }
-        },
-        "securitySource": "definition"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

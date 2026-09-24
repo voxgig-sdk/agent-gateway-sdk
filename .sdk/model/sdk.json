@@ -24,13 +24,79 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "analytics": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "analytics",
           "op": {
             "load": {
@@ -38,18 +104,19 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /api/stats",
-                    "json": "{\"operationId\":\"getStats\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Usage stats\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/stats",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/stats",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -57,8 +124,7 @@
                       "lit": "stats"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -75,20 +141,22 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "credits",
-              "req": false,
-              "type": "`$INTEGER`"
+          "fields": {
+            "credits": {
+              "a": true,
+              "h": "Credits",
+              "n": "credits",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "key",
-              "req": false,
-              "type": "`$STRING`"
+            "key": {
+              "a": true,
+              "h": "Key",
+              "n": "key",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "api_key",
           "op": {
             "create": {
@@ -96,18 +164,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /api/keys/create",
-                    "json": "{\"operationId\":\"createApiKey\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"credits\":200,\"key\":\"gw_abc123...\"},\"schema\":{\"properties\":{\"credits\":{\"example\":200,\"type\":\"integer\"},\"key\":{\"example\":\"gw_abc123...\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"API key created\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/api/keys/create",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/api/keys/create",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -118,8 +187,7 @@
                       "lit": "create"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -136,21 +204,23 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "createdAt",
-              "req": false,
-              "short": "Unix timestamp ms",
-              "type": "`$INTEGER`"
+          "fields": {
+            "createdAt": {
+              "a": true,
+              "h": "Created At",
+              "n": "createdAt",
+              "r": false,
+              "sh": "Unix timestamp ms",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "credits",
-              "req": false,
-              "type": "`$INTEGER`"
+            "credits": {
+              "a": true,
+              "h": "Credits",
+              "n": "credits",
+              "r": false,
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "name": "balance",
           "op": {
             "load": {
@@ -158,18 +228,19 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /api/keys/balance",
-                    "json": "{\"operationId\":\"getBalance\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"createdAt\":{\"description\":\"Unix timestamp ms\",\"example\":1709000000000,\"type\":\"integer\"},\"credits\":{\"example\":150,\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Balance info\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid key\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/keys/balance",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/keys/balance",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -180,8 +251,7 @@
                       "lit": "balance"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -198,14 +268,15 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "status",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "status": {
+              "a": true,
+              "h": "Status",
+              "n": "status",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "meta",
           "op": {
             "load": {
@@ -213,24 +284,24 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /health",
-                    "json": "{\"operationId\":\"healthCheck\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"status\":{\"example\":\"ok\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"OK\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/health",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/health",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "health"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -247,45 +318,51 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "api_key",
-              "req": true,
-              "type": "`$STRING`"
+          "fields": {
+            "api_key": {
+              "a": true,
+              "h": "Api Key",
+              "n": "api_key",
+              "r": true,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "credits_added",
-              "req": false,
-              "type": "`$INTEGER`"
+            "credits_added": {
+              "a": true,
+              "h": "Credits Added",
+              "n": "credits_added",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "ok",
-              "req": false,
-              "type": "`$BOOLEAN`"
+            "ok": {
+              "a": true,
+              "h": "Ok",
+              "n": "ok",
+              "r": false,
+              "t": "`$BOOLEAN`"
             },
-            {
-              "active": true,
-              "name": "total_credits",
-              "req": false,
-              "type": "`$INTEGER`"
+            "total_credits": {
+              "a": true,
+              "h": "Total Credits",
+              "n": "total_credits",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "tx_hash",
-              "req": true,
-              "short": "Transaction hash of USDC transfer on Base",
-              "type": "`$STRING`"
+            "tx_hash": {
+              "a": true,
+              "h": "Tx Hash",
+              "n": "tx_hash",
+              "r": true,
+              "sh": "Transaction hash of USDC transfer on Base",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "usdc",
-              "req": false,
-              "type": "`$NUMBER`"
+            "usdc": {
+              "a": true,
+              "h": "Usdc",
+              "n": "usdc",
+              "r": false,
+              "t": "`$NUMBER`"
             }
-          ],
+          },
           "name": "payment",
           "op": {
             "create": {
@@ -293,18 +370,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /api/credits/topup",
-                    "json": "{\"operationId\":\"topupCredits\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"api_key\":{\"type\":\"string\"},\"tx_hash\":{\"description\":\"Transaction hash of USDC transfer on Base\",\"type\":\"string\"}},\"required\":[\"api_key\",\"tx_hash\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"credits_added\":{\"type\":\"integer\"},\"ok\":{\"type\":\"boolean\"},\"total_credits\":{\"type\":\"integer\"},\"usdc\":{\"type\":\"number\"}},\"type\":\"object\"}}},\"description\":\"Credits added\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/api/credits/topup",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/api/credits/topup",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -315,8 +393,7 @@
                       "lit": "topup"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -328,18 +405,21 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /api/payments/info",
-                    "json": "{\"operationId\":\"getPaymentInfo\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"address\":{\"type\":\"string\"},\"chain\":{\"example\":\"Base (L2)\",\"type\":\"string\"},\"rate\":{\"example\":\"500 credits per 1 USDC\",\"type\":\"string\"},\"token\":{\"example\":\"USDC\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Payment details\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/payments/info",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/payments/info",
+                  "q": {
+                    "$action": "info"
+                  },
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -350,10 +430,7 @@
                       "lit": "info"
                     }
                   ],
-                  "select": {
-                    "$action": "info"
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -370,50 +447,57 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "apiUrl",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "apiUrl": {
+              "a": true,
+              "h": "Api Url",
+              "n": "apiUrl",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "category",
-              "req": false,
-              "type": "`$STRING`"
+            "category": {
+              "a": true,
+              "h": "Category",
+              "n": "category",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "type": "`$STRING`"
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "endpoints",
-              "req": false,
-              "type": "`$ARRAY`"
+            "endpoints": {
+              "a": true,
+              "h": "Endpoints",
+              "n": "endpoints",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "icon",
-              "req": false,
-              "type": "`$STRING`"
+            "icon": {
+              "a": true,
+              "h": "Icon",
+              "n": "icon",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -425,37 +509,43 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/services",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "category",
-                        "orig": "category",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "category",
+                        "or": "category",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "search",
-                        "orig": "search",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "search",
+                        "or": "search",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/services",
-                    "json": "{\"operationId\":\"listServices\",\"parameters\":[{\"description\":\"Filter by category\",\"in\":\"query\",\"name\":\"category\",\"schema\":{\"type\":\"string\"}},{\"description\":\"Search by name or description\",\"in\":\"query\",\"name\":\"search\",\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"count\":{\"type\":\"integer\"},\"services\":{\"items\":{\"properties\":{\"apiUrl\":{\"type\":\"string\"},\"category\":{\"enum\":[\"infrastructure\",\"defi\",\"blockchain\",\"data\",\"security\",\"gaming\"],\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"endpoints\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"icon\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"total\":{\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Service list\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/services",
+                  "q": {
+                    "exist": [
+                      "category",
+                      "search"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/services",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -463,30 +553,27 @@
                       "lit": "services"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "category",
-                      "search"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.services`"
                   }
                 },
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "GET /api/services/health",
-                    "json": "{\"operationId\":\"getHealth\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"offline\":{\"type\":\"integer\"},\"online\":{\"type\":\"integer\"},\"services\":{\"items\":{\"properties\":{\"id\":{\"type\":\"string\"},\"latency\":{\"type\":\"number\"},\"name\":{\"type\":\"string\"},\"status\":{\"enum\":[\"online\",\"offline\"],\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Health status\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/services/health",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/services/health",
+                  "q": {
+                    "$action": "health"
+                  },
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -497,10 +584,7 @@
                       "lit": "health"
                     }
                   ],
-                  "select": {
-                    "$action": "health"
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.services`"
                   }
@@ -512,30 +596,35 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /api/services/{id}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "crypto-feeds",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "crypto-feeds",
+                        "k": "param",
+                        "n": "id",
+                        "or": "id",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /api/services/{id}",
-                    "json": "{\"operationId\":\"getService\",\"parameters\":[{\"example\":\"crypto-feeds\",\"in\":\"path\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"apiUrl\":{\"type\":\"string\"},\"category\":{\"enum\":[\"infrastructure\",\"defi\",\"blockchain\",\"data\",\"security\",\"gaming\"],\"type\":\"string\"},\"description\":{\"type\":\"string\"},\"endpoints\":{\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"icon\":{\"type\":\"string\"},\"id\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Service detail\"},\"404\":{\"description\":\"Service not found\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/api/services/{id}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/api/services/{id}",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "api"
                     },
@@ -546,12 +635,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -980,17 +1064,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "analytics_ref01",
                 "srcdatavar": "analytics_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1010,15 +1094,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "api_key_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         },
@@ -1031,17 +1115,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "balance_ref01",
                 "srcdatavar": "balance_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1061,17 +1145,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "meta_ref01",
                 "srcdatavar": "meta_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1091,28 +1175,28 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "payment_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "payment_ref01",
                 "srcdatavar": "payment_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1132,13 +1216,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1148,19 +1232,19 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "service_ref01",
                 "srcdatavar": "service_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "service01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {

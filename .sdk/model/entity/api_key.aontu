@@ -1,0 +1,57 @@
+# Entity: api_key
+
+main: kit: entity: api_key: {
+
+  alias: field: {}
+
+  fields: {
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: false
+      t: "`$INTEGER`"
+    }
+    key: {
+      h: "Key"
+      n: "key"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "api_key"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/keys/create"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/keys/create"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "keys"
+            }
+            {
+              lit: "create"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

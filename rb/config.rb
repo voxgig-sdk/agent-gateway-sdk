@@ -112,7 +112,6 @@ module AgentGatewayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/stats",
@@ -124,15 +123,17 @@ module AgentGatewayConfig
                       "lit" => "stats",
                     },
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "api",
                     "stats",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -145,10 +146,12 @@ module AgentGatewayConfig
           "fields" => [
             {
               "name" => "credits",
+              "title" => "Credits",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "key",
+              "title" => "Key",
               "type" => "`$STRING`",
             },
           ],
@@ -159,7 +162,6 @@ module AgentGatewayConfig
               "name" => "create",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/keys/create",
@@ -174,16 +176,18 @@ module AgentGatewayConfig
                       "lit" => "create",
                     },
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "api",
                     "keys",
                     "create",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -196,11 +200,13 @@ module AgentGatewayConfig
           "fields" => [
             {
               "name" => "createdAt",
-              "short" => "Unix timestamp ms",
+              "title" => "Created At",
               "type" => "`$INTEGER`",
+              "short" => "Unix timestamp ms",
             },
             {
               "name" => "credits",
+              "title" => "Credits",
               "type" => "`$INTEGER`",
             },
           ],
@@ -211,7 +217,6 @@ module AgentGatewayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/keys/balance",
@@ -226,16 +231,18 @@ module AgentGatewayConfig
                       "lit" => "balance",
                     },
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "api",
                     "keys",
                     "balance",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -248,6 +255,7 @@ module AgentGatewayConfig
           "fields" => [
             {
               "name" => "status",
+              "title" => "Status",
               "type" => "`$STRING`",
             },
           ],
@@ -258,7 +266,6 @@ module AgentGatewayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/health",
@@ -267,14 +274,16 @@ module AgentGatewayConfig
                       "lit" => "health",
                     },
                   ],
-                  "select" => {},
+                  "parts" => [
+                    "health",
+                  ],
+                  "rename" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "parts" => [
-                    "health",
-                  ],
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -287,29 +296,35 @@ module AgentGatewayConfig
           "fields" => [
             {
               "name" => "api_key",
-              "req" => true,
+              "title" => "Api Key",
               "type" => "`$STRING`",
+              "req" => true,
             },
             {
               "name" => "credits_added",
+              "title" => "Credits Added",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "ok",
+              "title" => "Ok",
               "type" => "`$BOOLEAN`",
             },
             {
               "name" => "total_credits",
+              "title" => "Total Credits",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "tx_hash",
+              "title" => "Tx Hash",
+              "type" => "`$STRING`",
               "req" => true,
               "short" => "Transaction hash of USDC transfer on Base",
-              "type" => "`$STRING`",
             },
             {
               "name" => "usdc",
+              "title" => "Usdc",
               "type" => "`$NUMBER`",
             },
           ],
@@ -320,7 +335,6 @@ module AgentGatewayConfig
               "name" => "create",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/api/credits/topup",
@@ -335,16 +349,18 @@ module AgentGatewayConfig
                       "lit" => "topup",
                     },
                   ],
-                  "select" => {},
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "api",
                     "credits",
                     "topup",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {},
                 },
               ],
             },
@@ -353,7 +369,6 @@ module AgentGatewayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/payments/info",
@@ -368,18 +383,20 @@ module AgentGatewayConfig
                       "lit" => "info",
                     },
                   ],
-                  "select" => {
-                    "$action" => "info",
-                  },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "api",
                     "payments",
                     "info",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {},
+                  "select" => {
+                    "$action" => "info",
+                  },
                 },
               ],
             },
@@ -392,30 +409,37 @@ module AgentGatewayConfig
           "fields" => [
             {
               "name" => "apiUrl",
+              "title" => "Api Url",
               "type" => "`$STRING`",
             },
             {
               "name" => "category",
+              "title" => "Category",
               "type" => "`$STRING`",
             },
             {
               "name" => "description",
+              "title" => "Description",
               "type" => "`$STRING`",
             },
             {
               "name" => "endpoints",
+              "title" => "Endpoints",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "icon",
+              "title" => "Icon",
               "type" => "`$STRING`",
             },
             {
               "name" => "id",
+              "title" => "Id",
               "type" => "`$STRING`",
             },
             {
               "name" => "name",
+              "title" => "Name",
               "type" => "`$STRING`",
             },
           ],
@@ -430,22 +454,6 @@ module AgentGatewayConfig
               "name" => "list",
               "points" => [
                 {
-                  "args" => {
-                    "query" => [
-                      {
-                        "kind" => "query",
-                        "name" => "category",
-                        "orig" => "category",
-                        "type" => "`$STRING`",
-                      },
-                      {
-                        "kind" => "query",
-                        "name" => "search",
-                        "orig" => "search",
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/services",
@@ -457,23 +465,39 @@ module AgentGatewayConfig
                       "lit" => "services",
                     },
                   ],
+                  "parts" => [
+                    "api",
+                    "services",
+                  ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.services`",
+                  },
+                  "args" => {
+                    "query" => [
+                      {
+                        "name" => "category",
+                        "orig" => "category",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                      {
+                        "name" => "search",
+                        "orig" => "search",
+                        "type" => "`$STRING`",
+                        "kind" => "query",
+                      },
+                    ],
+                  },
                   "select" => {
                     "exist" => [
                       "category",
                       "search",
                     ],
                   },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.services`",
-                  },
-                  "parts" => [
-                    "api",
-                    "services",
-                  ],
                 },
                 {
-                  "args" => {},
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/services/health",
@@ -488,18 +512,20 @@ module AgentGatewayConfig
                       "lit" => "health",
                     },
                   ],
-                  "select" => {
-                    "$action" => "health",
-                  },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body.services`",
-                  },
                   "parts" => [
                     "api",
                     "services",
                     "health",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body.services`",
+                  },
+                  "args" => {},
+                  "select" => {
+                    "$action" => "health",
+                  },
                 },
               ],
             },
@@ -508,18 +534,6 @@ module AgentGatewayConfig
               "name" => "load",
               "points" => [
                 {
-                  "args" => {
-                    "params" => [
-                      {
-                        "example" => "crypto-feeds",
-                        "kind" => "param",
-                        "name" => "id",
-                        "orig" => "id",
-                        "reqd" => true,
-                        "type" => "`$STRING`",
-                      },
-                    ],
-                  },
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/api/services/{id}",
@@ -534,20 +548,33 @@ module AgentGatewayConfig
                       "var" => "id",
                     },
                   ],
-                  "select" => {
-                    "exist" => [
-                      "id",
-                    ],
-                  },
-                  "transform" => {
-                    "req" => "`reqdata`",
-                    "res" => "`body`",
-                  },
                   "parts" => [
                     "api",
                     "services",
                     "{id}",
                   ],
+                  "rename" => {},
+                  "transform" => {
+                    "req" => "`reqdata`",
+                    "res" => "`body`",
+                  },
+                  "args" => {
+                    "params" => [
+                      {
+                        "name" => "id",
+                        "orig" => "id",
+                        "type" => "`$STRING`",
+                        "kind" => "param",
+                        "reqd" => true,
+                        "example" => "crypto-feeds",
+                      },
+                    ],
+                  },
+                  "select" => {
+                    "exist" => [
+                      "id",
+                    ],
+                  },
                 },
               ],
             },

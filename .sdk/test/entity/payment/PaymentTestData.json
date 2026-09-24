@@ -45,115 +45,13 @@
   "requests": {
     "POST /api/credits/topup": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "topupCredits",
-        "parameters": [],
-        "protocol": "http",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "api_key": {
-                    "type": "string"
-                  },
-                  "tx_hash": {
-                    "description": "Transaction hash of USDC transfer on Base",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "api_key",
-                  "tx_hash"
-                ],
-                "type": "object"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "credits_added": {
-                      "type": "integer"
-                    },
-                    "ok": {
-                      "type": "boolean"
-                    },
-                    "total_credits": {
-                      "type": "integer"
-                    },
-                    "usdc": {
-                      "type": "number"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Credits added"
-          }
-        },
-        "security": [],
-        "securitySchemes": {
-          "bearerAuth": {
-            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
-            "scheme": "bearer",
-            "type": "http"
-          }
-        },
-        "securitySource": "operation"
-      }
+      "version": 2,
+      "source": "openapi3"
     },
     "GET /api/payments/info": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "getPaymentInfo",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "address": {
-                      "type": "string"
-                    },
-                    "chain": {
-                      "example": "Base (L2)",
-                      "type": "string"
-                    },
-                    "rate": {
-                      "example": "500 credits per 1 USDC",
-                      "type": "string"
-                    },
-                    "token": {
-                      "example": "USDC",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Payment details"
-          }
-        },
-        "security": [],
-        "securitySchemes": {
-          "bearerAuth": {
-            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
-            "scheme": "bearer",
-            "type": "http"
-          }
-        },
-        "securitySource": "operation"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

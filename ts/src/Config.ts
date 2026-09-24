@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -163,7 +156,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/stats",
@@ -175,15 +167,17 @@ class Config {
                   "lit": "stats"
                 }
               ],
-              "select": {},
+              "parts": [
+                "api",
+                "stats"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "api",
-                "stats"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -196,10 +190,12 @@ class Config {
       "fields": [
         {
           "name": "credits",
+          "title": "Credits",
           "type": "`$INTEGER`"
         },
         {
           "name": "key",
+          "title": "Key",
           "type": "`$STRING`"
         }
       ],
@@ -210,7 +206,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/api/keys/create",
@@ -225,16 +220,18 @@ class Config {
                   "lit": "create"
                 }
               ],
-              "select": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "keys",
                 "create"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -247,11 +244,13 @@ class Config {
       "fields": [
         {
           "name": "createdAt",
-          "short": "Unix timestamp ms",
-          "type": "`$INTEGER`"
+          "title": "Created At",
+          "type": "`$INTEGER`",
+          "short": "Unix timestamp ms"
         },
         {
           "name": "credits",
+          "title": "Credits",
           "type": "`$INTEGER`"
         }
       ],
@@ -262,7 +261,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/keys/balance",
@@ -277,16 +275,18 @@ class Config {
                   "lit": "balance"
                 }
               ],
-              "select": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "keys",
                 "balance"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -299,6 +299,7 @@ class Config {
       "fields": [
         {
           "name": "status",
+          "title": "Status",
           "type": "`$STRING`"
         }
       ],
@@ -309,7 +310,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/health",
@@ -318,14 +318,16 @@ class Config {
                   "lit": "health"
                 }
               ],
-              "select": {},
+              "parts": [
+                "health"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "health"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }
@@ -338,29 +340,35 @@ class Config {
       "fields": [
         {
           "name": "api_key",
-          "req": true,
-          "type": "`$STRING`"
+          "title": "Api Key",
+          "type": "`$STRING`",
+          "req": true
         },
         {
           "name": "credits_added",
+          "title": "Credits Added",
           "type": "`$INTEGER`"
         },
         {
           "name": "ok",
+          "title": "Ok",
           "type": "`$BOOLEAN`"
         },
         {
           "name": "total_credits",
+          "title": "Total Credits",
           "type": "`$INTEGER`"
         },
         {
           "name": "tx_hash",
+          "title": "Tx Hash",
+          "type": "`$STRING`",
           "req": true,
-          "short": "Transaction hash of USDC transfer on Base",
-          "type": "`$STRING`"
+          "short": "Transaction hash of USDC transfer on Base"
         },
         {
           "name": "usdc",
+          "title": "Usdc",
           "type": "`$NUMBER`"
         }
       ],
@@ -371,7 +379,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/api/credits/topup",
@@ -386,16 +393,18 @@ class Config {
                   "lit": "topup"
                 }
               ],
-              "select": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "credits",
                 "topup"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -404,7 +413,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/payments/info",
@@ -419,18 +427,20 @@ class Config {
                   "lit": "info"
                 }
               ],
-              "select": {
-                "$action": "info"
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "payments",
                 "info"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {},
+              "select": {
+                "$action": "info"
+              }
             }
           ]
         }
@@ -443,30 +453,37 @@ class Config {
       "fields": [
         {
           "name": "apiUrl",
+          "title": "Api Url",
           "type": "`$STRING`"
         },
         {
           "name": "category",
+          "title": "Category",
           "type": "`$STRING`"
         },
         {
           "name": "description",
+          "title": "Description",
           "type": "`$STRING`"
         },
         {
           "name": "endpoints",
+          "title": "Endpoints",
           "type": "`$ARRAY`"
         },
         {
           "name": "icon",
+          "title": "Icon",
           "type": "`$STRING`"
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "name",
+          "title": "Name",
           "type": "`$STRING`"
         }
       ],
@@ -481,22 +498,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "category",
-                    "orig": "category",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "search",
-                    "orig": "search",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/api/services",
@@ -508,23 +509,39 @@ class Config {
                   "lit": "services"
                 }
               ],
+              "parts": [
+                "api",
+                "services"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.services`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "category",
+                    "orig": "category",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "search",
+                    "orig": "search",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "category",
                   "search"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.services`"
-              },
-              "parts": [
-                "api",
-                "services"
-              ]
+              }
             },
             {
-              "args": {},
               "kind": "http",
               "method": "GET",
               "orig": "/api/services/health",
@@ -539,18 +556,20 @@ class Config {
                   "lit": "health"
                 }
               ],
-              "select": {
-                "$action": "health"
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.services`"
-              },
               "parts": [
                 "api",
                 "services",
                 "health"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.services`"
+              },
+              "args": {},
+              "select": {
+                "$action": "health"
+              }
             }
           ]
         },
@@ -559,18 +578,6 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "example": "crypto-feeds",
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/api/services/{id}",
@@ -585,20 +592,33 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
               "parts": [
                 "api",
                 "services",
                 "{id}"
-              ]
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true,
+                    "example": "crypto-feeds"
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }

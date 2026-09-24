@@ -129,7 +129,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/stats",
@@ -141,15 +140,17 @@ def make_config():
                     "lit": "stats",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "api",
                   "stats",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -162,10 +163,12 @@ def make_config():
         "fields": [
           {
             "name": "credits",
+            "title": "Credits",
             "type": "`$INTEGER`",
           },
           {
             "name": "key",
+            "title": "Key",
             "type": "`$STRING`",
           },
         ],
@@ -176,7 +179,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/keys/create",
@@ -191,16 +193,18 @@ def make_config():
                     "lit": "create",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "api",
                   "keys",
                   "create",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -213,11 +217,13 @@ def make_config():
         "fields": [
           {
             "name": "createdAt",
-            "short": "Unix timestamp ms",
+            "title": "Created At",
             "type": "`$INTEGER`",
+            "short": "Unix timestamp ms",
           },
           {
             "name": "credits",
+            "title": "Credits",
             "type": "`$INTEGER`",
           },
         ],
@@ -228,7 +234,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/keys/balance",
@@ -243,16 +248,18 @@ def make_config():
                     "lit": "balance",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "api",
                   "keys",
                   "balance",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -265,6 +272,7 @@ def make_config():
         "fields": [
           {
             "name": "status",
+            "title": "Status",
             "type": "`$STRING`",
           },
         ],
@@ -275,7 +283,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/health",
@@ -284,14 +291,16 @@ def make_config():
                     "lit": "health",
                   },
                 ],
-                "select": {},
+                "parts": [
+                  "health",
+                ],
+                "rename": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "parts": [
-                  "health",
-                ],
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -304,29 +313,35 @@ def make_config():
         "fields": [
           {
             "name": "api_key",
-            "req": True,
+            "title": "Api Key",
             "type": "`$STRING`",
+            "req": True,
           },
           {
             "name": "credits_added",
+            "title": "Credits Added",
             "type": "`$INTEGER`",
           },
           {
             "name": "ok",
+            "title": "Ok",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "total_credits",
+            "title": "Total Credits",
             "type": "`$INTEGER`",
           },
           {
             "name": "tx_hash",
+            "title": "Tx Hash",
+            "type": "`$STRING`",
             "req": True,
             "short": "Transaction hash of USDC transfer on Base",
-            "type": "`$STRING`",
           },
           {
             "name": "usdc",
+            "title": "Usdc",
             "type": "`$NUMBER`",
           },
         ],
@@ -337,7 +352,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/api/credits/topup",
@@ -352,16 +366,18 @@ def make_config():
                     "lit": "topup",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "api",
                   "credits",
                   "topup",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -370,7 +386,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/payments/info",
@@ -385,18 +400,20 @@ def make_config():
                     "lit": "info",
                   },
                 ],
-                "select": {
-                  "$action": "info",
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "api",
                   "payments",
                   "info",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {
+                  "$action": "info",
+                },
               },
             ],
           },
@@ -409,30 +426,37 @@ def make_config():
         "fields": [
           {
             "name": "apiUrl",
+            "title": "Api Url",
             "type": "`$STRING`",
           },
           {
             "name": "category",
+            "title": "Category",
             "type": "`$STRING`",
           },
           {
             "name": "description",
+            "title": "Description",
             "type": "`$STRING`",
           },
           {
             "name": "endpoints",
+            "title": "Endpoints",
             "type": "`$ARRAY`",
           },
           {
             "name": "icon",
+            "title": "Icon",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$STRING`",
           },
           {
             "name": "name",
+            "title": "Name",
             "type": "`$STRING`",
           },
         ],
@@ -447,22 +471,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "category",
-                      "orig": "category",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "search",
-                      "orig": "search",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/services",
@@ -474,23 +482,39 @@ def make_config():
                     "lit": "services",
                   },
                 ],
+                "parts": [
+                  "api",
+                  "services",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.services`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "category",
+                      "orig": "category",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "search",
+                      "orig": "search",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "category",
                     "search",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.services`",
-                },
-                "parts": [
-                  "api",
-                  "services",
-                ],
               },
               {
-                "args": {},
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/services/health",
@@ -505,18 +529,20 @@ def make_config():
                     "lit": "health",
                   },
                 ],
-                "select": {
-                  "$action": "health",
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.services`",
-                },
                 "parts": [
                   "api",
                   "services",
                   "health",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.services`",
+                },
+                "args": {},
+                "select": {
+                  "$action": "health",
+                },
               },
             ],
           },
@@ -525,18 +551,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "params": [
-                    {
-                      "example": "crypto-feeds",
-                      "kind": "param",
-                      "name": "id",
-                      "orig": "id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/api/services/{id}",
@@ -551,20 +565,33 @@ def make_config():
                     "var": "id",
                   },
                 ],
-                "select": {
-                  "exist": [
-                    "id",
-                  ],
-                },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "api",
                   "services",
                   "{id}",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "params": [
+                    {
+                      "name": "id",
+                      "orig": "id",
+                      "type": "`$STRING`",
+                      "kind": "param",
+                      "reqd": True,
+                      "example": "crypto-feeds",
+                    },
+                  ],
+                },
+                "select": {
+                  "exist": [
+                    "id",
+                  ],
+                },
               },
             ],
           },

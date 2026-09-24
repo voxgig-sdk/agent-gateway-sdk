@@ -1,0 +1,58 @@
+# Entity: balance
+
+main: kit: entity: balance: {
+
+  alias: field: {}
+
+  fields: {
+    createdAt: {
+      h: "Created At"
+      n: "createdAt"
+      r: false
+      sh: "Unix timestamp ms"
+      t: "`$INTEGER`"
+    }
+    credits: {
+      h: "Credits"
+      n: "credits"
+      r: false
+      t: "`$INTEGER`"
+    }
+  }
+
+  name: "balance"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/keys/balance"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/keys/balance"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "keys"
+            }
+            {
+              lit: "balance"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -44,10 +44,6 @@ const live_runner_1 = require("../../live-runner");
 const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
-// AFTER the imports on purpose: TypeScript hoists `import` above any
-// statement in the emitted CommonJS, so a loader placed above them would
-// run only after every imported module had already been evaluated - and
-// anything reading process.env at module scope would miss these values.
 (0, utility_1.loadEnvLocal)(__dirname + '/../../../.env.local');
 (0, node_test_1.describe)('AnalyticsEntity', async () => {
     // Per-test live pacing. Delay is read from sdk-test-control.json's
@@ -66,7 +62,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [], "name": "analytics", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": {}, "contract": { "id": "GET /api/stats", "json": "{\"operationId\":\"getStats\",\"parameters\":[],\"protocol\":\"http\",\"responses\":{\"200\":{\"description\":\"Usage stats\"}},\"security\":[],\"securitySchemes\":{\"bearerAuth\":{\"description\":\"Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"operation\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/api/stats", "segments": [{ "lit": "api" }, { "lit": "stats" }], "select": {}, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "analytics", "name__orig": "analytics", "Name": "Analytics", "name_": "analytics", "name-": "analytics", "NAME": "ANALYTICS", "index$": 0 }, { "active": true, "entity": "analytics", "key$": "BasicAnalyticsFlow", "kind": "basic", "name": "BasicAnalyticsFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "analytics_ref01", "srcdatavar": "analytics_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-analytics_ref01" } }], "index$": 0 }] }, 'Analytics');
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "analytics", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/stats", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/api/stats", "q": {}, "r": {}, "s": [{ "lit": "api" }, { "lit": "stats" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "analytics", "name__orig": "analytics", "Name": "Analytics", "name_": "analytics", "name-": "analytics", "NAME": "ANALYTICS", "index$": 0 }, { "active": true, "entity": "analytics", "key$": "BasicAnalyticsFlow", "kind": "basic", "name": "BasicAnalyticsFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "analytics_ref01", "srcdatavar": "analytics_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-analytics_ref01" } }], "index$": 0 }] }, 'Analytics', { "GET /api/stats": { "protocol": "http", "operationId": "getStats", "responses": { "200": { "description": "Usage stats" } }, "parameters": [], "security": [], "securitySource": "operation", "securitySchemes": { "bearerAuth": { "type": "http", "scheme": "bearer", "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access." } } } });
         }
         const client = setup.client;
         const struct = setup.struct;

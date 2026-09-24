@@ -1,0 +1,42 @@
+# Entity: analytics
+
+main: kit: entity: analytics: {
+
+  alias: field: {}
+
+  name: "analytics"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/stats"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/stats"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

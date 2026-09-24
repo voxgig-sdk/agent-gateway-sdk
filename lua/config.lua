@@ -100,7 +100,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/stats",
@@ -112,15 +111,17 @@ local function make_config()
                     ["lit"] = "stats",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "stats",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -133,10 +134,12 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "credits",
+            ["title"] = "Credits",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "key",
+            ["title"] = "Key",
             ["type"] = "`$STRING`",
           },
         },
@@ -147,7 +150,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/keys/create",
@@ -162,16 +164,18 @@ local function make_config()
                     ["lit"] = "create",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "keys",
                   "create",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -184,11 +188,13 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "createdAt",
-            ["short"] = "Unix timestamp ms",
+            ["title"] = "Created At",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Unix timestamp ms",
           },
           {
             ["name"] = "credits",
+            ["title"] = "Credits",
             ["type"] = "`$INTEGER`",
           },
         },
@@ -199,7 +205,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/keys/balance",
@@ -214,16 +219,18 @@ local function make_config()
                     ["lit"] = "balance",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "keys",
                   "balance",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -236,6 +243,7 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "status",
+            ["title"] = "Status",
             ["type"] = "`$STRING`",
           },
         },
@@ -246,7 +254,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/health",
@@ -255,14 +262,16 @@ local function make_config()
                     ["lit"] = "health",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "health",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "health",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -275,29 +284,35 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "api_key",
-            ["req"] = true,
+            ["title"] = "Api Key",
             ["type"] = "`$STRING`",
+            ["req"] = true,
           },
           {
             ["name"] = "credits_added",
+            ["title"] = "Credits Added",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "ok",
+            ["title"] = "Ok",
             ["type"] = "`$BOOLEAN`",
           },
           {
             ["name"] = "total_credits",
+            ["title"] = "Total Credits",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "tx_hash",
+            ["title"] = "Tx Hash",
+            ["type"] = "`$STRING`",
             ["req"] = true,
             ["short"] = "Transaction hash of USDC transfer on Base",
-            ["type"] = "`$STRING`",
           },
           {
             ["name"] = "usdc",
+            ["title"] = "Usdc",
             ["type"] = "`$NUMBER`",
           },
         },
@@ -308,7 +323,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/api/credits/topup",
@@ -323,16 +337,18 @@ local function make_config()
                     ["lit"] = "topup",
                   },
                 },
-                ["select"] = {},
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "credits",
                   "topup",
                 },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -341,7 +357,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/payments/info",
@@ -356,17 +371,19 @@ local function make_config()
                     ["lit"] = "info",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "info",
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "payments",
                   "info",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {},
+                ["select"] = {
+                  ["$action"] = "info",
                 },
               },
             },
@@ -380,30 +397,37 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "apiUrl",
+            ["title"] = "Api Url",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "category",
+            ["title"] = "Category",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "description",
+            ["title"] = "Description",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "endpoints",
+            ["title"] = "Endpoints",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "icon",
+            ["title"] = "Icon",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "id",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "name",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
           },
         },
@@ -418,22 +442,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "category",
-                      ["orig"] = "category",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "search",
-                      ["orig"] = "search",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/services",
@@ -445,23 +453,39 @@ local function make_config()
                     ["lit"] = "services",
                   },
                 },
+                ["parts"] = {
+                  "api",
+                  "services",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.services`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "category",
+                      ["orig"] = "category",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "search",
+                      ["orig"] = "search",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "category",
                     "search",
                   },
                 },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.services`",
-                },
-                ["parts"] = {
-                  "api",
-                  "services",
-                },
               },
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/services/health",
@@ -476,17 +500,19 @@ local function make_config()
                     ["lit"] = "health",
                   },
                 },
-                ["select"] = {
-                  ["$action"] = "health",
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.services`",
-                },
                 ["parts"] = {
                   "api",
                   "services",
                   "health",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.services`",
+                },
+                ["args"] = {},
+                ["select"] = {
+                  ["$action"] = "health",
                 },
               },
             },
@@ -496,18 +522,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "crypto-feeds",
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/api/services/{id}",
@@ -522,19 +536,32 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                  },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
                 ["parts"] = {
                   "api",
                   "services",
                   "{id}",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "crypto-feeds",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },

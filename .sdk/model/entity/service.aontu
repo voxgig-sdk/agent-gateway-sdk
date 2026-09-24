@@ -1,0 +1,186 @@
+# Entity: service
+
+main: kit: entity: service: {
+
+  alias: field: {}
+
+  fields: {
+    apiUrl: {
+      h: "Api Url"
+      n: "apiUrl"
+      r: false
+      t: "`$STRING`"
+    }
+    category: {
+      h: "Category"
+      n: "category"
+      r: false
+      t: "`$STRING`"
+    }
+    description: {
+      h: "Description"
+      n: "description"
+      r: false
+      t: "`$STRING`"
+    }
+    endpoints: {
+      h: "Endpoints"
+      n: "endpoints"
+      r: false
+      t: "`$ARRAY`"
+    }
+    icon: {
+      h: "Icon"
+      n: "icon"
+      r: false
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "service"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /api/services"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "category"
+                or: "category"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "search"
+                or: "search"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/services"
+          q: {
+            exist: [
+              "category"
+              "search"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "services"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.services`"
+          }
+        }
+        {
+          co: {
+            id: "GET /api/services/health"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/services/health"
+          q: {
+            "$action": "health"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "services"
+            }
+            {
+              lit: "health"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.services`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/services/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "crypto-feeds"
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/api/services/{id}"
+          q: {
+            exist: [
+              "id"
+            ]
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "services"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

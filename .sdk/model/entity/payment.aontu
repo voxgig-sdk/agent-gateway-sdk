@@ -1,0 +1,114 @@
+# Entity: payment
+
+main: kit: entity: payment: {
+
+  alias: field: {}
+
+  fields: {
+    api_key: {
+      h: "Api Key"
+      n: "api_key"
+      r: true
+      t: "`$STRING`"
+    }
+    credits_added: {
+      h: "Credits Added"
+      n: "credits_added"
+      r: false
+      t: "`$INTEGER`"
+    }
+    ok: {
+      h: "Ok"
+      n: "ok"
+      r: false
+      t: "`$BOOLEAN`"
+    }
+    total_credits: {
+      h: "Total Credits"
+      n: "total_credits"
+      r: false
+      t: "`$INTEGER`"
+    }
+    tx_hash: {
+      h: "Tx Hash"
+      n: "tx_hash"
+      r: true
+      sh: "Transaction hash of USDC transfer on Base"
+      t: "`$STRING`"
+    }
+    usdc: {
+      h: "Usdc"
+      n: "usdc"
+      r: false
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "payment"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /api/credits/topup"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/api/credits/topup"
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "credits"
+            }
+            {
+              lit: "topup"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /api/payments/info"
+            source: "openapi3"
+            version: 2
+          }
+          m: "GET"
+          o: "/api/payments/info"
+          q: {
+            "$action": "info"
+          }
+          s: [
+            {
+              lit: "api"
+            }
+            {
+              lit: "payments"
+            }
+            {
+              lit: "info"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

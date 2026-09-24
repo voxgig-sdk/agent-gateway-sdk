@@ -29,46 +29,8 @@
   "requests": {
     "POST /api/keys/create": {
       "provenance": "operation-contract",
-      "contract": {
-        "operationId": "createApiKey",
-        "parameters": [],
-        "protocol": "http",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "credits": 200,
-                  "key": "gw_abc123..."
-                },
-                "schema": {
-                  "properties": {
-                    "credits": {
-                      "example": 200,
-                      "type": "integer"
-                    },
-                    "key": {
-                      "example": "gw_abc123...",
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                }
-              }
-            },
-            "description": "API key created"
-          }
-        },
-        "security": [],
-        "securitySchemes": {
-          "bearerAuth": {
-            "description": "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer <api_key> for full access.",
-            "scheme": "bearer",
-            "type": "http"
-          }
-        },
-        "securitySource": "operation"
-      }
+      "version": 2,
+      "source": "openapi3"
     }
   }
 }

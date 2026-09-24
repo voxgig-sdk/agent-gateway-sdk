@@ -1,7 +1,7 @@
 // Typed models for the AgentGateway SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -22,8 +22,6 @@ type AnalyticsLoadMatch struct {
 
 // ApiKey is the typed data model for the api_key entity.
 type ApiKey struct {
-	Credits *int `json:"credits,omitempty"`
-	Key *string `json:"key,omitempty"`
 }
 
 // ApiKeyCreateData is the typed request payload for ApiKey.CreateTyped.
@@ -34,8 +32,6 @@ type ApiKeyCreateData struct {
 
 // Balance is the typed data model for the balance entity.
 type Balance struct {
-	CreatedAt *int `json:"createdAt,omitempty"`
-	Credits *int `json:"credits,omitempty"`
 }
 
 // BalanceLoadMatch is the typed request payload for Balance.LoadTyped.
@@ -46,7 +42,6 @@ type BalanceLoadMatch struct {
 
 // Meta is the typed data model for the meta entity.
 type Meta struct {
-	Status *string `json:"status,omitempty"`
 }
 
 // MetaLoadMatch is the typed request payload for Meta.LoadTyped.
@@ -56,12 +51,6 @@ type MetaLoadMatch struct {
 
 // Payment is the typed data model for the payment entity.
 type Payment struct {
-	ApiKey string `json:"api_key"`
-	CreditsAdded *int `json:"credits_added,omitempty"`
-	Ok *bool `json:"ok,omitempty"`
-	TotalCredits *int `json:"total_credits,omitempty"`
-	TxHash string `json:"tx_hash"`
-	Usdc *float64 `json:"usdc,omitempty"`
 }
 
 // PaymentLoadMatch is the typed request payload for Payment.LoadTyped.
@@ -86,13 +75,6 @@ type PaymentCreateData struct {
 
 // Service is the typed data model for the service entity.
 type Service struct {
-	ApiUrl *string `json:"apiUrl,omitempty"`
-	Category *string `json:"category,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Endpoints *[]any `json:"endpoints,omitempty"`
-	Icon *string `json:"icon,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
 }
 
 // ServiceLoadMatch is the typed request payload for Service.LoadTyped.
