@@ -1,0 +1,237 @@
+import { describe, test } from 'node:test'
+import { SDK } from '..'
+import { runDefinitionPoint } from './definition-runner'
+import { isControlSkipped } from './utility'
+
+
+// Generated from the API definition, not from the model this SDK was built
+// from: the route, the declared query parameters, the credential the security
+// scheme names, and the definition's own response example.
+const PLAN: any[] = [
+  {
+    "entity": "analytics",
+    "accessor": "Analytics",
+    "op": "load",
+    "method": "GET",
+    "path": "/api/stats",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": null,
+    "idField": "id"
+  },
+  {
+    "entity": "api_key",
+    "accessor": "ApiKey",
+    "op": "create",
+    "method": "POST",
+    "path": "/api/keys/create",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "key": "gw_abc123...",
+      "credits": 200
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "balance",
+    "accessor": "Balance",
+    "op": "load",
+    "method": "GET",
+    "path": "/api/keys/balance",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [
+      [
+        {
+          "in": "header",
+          "name": "authorization",
+          "scheme": "bearer"
+        }
+      ]
+    ],
+    "status": 200,
+    "sample": {
+      "credits": 150,
+      "createdAt": 1709000000000
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "meta",
+    "accessor": "Meta",
+    "op": "load",
+    "method": "GET",
+    "path": "/health",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "status": "ok"
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "payment",
+    "accessor": "Payment",
+    "op": "create",
+    "method": "POST",
+    "path": "/api/credits/topup",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "ok": true,
+      "usdc": 1,
+      "credits_added": 1,
+      "total_credits": 1
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "payment",
+    "accessor": "Payment",
+    "op": "load",
+    "method": "GET",
+    "path": "/api/payments/info",
+    "action": "info",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "chain": "Base (L2)",
+      "token": "USDC",
+      "address": "x",
+      "rate": "500 credits per 1 USDC"
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "service",
+    "accessor": "Service",
+    "op": "list",
+    "method": "GET",
+    "path": "/api/services",
+    "args": [],
+    "select": {
+      "category": "v1",
+      "search": "v1"
+    },
+    "headers": [],
+    "query": [
+      "category",
+      "search"
+    ],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "services": [
+        {
+          "apiUrl": "x",
+          "category": "infrastructure",
+          "description": "x",
+          "endpoints": [
+            "x"
+          ],
+          "icon": "x",
+          "id": "x",
+          "name": "x"
+        }
+      ],
+      "count": 1,
+      "total": 1
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "service",
+    "accessor": "Service",
+    "op": "list",
+    "method": "GET",
+    "path": "/api/services/health",
+    "action": "health",
+    "args": [],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "services": [
+        {
+          "id": "x",
+          "latency": 1,
+          "name": "x",
+          "status": "online"
+        }
+      ],
+      "online": 1,
+      "offline": 1
+    },
+    "idField": "id"
+  },
+  {
+    "entity": "service",
+    "accessor": "Service",
+    "op": "load",
+    "method": "GET",
+    "path": "/api/services/{id}",
+    "args": [
+      {
+        "name": "id",
+        "wire": "id",
+        "value": "crypto-feeds"
+      }
+    ],
+    "select": {},
+    "headers": [],
+    "query": [],
+    "auth": [],
+    "status": 200,
+    "sample": {
+      "id": "x",
+      "name": "x",
+      "description": "x",
+      "category": "infrastructure",
+      "icon": "x",
+      "apiUrl": "x",
+      "endpoints": [
+        "x"
+      ]
+    },
+    "idField": "id"
+  }
+]
+
+
+describe('definition', () => {
+  for (const point of PLAN) {
+    test(point.entity + '.' + point.op + ' ' + point.method + ' ' + point.path, async (t) => {
+      const control = isControlSkipped('entityOp', point.entity + '.' + point.op, 'definition')
+      if (control.skip) {
+        t.skip(control.reason || 'skipped via sdk-test-control.json')
+        return
+      }
+      await runDefinitionPoint(SDK, point)
+    })
+  }
+})

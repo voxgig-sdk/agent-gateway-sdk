@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 AgentGatewayUtility::setRegistrar(function (AgentGatewayUtility $u): void {
     $u->clean = [AgentGatewayClean::class, 'call'];
+    $u->clean_add = [AgentGatewayClean::class, 'add'];
+    $u->clean_explain = [AgentGatewayDone::class, 'clean_explain'];
     $u->done = [AgentGatewayDone::class, 'call'];
     $u->make_error = [AgentGatewayMakeError::class, 'call'];
     $u->feature_add = [AgentGatewayFeatureAdd::class, 'call'];

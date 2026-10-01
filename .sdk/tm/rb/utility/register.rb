@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 AgentGatewayUtility.registrar = ->(u) {
   u.clean = AgentGatewayUtilities::Clean
+  u.clean_add = AgentGatewayUtilities::CleanAdd
+  u.clean_explain = AgentGatewayUtilities::CleanExplain
   u.done = AgentGatewayUtilities::Done
   u.make_error = AgentGatewayUtilities::MakeError
   u.feature_add = AgentGatewayUtilities::FeatureAdd
