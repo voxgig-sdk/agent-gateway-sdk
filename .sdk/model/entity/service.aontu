@@ -85,11 +85,9 @@ main: kit: entity: service: {
           }
           m: "GET"
           o: "/api/services"
-          q: {
-            exist: [
-              "category"
-              "search"
-            ]
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -114,6 +112,10 @@ main: kit: entity: service: {
           o: "/api/services/health"
           q: {
             "$action": "health"
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
@@ -160,6 +162,10 @@ main: kit: entity: service: {
             exist: [
               "id"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

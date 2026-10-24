@@ -149,27 +149,11 @@ PaymentLoadMatch = Struct.new(
 # @!attribute [rw] api_key
 #   @return [String]
 #
-# @!attribute [rw] credits_added
-#   @return [Integer, nil]
-#
-# @!attribute [rw] ok
-#   @return [Boolean, nil]
-#
-# @!attribute [rw] total_credits
-#   @return [Integer, nil]
-#
 # @!attribute [rw] tx_hash
 #   @return [String]
-#
-# @!attribute [rw] usdc
-#   @return [Float, nil]
 PaymentCreateData = Struct.new(
   :api_key,
-  :credits_added,
-  :ok,
-  :total_credits,
   :tx_hash,
-  :usdc,
   keyword_init: true
 )
 

@@ -88,11 +88,7 @@ class PaymentLoadMatch
 class PaymentCreateData
 {
     public string $api_key;
-    public ?int $credits_added = null;
-    public ?bool $ok = null;
-    public ?int $total_credits = null;
     public string $tx_hash;
-    public ?float $usdc = null;
 }
 
 /** Service entity data model. */

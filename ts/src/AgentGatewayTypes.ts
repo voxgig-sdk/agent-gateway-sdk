@@ -65,11 +65,7 @@ export interface PaymentLoadMatch {
 
 export interface PaymentCreateData {
   api_key: string
-  credits_added?: number
-  ok?: boolean
-  total_credits?: number
   tx_hash: string
-  usdc?: number
 }
 
 export interface Service {

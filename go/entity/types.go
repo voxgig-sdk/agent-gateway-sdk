@@ -66,11 +66,7 @@ type PaymentLoadMatch struct {
 // PaymentCreateData is the typed request payload for Payment.CreateTyped.
 type PaymentCreateData struct {
 	ApiKey string `json:"api_key"`
-	CreditsAdded *int `json:"credits_added,omitempty"`
-	Ok *bool `json:"ok,omitempty"`
-	TotalCredits *int `json:"total_credits,omitempty"`
 	TxHash string `json:"tx_hash"`
-	Usdc *float64 `json:"usdc,omitempty"`
 }
 
 // Service is the typed data model for the service entity.

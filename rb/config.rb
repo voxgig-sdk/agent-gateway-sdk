@@ -79,6 +79,7 @@ module AgentGatewayConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -188,6 +189,10 @@ module AgentGatewayConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -243,6 +248,10 @@ module AgentGatewayConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -284,6 +293,10 @@ module AgentGatewayConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -361,6 +374,10 @@ module AgentGatewayConfig
                   },
                   "args" => {},
                   "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
+                  },
                 },
               ],
             },
@@ -396,6 +413,10 @@ module AgentGatewayConfig
                   "args" => {},
                   "select" => {
                     "$action" => "info",
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -481,6 +502,7 @@ module AgentGatewayConfig
                         "orig" => "category",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "search",
@@ -490,11 +512,10 @@ module AgentGatewayConfig
                       },
                     ],
                   },
-                  "select" => {
-                    "exist" => [
-                      "category",
-                      "search",
-                    ],
+                  "select" => {},
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
                 {
@@ -525,6 +546,10 @@ module AgentGatewayConfig
                   "args" => {},
                   "select" => {
                     "$action" => "health",
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -574,6 +599,10 @@ module AgentGatewayConfig
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

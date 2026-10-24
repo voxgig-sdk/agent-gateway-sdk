@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.ApiKey();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.AgentGatewaySDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.ApiKey().create({ "credits": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.AGENT_GATEWAY_TEST_LIVE;
         for (const op of ['create']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "credits": { "a": true, "h": "Credits", "n": "credits", "r": false, "t": "`$INTEGER`", "key$": "credits", "index$": 0 }, "key": { "a": true, "h": "Key", "n": "key", "r": false, "t": "`$STRING`", "key$": "key", "index$": 1 } }, "name": "api_key", "op": { "create": { "input": "data", "name": "create", "points": [{ "a": true, "co": { "id": "POST /api/keys/create", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "POST", "o": "/api/keys/create", "q": {}, "r": {}, "s": [{ "lit": "api" }, { "lit": "keys" }, { "lit": "create" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "create" } }, "relations": { "ancestors": [] }, "key$": "api_key", "name__orig": "api_key", "Name": "ApiKey", "name_": "api_key", "name-": "api-key", "NAME": "API_KEY", "index$": 1 }, { "active": true, "entity": "api_key", "key$": "BasicApiKeyFlow", "kind": "basic", "name": "BasicApiKeyFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "api_key_ref01" }, "m": {}, "o": "create", "s": [], "v": [], "index$": 0 }] }, 'ApiKey', { "POST /api/keys/create": { "protocol": "http", "parameters": [] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "credits": { "a": true, "h": "Credits", "n": "credits", "r": false, "t": "`$INTEGER`", "key$": "credits", "index$": 0 }, "key": { "a": true, "h": "Key", "n": "key", "r": false, "t": "`$STRING`", "key$": "key", "index$": 1 } }, "name": "api_key", "op": { "create": { "input": "data", "name": "create", "points": [{ "a": true, "co": { "id": "POST /api/keys/create", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "POST", "o": "/api/keys/create", "q": {}, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "api" }, { "lit": "keys" }, { "lit": "create" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "create" } }, "relations": { "ancestors": [] }, "key$": "api_key", "name__orig": "api_key", "Name": "ApiKey", "name_": "api_key", "name-": "api-key", "NAME": "API_KEY", "index$": 1 }, { "active": true, "entity": "api_key", "key$": "BasicApiKeyFlow", "kind": "basic", "name": "BasicApiKeyFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "api_key_ref01" }, "m": {}, "o": "create", "s": [], "v": [], "index$": 0 }] }, 'ApiKey', { "POST /api/keys/create": { "protocol": "http", "parameters": [] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +83,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(null != api_key_ref01_data);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

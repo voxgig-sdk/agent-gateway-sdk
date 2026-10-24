@@ -78,7 +78,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 The default credential is sent in the `Authorization` header with the `Bearer` prefix.
 
-Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer &lt;api_key&gt; for full access.
+Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer &lt;`api_key`&gt; for full access.
 
 Check authentication for the route you plan to call. A route that declares no authentication can be used without credentials; this does not change the requirements of other routes. Keep credentials in environment variables or a configured secret provider, and keep them out of source control and logs.
 

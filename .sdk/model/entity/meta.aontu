@@ -26,6 +26,10 @@ main: kit: entity: meta: {
           }
           m: "GET"
           o: "/health"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "health"

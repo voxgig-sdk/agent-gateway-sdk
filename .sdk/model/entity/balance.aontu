@@ -33,6 +33,10 @@ main: kit: entity: balance: {
           }
           m: "GET"
           o: "/api/keys/balance"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

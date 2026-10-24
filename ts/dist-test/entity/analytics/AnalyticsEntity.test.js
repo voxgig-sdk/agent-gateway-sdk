@@ -62,7 +62,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "analytics", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/stats", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/api/stats", "q": {}, "r": {}, "s": [{ "lit": "api" }, { "lit": "stats" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "analytics", "name__orig": "analytics", "Name": "Analytics", "name_": "analytics", "name-": "analytics", "NAME": "ANALYTICS", "index$": 0 }, { "active": true, "entity": "analytics", "key$": "BasicAnalyticsFlow", "kind": "basic", "name": "BasicAnalyticsFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "analytics_ref01", "srcdatavar": "analytics_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-analytics_ref01" } }], "index$": 0 }] }, 'Analytics', { "GET /api/stats": { "protocol": "http", "parameters": [] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": {}, "name": "analytics", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /api/stats", "source": "openapi3", "version": 2 }, "g": {}, "k": "http", "m": "GET", "o": "/api/stats", "q": {}, "r": {}, "s": [{ "lit": "api" }, { "lit": "stats" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "analytics", "name__orig": "analytics", "Name": "Analytics", "name_": "analytics", "name-": "analytics", "NAME": "ANALYTICS", "index$": 0 }, { "active": true, "entity": "analytics", "key$": "BasicAnalyticsFlow", "kind": "basic", "name": "BasicAnalyticsFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "analytics_ref01", "srcdatavar": "analytics_ref01_data", "suffix": "_dt0" }, "m": {}, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-analytics_ref01" } }], "index$": 0 }] }, 'Analytics', { "GET /api/stats": { "protocol": "http", "parameters": [] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -76,6 +76,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(null != analytics_ref01_data_dt0);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

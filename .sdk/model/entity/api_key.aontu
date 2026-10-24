@@ -32,6 +32,10 @@ main: kit: entity: api_key: {
           }
           m: "POST"
           o: "/api/keys/create"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "api"

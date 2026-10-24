@@ -50,11 +50,7 @@
 
 ---@class PaymentCreateData
 ---@field api_key string
----@field credits_added? number
----@field ok? boolean
----@field total_credits? number
 ---@field tx_hash string
----@field usdc? number
 
 ---@class Service
 ---@field apiUrl? string

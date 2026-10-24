@@ -6,40 +6,59 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/google/jsonschema-go/jsonschema"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	sdk "github.com/voxgig-sdk/agent-gateway-sdk/go"
 )
 
-// Args is the common argument shape for both tools. `entity` selects
-// the SDK entity to operate on; `query` is the optional reqmatch /
-// reqdata map passed through to the SDK. For load, `query` should be
-// `{"id": <value>}`. For list, omit `query` or pass an empty map.
-type Args struct {
-	Entity string         `json:"entity" jsonschema:"analytics | api_key | balance | meta | payment | service"`
-	Query  map[string]any `json:"query,omitempty" jsonschema:"optional match map e.g. {\"id\":1} for load, omit for list"`
+// ListArgs is what an agent sends to agent-gateway_list.
+type ListArgs struct {
+	Entity string         `json:"entity" jsonschema:"one of: service"`
+	Query  map[string]any `json:"query,omitempty" jsonschema:"optional filter map; omit it for the first page"`
+}
+
+// LoadArgs is what an agent sends to agent-gateway_load.
+type LoadArgs struct {
+	Entity string         `json:"entity" jsonschema:"one of: analytics | balance | meta | payment | service"`
+	Query  map[string]any `json:"query" jsonschema:"match map naming the record, such as {\"id\":1}"`
 }
 
 func registerTools(server *mcp.Server, client *sdk.AgentGatewaySDK) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name: "agent-gateway_list",
-		Description: "List records from AgentGateway. " +
-			"Args: entity (one of the supported SDK entities), query (optional filter map). " +
-			"Returns the first page of records as JSON.",
-	}, func(ctx context.Context, req *mcp.CallToolRequest, args Args) (*mcp.CallToolResult, any, error) {
-		return runOp(client, "list", args)
+		Name:        "agent-gateway_list",
+		Description: "List records from AgentGateway. Args: entity, query (optional filter map; omit it for the first page). Returns the first page of records as JSON.",
+		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
+		InputSchema: entitySchema[ListArgs]("service"),
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args ListArgs) (*mcp.CallToolResult, any, error) {
+		return runOp(ctx, client, "list", args.Entity, args.Query)
 	})
-
 	mcp.AddTool(server, &mcp.Tool{
-		Name: "agent-gateway_load",
-		Description: "Load a single record from AgentGateway. " +
-			"Args: entity, query ({\"id\":N} required). Returns the record as JSON.",
-	}, func(ctx context.Context, req *mcp.CallToolRequest, args Args) (*mcp.CallToolResult, any, error) {
-		return runOp(client, "load", args)
+		Name:        "agent-gateway_load",
+		Description: "Load one record from AgentGateway. Args: entity, query (match map naming the record, such as {\"id\":1}). Returns the record as JSON.",
+		Annotations: &mcp.ToolAnnotations{ReadOnlyHint: true},
+		InputSchema: entitySchema[LoadArgs]("analytics", "balance", "meta", "payment", "service"),
+	}, func(ctx context.Context, req *mcp.CallToolRequest, args LoadArgs) (*mcp.CallToolResult, any, error) {
+		return runOp(ctx, client, "load", args.Entity, args.Query)
 	})
 }
 
-func runOp(client *sdk.AgentGatewaySDK, op string, args Args) (*mcp.CallToolResult, any, error) {
-	ent, err := entityFor(client, args.Entity)
+// entitySchema is the schema inferred from In, its entity limited to the
+// entities the tool serves.
+func entitySchema[In any](names ...string) *jsonschema.Schema {
+	schema, err := jsonschema.For[In](nil)
+	if err != nil {
+		panic(err)
+	}
+	enum := make([]any, len(names))
+	for i, name := range names {
+		enum[i] = name
+	}
+	schema.Properties["entity"].Enum = enum
+	return schema
+}
+
+func runOp(_ context.Context, client *sdk.AgentGatewaySDK, op string, entity string, input map[string]any) (*mcp.CallToolResult, any, error) {
+	ent, err := entityFor(client, entity)
 	if err != nil {
 		return toolError(err.Error())
 	}
@@ -47,9 +66,17 @@ func runOp(client *sdk.AgentGatewaySDK, op string, args Args) (*mcp.CallToolResu
 	var result any
 	switch op {
 	case "list":
-		result, err = ent.List(args.Query, nil)
+		result, err = ent.List(input, nil)
 	case "load":
-		result, err = ent.Load(args.Query, nil)
+		result, err = ent.Load(input, nil)
+	case "create":
+		result, err = ent.Create(input, nil)
+	case "update":
+		result, err = ent.Update(input, nil)
+	case "patch":
+		result, err = ent.Patch(input, nil)
+	case "remove":
+		result, err = ent.Remove(input, nil)
 	default:
 		return toolError(fmt.Sprintf("unknown op %q", op))
 	}
@@ -88,7 +115,6 @@ func entityFor(client *sdk.AgentGatewaySDK, name string) (sdk.AgentGatewayEntity
 		return client.Payment(nil), nil
 	case "service":
 		return client.Service(nil), nil
-
 	}
 	return nil, fmt.Errorf("unknown entity %q", name)
 }
@@ -120,4 +146,9 @@ func toolError(msg string) (*mcp.CallToolResult, any, error) {
 			&mcp.TextContent{Text: msg},
 		},
 	}, nil, nil
+}
+
+// hint is an MCP annotation that defaults to true unless stated.
+func hint(b bool) *bool {
+	return &b
 }

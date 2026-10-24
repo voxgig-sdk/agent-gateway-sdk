@@ -73,16 +73,9 @@ class PaymentLoadMatch(TypedDict, total=False):
     usdc: float
 
 
-class PaymentCreateDataRequired(TypedDict):
+class PaymentCreateData(TypedDict):
     api_key: str
     tx_hash: str
-
-
-class PaymentCreateData(PaymentCreateDataRequired, total=False):
-    credits_added: int
-    ok: bool
-    total_credits: int
-    usdc: float
 
 
 class Service(TypedDict, total=False):

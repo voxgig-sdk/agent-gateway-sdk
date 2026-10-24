@@ -17,7 +17,9 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": null,
@@ -32,7 +34,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": {
@@ -50,7 +57,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [
             [
                 {
@@ -76,7 +88,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": {
@@ -93,7 +110,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": {
@@ -114,7 +136,12 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": {
@@ -137,24 +164,38 @@ const PLAN = [
             "search": "v1"
         },
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [
             "category",
             "search"
+        ],
+        "queryArgs": [
+            {
+                "name": "category",
+                "wire": "category"
+            },
+            {
+                "name": "search",
+                "wire": "search"
+            }
         ],
         "auth": [],
         "status": 200,
         "sample": {
             "services": [
                 {
-                    "apiUrl": "x",
-                    "category": "infrastructure",
+                    "id": "x",
+                    "name": "x",
                     "description": "x",
+                    "category": "infrastructure",
+                    "icon": "x",
+                    "apiUrl": "x",
                     "endpoints": [
                         "x"
-                    ],
-                    "icon": "x",
-                    "id": "x",
-                    "name": "x"
+                    ]
                 }
             ],
             "count": 1,
@@ -172,16 +213,21 @@ const PLAN = [
         "args": [],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": {
             "services": [
                 {
                     "id": "x",
-                    "latency": 1,
                     "name": "x",
-                    "status": "online"
+                    "status": "online",
+                    "latency": 1
                 }
             ],
             "online": 1,
@@ -204,7 +250,12 @@ const PLAN = [
         ],
         "select": {},
         "headers": [],
+        "cookies": [],
+        "responseMedia": [
+            "application/json"
+        ],
         "query": [],
+        "queryArgs": [],
         "auth": [],
         "status": 200,
         "sample": {

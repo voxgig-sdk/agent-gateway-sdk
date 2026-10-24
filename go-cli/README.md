@@ -21,6 +21,7 @@ export AGENT_GATEWAY_APIKEY=sk_live_xxx
 # 4. Each command line is ONE boru expression, run against the API:
 ./agent-gateway-cli load 1 analytics            # {id:1} shorthand
 ./agent-gateway-cli load '{id:1}' analytics       # explicit match map
+./agent-gateway-cli list service
 
 # 5. Override the API base URL for a single call
 AGENT_GATEWAY_BASE=https://api.example.com ./agent-gateway-cli load 1 analytics

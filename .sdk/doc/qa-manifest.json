@@ -3,5 +3,23 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "34 production-ready API services for AI agents. Wallets, trading, storage, scheduling, scraping, logging, and more, all in one gateway. Pay-as-you-go with USDC on Base.",
+      "API key created",
+      "Balance info",
+      "Credits added",
+      "Health status",
+      "OK",
+      "Payment details",
+      "Production API",
+      "Service detail",
+      "Service list",
+      "Transaction hash of USDC transfer on Base",
+      "Unix timestamp ms",
+      "Usage stats",
+      "Your API key from POST /api/keys/create. Free tier: 50 req/day without a key. Paid: Bearer &lt;`api_key`&gt; for full access."
+    ]
+  }
 }

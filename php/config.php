@@ -93,6 +93,7 @@ class AgentGatewayConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -202,6 +203,10 @@ class AgentGatewayConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -257,6 +262,10 @@ class AgentGatewayConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -298,6 +307,10 @@ class AgentGatewayConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -375,6 +388,10 @@ class AgentGatewayConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
@@ -410,6 +427,10 @@ class AgentGatewayConfig
                   'args' => [],
                   'select' => [
                     '$action' => 'info',
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -495,6 +516,7 @@ class AgentGatewayConfig
                         'orig' => 'category',
                         'type' => '`$STRING`',
                         'kind' => 'query',
+                        'field' => true,
                       ],
                       [
                         'name' => 'search',
@@ -504,11 +526,10 @@ class AgentGatewayConfig
                       ],
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'category',
-                      'search',
-                    ],
+                  'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
                 [
@@ -539,6 +560,10 @@ class AgentGatewayConfig
                   'args' => [],
                   'select' => [
                     '$action' => 'health',
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -588,6 +613,10 @@ class AgentGatewayConfig
                     'exist' => [
                       'id',
                     ],
+                  ],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
